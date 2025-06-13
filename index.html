@@ -22,29 +22,74 @@
         <div class="header">
             <h1>AutoGrid</h1>
         </div>
+        <ul class="sidebar">
+            <div>
+                <li class="sidebar-close" onclick=hideSidebar()>
+                    <img src="Images/X.png">
+                </li>
+                <li class="sidebar-login" onclick=hideSidebar()>
+                    <img src="Images/user_icon.png"></a>
+                </li>
+            </div>
+            <li onclick=hideSidebar()>
+                <a href="#initial-images">
+                    <h2>Início</h2>
+                </a>
+            </li>
+            <li onclick=hideSidebar()>
+                <a href="#destaque">
+                    <h2>Destaque</h2>
+                </a>
+            </li>
+            <li onclick=hideSidebar()>
+                <a href="#products">
+                    <h2>Produtos</h2>
+                </a>
+            </li>
+            <li onclick=hideSidebar()>
+                <a href="">
+                    <h2>Busca</h2>
+                </a>
+            </li onclick=hideSidebar()>
+            <li onclick=hideSidebar()>
+                <a href="#car-brands">
+                    <h2>Marcas</h2>
+                </a>
+            </li>
+            <li onclick=hideSidebar()>
+                <a href="#contact" class="hideOnMobile">
+                    <h2>Contato</h2>
+                </a>
+            </li>
+        </ul>
         <div class="nav">
-            <a href="#initial-images">
+            <a href="#initial-images" class="hideOnMobile">
                 <h2>Início</h2>
             </a>
-            <a href="#destaque">
+            <a href="#destaque" class="hideOnMobile">
                 <h2>Destaque</h2>
             </a>
-            <a href="#products">
+            <a href="#products" class="hideOnMobile">
                 <h2>Produtos</h2>
             </a>
-            <a href="">
+            <a href="" class="hideOnMobile">
                 <h2>Busca</h2>
             </a>
-            <a href="#car-brands">
+            <a href="#car-brands" class="hideOnMobile">
                 <h2>Marcas</h2>
             </a>
-            <a href="#contact">
+            <a href="#contact" class="hideOnMobile">
                 <h2>Contato</h2>
             </a>
         </div>
         <div class="login">
-            <a class="loginIcon"></a>
+            <a class="loginIcon hideOnMobile"></a>
         </div>
+        <li class="menu-button" onclick=showSidebar()>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
+                <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/>
+            </svg>
+        </li>
     </header>
 
     <section id="initial-images">
@@ -173,7 +218,7 @@
 
         <div class="brands">
             <div class="brand-img">
-                <img src="Images/27.jpg">
+                <img src="Images/Toyota.png">
             </div>
             <div class="brand-align">
                 <div class="car-brand-text-left">
@@ -212,12 +257,12 @@
                 </div>
             </div>
             <div class="brand-img">
-                <img src="Images/28.jpg">
+                <img src="Images/MercedesBenz.png">
             </div>
         </div>
         <div class="brands">
             <div class="brand-img"> 
-                <img src="Images/29.jpg">
+                <img src="Images/BMW.jpg">
             </div>
             <div class="brand-align">
                 <div class="car-brand-text-left">
@@ -254,12 +299,12 @@
                 </div>
             </div>
             <div class="brand-img"> 
-                <img src="Images/30.jpg">
+                <img src="Images/Volkswagen.png">
             </div>
         </div>
         <div class="brands">
             <div class="brand-img"> 
-                <img src="Images/29.jpg">
+                <img src="Images/Honda.jpg">
             </div>
             <div class="brand-align">
                 <div class="car-brand-text-left">
@@ -290,38 +335,23 @@
     
 
     <section id="contact">
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10">
-                <h2>Contato</h2>
+        <h2>Contato</h2>
+        <form id="form">
+            <label for="Name" class="form-label">Nome*</label>
+            <input type="text" class="form-control" required>
+            <label for="exampleInputEmail1" class="form-label">Endereço de email*</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                required>
+            <div id="emailHelp" class="form-text" style="color: white;">Nunca compartilharemos seu
+                e-mail com mais
+                ninguém.
             </div>
-        </div>
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10">
-                <form id="form">
-                    <div class="mb-3">
-                        <label for="Name" class="form-label">Nome*</label>
-                        <input type="text" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Endereço de email*</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                            required>
-                        <div id="emailHelp" class="form-text" style="color: white;">Nunca compartilharemos seu
-                            e-mail com mais
-                            ninguém.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="Message" class="form-label">Mensagem</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-outline-secondary" style="color: white;"
-                        onclick="Confirmar()">Submit</button>
-                </form>
-                <p id="resposta"></p>
-            </div>
-        </div>
+            <label for="Message" class="form-label">Mensagem</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+            <button type="submit" class="btn btn-outline-secondary" style="color: white;"
+                onclick="Confirmar()">Submit</button>
+        </form>
+        <p id="resposta"></p>
     </section>
 
     <script src="func.js"></script>
