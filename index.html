@@ -4,155 +4,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagramação</title>
-    <link href="styles.css" rel="stylesheet">
+    <title>AutoGrid</title>
+    <link rel="icon" href="Images/AutoGrid_logo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="styles.css" rel="stylesheet">
 </head>
 
-<body style="background-color: #2c2c30;">
+<body>
     <script src="jquery.js"></script>
-    <script>
 
-        // $(document).ready(function () {
-        //     alert('jQuery funcionando corretamente!')
-        // })
+    <header>
+        <div class="header">
+            <h1>AutoGrid</h1>
+        </div>
+        <div class="nav">
+            <a href="#initial-images">
+                <h2>Início</h2>
+            </a>
+            <a href="#destaque">
+                <h2>Destaque</h2>
+            </a>
+            <a href="#products">
+                <h2>Produtos</h2>
+            </a>
+            <a href="">
+                <h2>Busca</h2>
+            </a>
+            <a href="#car-brands">
+                <h2>Marcas</h2>
+            </a>
+            <a href="#contact">
+                <h2>Contato</h2>
+            </a>
+        </div>
+        <div class="login">
+            <a class="loginIcon"></a>
+        </div>
+    </header>
 
-        $(document).ready(function () {
-            $('#desaparecer').click(function () {
-                $('#foto').slideUp(350)
-            })
-            $('#aparecer').click(function () {
-                $('#foto').slideDown(350)
-            })
-        })
+    <section id="initial-images">
+        <h1>NOVIDADES</h1>
+        <button>VEJA AQUI</button>
+    </section>
 
-    </script>
-
-    <div class="container-liquid">
-        <div class="row">
-            <div class="col-12 header">
-                <h1>Estúdio fotográfico</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 nav">
-                <a href="#estudio">
-                    <h2>Estúdio</h2>
-                </a>
-                <a href="#portfolio">
-                    <h2>Portfólio</h2>
-                </a>
-                <a href="#testemunho">
-                    <h2>Testemunhos</h2>
-                </a>
-                <a href="#contato">
-                    <h2>Contato</h2>
-                </a>
-            </div>
-        </div>
-        <br>
-        <br>
-        <div class="row">
-            <div class="offset-5 col-2">
-                    <button class="btn btn-dark" id="desaparecer">DESAPARECER</button>
-                    <button class="btn btn-dark" id="aparecer">APARECER</button>
-            </div>
-        </div>
-        <div id="foto">
-            <div class="row">
-                <div class="col-1"></div>
-                <div class="col-xl-4 col-sm-10">
-                    <img src="Images/1.jpg" id="sub-img1">
-                </div>
-                <div class="col-2"></div>
-                <div class="col-xl-4 col-sm-10">
-                    <img src="Images/2.png" id="sub-img1">
-                </div>
-                <div class="col-1"></div>
-            </div>
-        </div>
-
-    </div>
-    <section id="estudio">
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10 paragraph">
-                <h2>O Estúdio</h2>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores reprehenderit accusantium
-                    inventore, veritatis, ipsa enim natus magni, voluptate placeat praesentium magnam odio dolor!
-                    Recusandae maxime veniam sit debitis, quis consectetur. Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Iste porro odio vitae itaque rerum accusantium, excepturi est! Dignissimos
-                    odio
-                    iusto reprehenderit vero sint, itaque necessitatibus. Possimus, eius nulla. Quasi, repudiandae.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas animi facilis excepturi incidunt
-                    libero suscipit consequatur maxime. In, eos sed minus, a temporibus ex vitae esse vero
-                    voluptatibus
-                    veniam fugiat!</p>
-            </div>
-        </div>
-        <div class="row">
+    <section id="destaque">
+        <div class=" slideshow">
             <div class="offset-1 col-10">
                 <div class="slideshow-container">
-
                     <div class="mySlides">
                         <div class="numbertext">1 / 4</div>
                         <img src="Images/31.jpg" id="img-slide">
+                        <div class="image-text">
+                            <h2>2019 Ford GT MK II</h2>
+                            <p>Uma máquina de corrida sem concessões, nascida para dominar as pistas com sua aerodinâmica extrema e performance brutal, levando a lenda do GT a um novo patamar de exclusividade e velocidade.</p>
+                        </div>
                     </div>
-
                     <div class="mySlides">
                         <div class="numbertext">2 / 4</div>
                         <img src="Images/32.jpg" id="img-slide">
+                        <div class="image-text">
+                            <h2>2019 Porsche Gt3 Rs</h2>
+                            <p>Um bólido focado nas pistas, que combina uma engenharia de precisão alemã com desempenho arrebatador, oferecendo uma experiência de condução visceral e emocionante para os puristas.</p>
+                        </div>
                     </div>
-
                     <div class="mySlides">
                         <div class="numbertext">3 / 4</div>
                         <img src="Images/33.jpg" id="img-slide">
+                        <div class="image-text">
+                            <h2>Nissan 370z</h2>
+                            <p>Um coupé esportivo que oferece uma experiência de condução divertida e envolvente, com um motor V6 potente e um design clássico de carro esportivo japonês.</p>
+                        </div>
                     </div>
-
                     <div class="mySlides">
                         <div class="numbertext">4 / 4</div>
                         <img src="Images/34.jpg" id="img-slide">
+                        <div class="image-text">
+                            <h2>2019 Chevrolet Corvette ZR1</h2>
+                            <p>Um supercarro americano brutal, com um motor supercharged de 755 cavalos de potência e aerodinâmica agressiva, feito para dominar tanto as ruas quanto as pistas.</p>
+                        </div>
                     </div>
-
                     <a class="voltar" onclick="plusSlides(-1)">❮</a>
                     <a class="proximo" onclick="plusSlides(1)">❯</a>
-
                 </div>
-
                 <div style="text-align:center">
                     <span class="dot" onclick="currentSlide(1)"></span>
                     <span class="dot" onclick="currentSlide(2)"></span>
                     <span class="dot" onclick="currentSlide(3)"></span>
                     <span class="dot" onclick="currentSlide(4)"></span>
                 </div>
-    </section>
-    <section id="portfolio">
-        <div class="row">
-            <div class="offset-1 col-10 paragraph">
-                <h2>Portfólio</h2>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores reprehenderit accusantium
-                    inventore, veritatis, ipsa enim natus magni, voluptate placeat praesentium magnam odio dolor!
-                    Recusandae maxime veniam sit debitis, quis consectetur. Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Iste porro odio vitae itaque rerum accusantium, excepturi est! Dignissimos
-                    odio
-                    iusto reprehenderit vero sint, itaque necessitatibus. Possimus, eius nulla. Quasi, repudiandae.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas animi facilis excepturi incidunt
-                    libero suscipit consequatur maxime. In, eos sed minus, a temporibus ex vitae esse vero
-                    voluptatibus
-                    veniam fugiat!</p>
             </div>
         </div>
+    </section>
+
+    <section id="products">
+        <div class="title">
+            <h2>Produtos em Destaque</h2>
+        </div>
         <div class="row">
-            <div class="offset-1 col-10">
-                <div class="date">
-                    <h1>2023</h1>
-                </div>
-            </div>
+        </div>
+        <div class="date">
+            <h1>2023</h1>
         </div>
         <div class="row">
             <div class="offset-1 col-10 fill">
@@ -173,12 +129,8 @@
             </div>
         </div>
         <span id="morePort">
-            <div class="row">
-                <div class="offset-1 col-10">
-                    <div class="date">
-                        <h1>2024</h1>
-                    </div>
-                </div>
+            <div class="date">
+                <h1>2024</h1>
             </div>
             <div class="row">
                 <div class="offset-1 col-10 fill">
@@ -199,220 +151,149 @@
                 </div>
             </div>
         </span>
-        <div class="row">
-            <div class="offset-5 col-2">
-                <div class="ver-mais" onclick="VerMais()">
-                    <i class="bi bi-arrow-down-circle" id="downPort"></i>
-                    <i class="bi bi-arrow-up-circle" id="upPort"></i>
-                    <h1 id="btnVerMais">VER MAIS</h1>
+        <div class="ver-mais invert" onclick="VerMais()">
+            <i class="bi bi-arrow-down-circle" id="downPort"></i>
+            <i class="bi bi-arrow-up-circle" id="upPort"></i>
+            <h1 id="btnVerMais">VER MAIS</h1>
+        </div>
+    </section>
+
+    <section id="car-brands">
+            <h2>Marcas</h2>
+            <p>As marcas de carro são muito mais do que apenas um logotipo 
+                ou um nome bonito estampado na frente de um veículo. Elas 
+                representam a identidade de uma empresa, um conjunto de 
+                valores, uma história e, acima de tudo, uma promessa ao 
+                consumidor. Cada marca carrega consigo uma reputação 
+                construída ao longo de décadas, influenciando diretamente a 
+                percepção de qualidade, confiabilidade, desempenho e até 
+                mesmo o status social.
+            </p>
+        </div>
+
+        <div class="brands">
+            <div class="brand-img">
+                <img src="Images/27.jpg">
+            </div>
+            <div class="brand-align">
+                <div class="car-brand-text-left">
+                    <h1>Toyota</h1>
+                    <p>A Toyota é uma gigante japonesa, globalmente reconhecida 
+                        por sua confiabilidade inabalável, durabilidade e volumes 
+                        de vendas massivos. Fundada em 1937, a marca se tornou 
+                        sinônimo de carros que "não dão problema", com modelos 
+                        icônicos como o Corolla e a Hilux dominando as estradas 
+                        em todos os continentes, desde as grandes cidades até os 
+                        rincões mais remotos. Sua filosofia de produção enxuta e 
+                        foco na eficiência garantiram à Toyota uma posição de 
+                        liderança e a lealdade de milhões de consumidores ao 
+                        redor do mundo.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
-    <section id="testemunhos">
-    </section>
-    <div class="row">
-        <div class="col-1"></div>
-        <div class="col-10 paragraph">
-            <h2>Testemunhos</h2>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores reprehenderit accusantium
-                inventore, veritatis, ipsa enim natus magni, voluptate placeat praesentium magnam odio dolor!
-                Recusandae maxime veniam sit debitis, quis consectetur. Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Iste porro odio vitae itaque rerum accusantium, excepturi est! Dignissimos
-                odio
-                iusto reprehenderit vero sint, itaque necessitatibus. Possimus, eius nulla. Quasi, repudiandae.
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas animi facilis excepturi incidunt
-                libero suscipit consequatur maxime. In, eos sed minus, a temporibus ex vitae esse vero
-                voluptatibus
-                veniam fugiat!</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-1"></div>
-        <div class="col-2 fill">
-            <div id="testemunho"> <img src="Images/27.jpg">
-            </div>
-        </div>
-        <div class="col-8">
-            <div id="testemunho">
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores reprehenderit
-                    accusantium
-                    inventore, veritatis, ipsa enim natus magni, voluptate placeat praesentium magnam odio
-                    dolor!
-                    Recusandae maxime veniam sit debitis, quis consectetur. Lorem ipsum dolor sit amet
-                    consectetur
-                    adipisicing elit. Iste porro odio vitae itaque rerum accusantium, excepturi est! Dignissimos
-                    odio
-                    iusto reprehenderit vero sint, itaque necessitatibus. Possimus, eius nulla. Quasi,
-                    repudiandae.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas animi facilis excepturi
-                    incidunt
-                    libero suscipit consequatur maxime. In, eos sed minus, a temporibus ex vitae esse vero
-                    voluptatibus
-                    veniam fugiat! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis adipisci
-                    voluptatum rerum, similique neque corporis obcaecati id harum excepturi? Architecto quasi
-                    labore sunt nisi amet illo possimus natus, qui omnis. Lorem ipsum, dolor sit amet
-                    consectetur adipisicing elit. Unde architecto ipsam sapiente. Enim corrupti aliquam
-                    doloribus alias fugiat. Laboriosam tempora fugiat expedita eum quod nihil iusto omnis sunt
-                    pariatur ea! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet eligendi, animi
-                    sint libero adipisci quae veniam molestiae perferendis quia dicta, corporis quibusdam! Eos
-                    voluptas aut amet, deleniti harum deserunt neque.</p>
-            </div>
-        </div>
-    </div>
-    <span id="moreTest">
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-8">
-                <div id="testemunho">
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores reprehenderit
-                        accusantium
-                        inventore, veritatis, ipsa enim natus magni, voluptate placeat praesentium magnam odio
-                        dolor!
-                        Recusandae maxime veniam sit debitis, quis consectetur. Lorem ipsum dolor sit amet
-                        consectetur
-                        adipisicing elit. Iste porro odio vitae itaque rerum accusantium, excepturi est!
-                        Dignissimos
-                        odio
-                        iusto reprehenderit vero sint, itaque necessitatibus. Possimus, eius nulla. Quasi,
-                        repudiandae.
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas animi facilis excepturi
-                        incidunt
-                        libero suscipit consequatur maxime. In, eos sed minus, a temporibus ex vitae esse vero
-                        voluptatibus
-                        veniam fugiat! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis
-                        adipisci
-                        voluptatum rerum, similique neque corporis obcaecati id harum excepturi? Architecto
-                        quasi
-                        labore sunt nisi amet illo possimus natus, qui omnis. Lorem ipsum, dolor sit amet
-                        consectetur adipisicing elit. Unde architecto ipsam sapiente. Enim corrupti aliquam
-                        doloribus alias fugiat. Laboriosam tempora fugiat expedita eum quod nihil iusto omnis
-                        sunt
-                        pariatur ea! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet eligendi,
-                        animi
-                        sint libero adipisci quae veniam molestiae perferendis quia dicta, corporis quibusdam!
-                        Eos
-                        voluptas aut amet, deleniti harum deserunt neque.</p>
+
+    <span id="another-car-brands">
+        <div class="brands">
+            <div class="brand-align">
+                <div class="car-brand-text-right">
+                    <h1>Mercedes-Benz</h1>
+                    <p>A Mercedes-Benz, uma joia da engenharia alemã, é sinônimo 
+                        de luxo, prestígio e inovação tecnológica. Com uma 
+                        história que remonta aos primórdios do automóvel no 
+                        final do século XIX, a marca construiu uma reputação 
+                        de excelência em design, conforto e desempenho. Carros 
+                        como o Classe S e o AMG GT personificam a combinação 
+                        de sofisticação e potência que a Mercedes-Benz oferece, 
+                        atraindo um público que busca exclusividade e uma 
+                        experiência de condução superior.
+                    </p>
                 </div>
             </div>
-            <div class="col-2 fill">
-                <div id="testemunho"> <img src="Images/28.jpg">
+            <div class="brand-img">
+                <img src="Images/28.jpg">
+            </div>
+        </div>
+        <div class="brands">
+            <div class="brand-img"> 
+                <img src="Images/29.jpg">
+            </div>
+            <div class="brand-align">
+                <div class="car-brand-text-left">
+                    <h1>BMW</h1>
+                    <p>A BMW, outra potência alemã, é amplamente conhecida por 
+                        entregar o "prazer de dirigir". Seus veículos são 
+                        projetados com foco na dinâmica de condução, oferecendo 
+                        uma experiência envolvente que combina desempenho 
+                        esportivo com um design elegante e tecnologias avançadas. 
+                        Desde seus sedãs executivos da Série 3 e 5 até seus SUVs 
+                        (SAVs, como a BMW os chama) e modelos de alta performance 
+                        da divisão M, a BMW atrai motoristas que valorizam a 
+                        conexão com a estrada e uma direção mais esportiva. 
+                    </p>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-2 fill">
-                <div id="testemunho"> <img src="Images/29.jpg">
+        <div class="brands">
+            <div class="brand-align">
+                <div class="car-brand-text-right">
+                    <h1>Volkswagen</h1>
+                    <p>A Volkswagen, literalmente "carro do povo" em alemão, é 
+                        uma das maiores montadoras do mundo, com uma gama 
+                        incrivelmente diversificada de veículos que atende a 
+                        praticamente todos os segmentos de mercado. Desde os 
+                        icônicos Fusca e Golf, que se tornaram parte da cultura 
+                        automotiva global, até a liderança em veículos elétricos 
+                        com a linha ID., a Volkswagen se destaca por sua 
+                        engenharia sólida, qualidade construtiva e capacidade 
+                        de oferecer carros confiáveis e acessíveis para as 
+                        massas, mantendo também o controle de marcas de luxo 
+                        como Audi e Porsche.
+                    </p>
                 </div>
             </div>
-            <div class="col-8">
-                <div id="testemunho">
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores reprehenderit
-                        accusantium
-                        inventore, veritatis, ipsa enim natus magni, voluptate placeat praesentium magnam odio
-                        dolor!
-                        Recusandae maxime veniam sit debitis, quis consectetur. Lorem ipsum dolor sit amet
-                        consectetur
-                        adipisicing elit. Iste porro odio vitae itaque rerum accusantium, excepturi est!
-                        Dignissimos
-                        odio
-                        iusto reprehenderit vero sint, itaque necessitatibus. Possimus, eius nulla. Quasi,
-                        repudiandae.
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas animi facilis excepturi
-                        incidunt
-                        libero suscipit consequatur maxime. In, eos sed minus, a temporibus ex vitae esse vero
-                        voluptatibus
-                        veniam fugiat! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis
-                        adipisci
-                        voluptatum rerum, similique neque corporis obcaecati id harum excepturi? Architecto
-                        quasi
-                        labore sunt nisi amet illo possimus natus, qui omnis. Lorem ipsum, dolor sit amet
-                        consectetur adipisicing elit. Unde architecto ipsam sapiente. Enim corrupti aliquam
-                        doloribus alias fugiat. Laboriosam tempora fugiat expedita eum quod nihil iusto omnis
-                        sunt
-                        pariatur ea! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet eligendi,
-                        animi
-                        sint libero adipisci quae veniam molestiae perferendis quia dicta, corporis quibusdam!
-                        Eos
-                        voluptas aut amet, deleniti harum deserunt neque.</p>
-                </div>
+            <div class="brand-img"> 
+                <img src="Images/30.jpg">
             </div>
         </div>
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-8">
-                <div id="testemunho">
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores reprehenderit
-                        accusantium
-                        inventore, veritatis, ipsa enim natus magni, voluptate placeat praesentium magnam odio
-                        dolor!
-                        Recusandae maxime veniam sit debitis, quis consectetur. Lorem ipsum dolor sit amet
-                        consectetur
-                        adipisicing elit. Iste porro odio vitae itaque rerum accusantium, excepturi est!
-                        Dignissimos
-                        odio
-                        iusto reprehenderit vero sint, itaque necessitatibus. Possimus, eius nulla. Quasi,
-                        repudiandae.
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas animi facilis excepturi
-                        incidunt
-                        libero suscipit consequatur maxime. In, eos sed minus, a temporibus ex vitae esse vero
-                        voluptatibus
-                        veniam fugiat! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis
-                        adipisci
-                        voluptatum rerum, similique neque corporis obcaecati id harum excepturi? Architecto
-                        quasi
-                        labore sunt nisi amet illo possimus natus, qui omnis. Lorem ipsum, dolor sit amet
-                        consectetur adipisicing elit. Unde architecto ipsam sapiente. Enim corrupti aliquam
-                        doloribus alias fugiat. Laboriosam tempora fugiat expedita eum quod nihil iusto omnis
-                        sunt
-                        pariatur ea! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet eligendi,
-                        animi
-                        sint libero adipisci quae veniam molestiae perferendis quia dicta, corporis quibusdam!
-                        Eos
-                        voluptas aut amet, deleniti harum deserunt neque.</p>
-                </div>
+        <div class="brands">
+            <div class="brand-img"> 
+                <img src="Images/29.jpg">
             </div>
-            <div class="col-2 fill">
-                <div id="testemunho"> <img src="Images/30.jpg">
+            <div class="brand-align">
+                <div class="car-brand-text-left">
+                    <h1>Honda</h1>
+                    <p>A Honda, mais uma potência japonesa, é celebrada por sua 
+                        engenharia de precisão, confiabilidade e eficiência, 
+                        especialmente reconhecida pela excelência de seus 
+                        motores. A marca vai além dos automóveis, sendo líder 
+                        também em motocicletas e equipamentos de força, o que 
+                        demonstra sua vasta expertise em engenharia mecânica. 
+                        No universo automotivo, modelos como o Civic e o HR-V 
+                        são exemplos de como a Honda combina desempenho 
+                        equilibrado, durabilidade e uma condução agradável, 
+                        conquistando a confiança de consumidores que buscam um 
+                        veículo prático e de baixo custo de manutenção. 
+                    </p>
                 </div>
             </div>
         </div>
     </span>
-    <div class="row">
-        <div class="col-5"></div>
-        <div class="col-2">
-            <div class="ver-mais" onclick="VerMaisTestemunhos()">
-                <i class="bi bi-arrow-down-circle" id="downTest"></i>
-                <i class="bi bi-arrow-up-circle" id="upTest"></i>
-                <h1 id="btnVerMais">VER MAIS</h1>
-            </div>
-        </div>
+
+    <div class="ver-mais" onclick="VerMaisTestemunhos()">
+        <i class="bi bi-arrow-down-circle" id="downTest"></i>
+        <i class="bi bi-arrow-up-circle" id="upTest"></i>
+        <h1 id="btnVerMaisTestemunho">VER MAIS</h1>
     </div>
 
-    <div class="slideshow-container">
-        
-        <div class="mySlides">
-            
-        </div>
+    
 
-    </div>
-
-    <section id="contato">
+    <section id="contact">
         <div class="row">
             <div class="col-1"></div>
-            <div class="col-10 paragraph">
+            <div class="col-10">
                 <h2>Contato</h2>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores reprehenderit accusantium
-                    inventore, veritatis, ipsa enim natus magni, voluptate placeat praesentium magnam odio dolor!
-                    Recusandae maxime veniam sit debitis, quis consectetur. Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Iste porro odio vitae itaque rerum accusantium, excepturi est! Dignissimos
-                    odio
-                    iusto reprehenderit vero sint, itaque necessitatibus. Possimus, eius nulla. Quasi, repudiandae.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas animi facilis excepturi incidunt
-                    libero suscipit consequatur maxime. In, eos sed minus, a temporibus ex vitae esse vero
-                    voluptatibus
-                    veniam fugiat!</p>
             </div>
         </div>
         <div class="row">
@@ -433,20 +314,19 @@
                     </div>
                     <div class="mb-3">
                         <label for="Message" class="form-label">Mensagem</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-dark" style="color: white;"
+                    <button type="submit" class="btn btn-outline-secondary" style="color: white;"
                         onclick="Confirmar()">Submit</button>
                 </form>
                 <p id="resposta"></p>
             </div>
         </div>
     </section>
-    </div>
+
     <script src="func.js"></script>
     <script>
         AOS.init();
     </script>
 </body>
-
 </html>

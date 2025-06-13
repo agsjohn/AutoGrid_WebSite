@@ -13,8 +13,8 @@ function showSlides(n) {
     let i;
     let slides = document.getElementsByClassName("mySlides");
     let dots = document.getElementsByClassName("dot");
-    if (n > slides.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = slides.length}
+    if (n >= slides.length ) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length - 1}
     for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
     }
@@ -46,10 +46,10 @@ function VerMais() {
 }
 
 function VerMaisTestemunhos() {
-    let more = document.getElementById("another-car-brands");
+    let more = document.getElementById("moreTest");
     let up = document.getElementById("upTest");
     let down = document.getElementById("downTest");
-    let btnSeeMore = document.getElementById("btnVerMaisTestemunho");
+    let btnSeeMore = document.getElementById("btnVerMais");
 
     if (more.style.display === "" || more.style.display === "none") {
         more.style.display = "inline";
