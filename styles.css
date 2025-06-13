@@ -146,6 +146,7 @@ header svg{
     justify-content: center;
     align-items: center;
     padding: 0.5rem;
+    padding-bottom: 1rem;
     gap: 2rem;
 }
 
@@ -155,22 +156,38 @@ header svg{
     letter-spacing: 0.05em;
     text-decoration: none;
     color: white;
-}
-
-.nav h2{
-    font-size: 1.5rem;
+    text-decoration: none; 
+    padding-bottom: 3px;
 }
 
 .nav>a:hover {
     transform: scale(1.1);
     transition: 0.4s ease;
     cursor: pointer;
-    color: white;
 }
 
-.nav>a:active {
-    transform: scale(1.06);
-    color: white;
+.nav h2{
+    font-size: 1.5rem;
+    padding: 0; 
+    margin: 0;
+    position: relative;
+}
+
+.nav a h2::after{
+    content: '';
+    background-color: white;
+    border-radius: 10rem;
+    height: 0.1rem;
+    width: 0;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width 0.2s ease;
+}
+
+.nav a h2:hover::after{
+    width: 100%;
 }
 
 .login{
@@ -278,6 +295,12 @@ header svg{
     background-color: rgba(255, 255, 255, 0.3);
 }
 
+@media (max-width: 1024px) {
+    #initial-images{
+        height: 30rem;
+    }
+}
+
 @media (max-width: 800px) {
     #initial-images>h1{
         transform: scale(0.8);
@@ -294,7 +317,7 @@ header svg{
 
 /* DESTAQUE */
 #destaque {
-    padding-top: 6rem;
+    padding-top: 4rem;
     padding-bottom: 2rem;
 }
 
@@ -313,7 +336,6 @@ header svg{
 
 .slideshow-container {
     position: relative;
-    height: 42rem; 
     background-color: gray;
     overflow: hidden;
 }
@@ -335,10 +357,10 @@ header svg{
 }
 
 .mySlides img { 
-    width: 100%;
-    height: 100%; 
-    object-fit: cover;
+    height: 40vw;
     display: block; 
+    width: 100%; 
+    object-fit: cover;
     filter: blur(0.5rem); 
     transition: filter 0.3s ease-in-out;
 }
@@ -355,7 +377,7 @@ header svg{
     z-index: 1; 
     text-align: center;
     color: white; 
-    padding: 1.5rem 2rem;
+    padding: 1rem 1rem;
     background-color: rgba(0, 0, 0, 0.6); 
     border-radius: 10px;
     max-width: 80%; 
@@ -429,6 +451,72 @@ header svg{
 .active,
 .dot:hover {
     background-color: #717171;
+}
+
+@media(max-width: 800px){
+    #destaque{
+        padding: 0;
+    }
+
+    .slideshow {
+        margin: 0;
+        padding: 0;
+    }
+
+    .slideshow>div {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .slideshow-container {
+        position: relative;
+        background-color: gray;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .mySlides img { 
+        height: 80vw;
+        filter: blur(0); 
+    }
+
+    .mySlides .image-text {
+        opacity: 1;
+    }
+
+    .image-text h2 {
+        transform: scale(0.7);
+    }
+
+    .image-text p {
+        transform: scale(0.7);
+    }
+
+    .dot{
+        display: none;
+    }
+}
+
+@media(max-width: 540px){
+    .image-text {
+        padding: 0;
+        max-width: 90%;
+    }
+
+    .mySlides img { 
+        height: 100vw;
+    }
+
+    .image-text h2 {
+        font-size: 2rem;
+        margin-bottom: 0;
+    }
+
+    .image-text p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
 }
 
 
