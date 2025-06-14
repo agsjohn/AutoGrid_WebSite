@@ -21,6 +21,8 @@ div{
     padding: 0;
 }
 
+
+
 /* HEADER */
 header{
     background-color: #2c2c30;
@@ -198,10 +200,10 @@ header svg{
 }
 
 .loginIcon{
-    background-image: url("https://placehold.co/48x48/ffffff/000000?text=User");
+    background-image: url("/images/user_icon.png");
     background-repeat: no-repeat;
     background-size: contain;
-    /* filter: invert(); */
+    filter: invert();
     height: 3rem;
     width: 3rem;
 }
@@ -257,10 +259,11 @@ header svg{
   }
 }
 
-/* --- ESTILOS DA PÁGINA DE BUSCA --- */
 
+
+/*  */
 .search-page-container {
-    padding-top: 7rem; /* Espaço para o header fixo */
+    padding-top: 7rem; 
     padding-bottom: 2rem;
 }
 
@@ -269,7 +272,6 @@ header svg{
     max-width: 1400px;
 }
 
-/* Barra de Filtros */
 .filter-sidebar {
     padding: 1rem;
 }
@@ -316,7 +318,6 @@ header svg{
     border-color: #0d6efd;
 }
 
-/* Área de Resultados */
 .results-area {
     padding: 1rem;
 }
@@ -351,7 +352,7 @@ header svg{
 }
 
 .product-link {
-    display: contents; /* Faz o link se comportar como o container */
+    display: contents; 
     text-decoration: none;
     color: inherit;
 }
@@ -391,7 +392,6 @@ header svg{
     color: #aaa;
 }
 
-/* Estilos para Paginação */
 .pagination .page-item .page-link {
     background-color: #3a3a40;
     border-color: #555;
@@ -408,7 +408,6 @@ header svg{
     color: #6c757d;
 }
 
-/* Media Queries para responsividade da página de busca */
 @media (max-width: 992px) {
     .filter-sidebar {
         border-bottom: 1px solid #555;
