@@ -282,17 +282,20 @@ header svg{
     font-style: italic;
 }
 
-#initial-images>button{
+#initial-images>a{
     background-color: transparent;
     box-shadow: 0 0 1rem white;
     padding: 0.5rem 1.5rem;
     border: 0.1rem solid white;
     transition: 0.4s ease;
+    text-decoration: none;
+    color: white;
 }
 
-#initial-images>button:hover{
+#initial-images>a:hover{
     transform: scale(1.1);
     background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
 }
 
 @media (max-width: 1024px) {
