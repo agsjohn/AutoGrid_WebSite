@@ -329,10 +329,24 @@ header svg{
     margin-bottom: 1rem;
 }
 
+.show-options{
+    display: flex;
+    align-items: center;
+    width: 15rem;
+}
+
+.show-options select{
+    width: 35%;
+}
+
 .sort-options {
     display: flex;
     align-items: center;
-    width: 300px;
+    width: 20rem;
+}
+
+.sort-options select{
+    width: 50%;
 }
 
 .results-list hr {
@@ -430,5 +444,12 @@ header svg{
     }
     .product-price {
         font-size: 1.5rem;
+    }
+    .results-header {
+        display: flex;
+        align-items: start;
+        gap: 1rem;
+        flex-direction: column;
+        margin-bottom: 1rem;
     }
 }

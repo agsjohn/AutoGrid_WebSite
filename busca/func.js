@@ -1,102 +1,132 @@
-let slideIndex = 1;
-// As funções de slide não serão usadas aqui, mas não causam problema.
-// showSlides(slideIndex); 
-
-function plusSlides(n) {
-    showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-    showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
-    let dots = document.getElementsByClassName("dot");
-    if (!slides.length) return; // Não executa se os elementos não existirem
-    if (n > slides.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = slides.length}
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-    slides[slideIndex - 1].style.display = "block";
-    dots[slideIndex - 1].className += " active";
-}
-
-function VerMais() {
-    let more = document.getElementById("morePort");
-    if(!more) return; // Não executa se o elemento não existir
-    let up = document.getElementById("upPort");
-    let down = document.getElementById("downPort");
-    let btnSeeMore = document.getElementById("btnVerMais");
-
-    if (more.style.display === "" || more.style.display === "none") {
-        more.style.display = "inline";
-        btnSeeMore.innerHTML = "VER MENOS";
-        up.style.display = "inline";
-        down.style.display = "none";
-    } else {
-        more.style.display = "none";
-        btnSeeMore.innerHTML = "VER MAIS";
-        up.style.display = "none";
-        down.style.display = "inline";
-    }
-}
-
-function VerMaisTestemunhos() {
-    let more = document.getElementById("another-car-brands");
-    if(!more) return; // Não executa se o elemento não existir
-    let up = document.getElementById("upTest");
-    let down = document.getElementById("downTest");
-    let btnSeeMore = document.getElementById("btnVerMaisTestemunho");
-
-    if (more.style.display === "" || more.style.display === "none") {
-        more.style.display = "inline";
-        btnSeeMore.innerHTML = "VER MENOS";
-        up.style.display = "inline";
-        down.style.display = "none";
-    } else {
-        more.style.display = "none";
-        btnSeeMore.innerHTML = "VER MAIS";
-        up.style.display = "none";
-        down.style.display = "inline";
-    }
-}
-
-function Confirmar() {
-    let text = "Precione 'OK' para confirmar ou Cancelar";
-    if (confirm(text) == true) {
-        text = "Salvo!!";
-    } else {
-        text = "Cancelado!!";
-    }
-    let resposta = document.getElementById("resposta");
-    if(resposta) {
-      resposta.innerHTML = text;
-    }
-}
-
 function showSidebar(){
-    const sidebar = document.querySelector('.sidebar');
-    const menubutton = document.querySelector('.menu-button svg');
-    sidebar.style.display = 'flex';
-    menubutton.style.fill = "none";
+	const sidebar = document.querySelector('.sidebar');
+	const menubutton = document.querySelector('.menu-button svg');
+	sidebar.style.display = 'flex';
+	menubutton.style.fill = "none";
 }
 
 function hideSidebar(){
-    const sidebar = document.querySelector('.sidebar');
-    const menubutton = document.querySelector('.menu-button svg');
-    sidebar.style.display = 'none';
-    menubutton.style.fill = "white";
+	const sidebar = document.querySelector('.sidebar');
+	const menubutton = document.querySelector('.menu-button svg');
+	sidebar.style.display = 'none';
+	menubutton.style.fill = "white";
 }
 
 window.addEventListener('resize', function() {
-    const currentWidth = window.innerWidth;
-    if(currentWidth > 800){
-        hideSidebar();
-    }
+	const currentWidth = window.innerWidth;
+	if(currentWidth > 800){
+		hideSidebar();
+	}
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+	const totalResults = document.getElementById('total-results');
+
+	const productCards = document.querySelectorAll('.product-card');
+	const estadosInput = document.querySelectorAll('.filtro-estado');
+	const localizacaoInput = document.getElementById('filtro-localizacao');
+	const precoMinInput = document.getElementById('preco-min');
+	const precoMaxInput = document.getElementById('preco-max');
+	const anoMinInput = document.getElementById('ano-min');
+	const anoMaxInput = document.getElementById('ano-max');
+	const filtroMarcas = document.querySelectorAll('.filtro-marca');
+
+	//Mostrar quantidade de resultados sem filtro
+	if(productCards.length == 0){
+		totalResults.innerHTML = `Nenhum resultado encontrado`;
+	} else if (productCards.length == 1){
+		totalResults.innerHTML = `${productCards.length} resultado`;
+	} else{
+		totalResults.innerHTML = `${productCards.length} resultados`;
+	}
+
+	function aplicarFiltros() {
+		let totalViewCards = 0;
+
+		// Obter valores
+		const estadosSelecionados = Array.from(estadosInput)
+			.filter(checkbox => checkbox.checked)
+			.map(checkbox => checkbox.value);
+		console.log(estadosSelecionados)
+		const localizacaoSelecionada = localizacaoInput.value;
+		const precoMin = parseFloat(precoMinInput.value) || 0;
+		const precoMax = parseFloat(precoMaxInput.value) || Infinity;
+		const anoMin = parseInt(anoMinInput.value) || 0;
+		const anoMax = parseInt(anoMaxInput.value) || Infinity;
+		const marcasSelecionadas = Array.from(filtroMarcas)
+			.filter(checkbox => checkbox.checked)
+			.map(checkbox => checkbox.value);
+
+		// Percorrer cada card
+		productCards.forEach(card => {
+			const cardEstado = card.dataset.estado;
+			const cardLocalizacao = card.dataset.localizacao;
+			const cardPreco = parseFloat(card.dataset.preco);
+			const cardAno = parseInt(card.dataset.ano);
+			const cardMarca = card.dataset.marca;
+			
+			let letDisplay = true;
+
+			// Aplicar as regras de filtro
+			// Regra de estado: se houver estado selecionado, o card deve pertencer à ele
+			if (estadosSelecionados.length > 0 && !estadosSelecionados.includes(cardEstado)) {
+				letDisplay = false;
+			}
+
+			// Regra de Localização: se tiver localização não for "Todos", o card deve pertencer a essa localização
+			if(localizacaoSelecionada != 'Todos' && (cardLocalizacao != localizacaoSelecionada)){
+				letDisplay = false;
+			}
+
+			// Regra de Preço
+			if (cardPreco < precoMin || cardPreco > precoMax) {
+				letDisplay = false;
+			}
+
+			// Regra de Ano
+			if (cardAno < anoMin || cardAno > anoMax) {
+				letDisplay = false;
+			}
+
+			// Regra da Marca: se houver marcas selecionadas, o card deve pertencer a uma delas
+			if (marcasSelecionadas.length > 0 && !marcasSelecionadas.includes(cardMarca)) {
+				letDisplay = false;
+			}
+
+
+			// Mostrar ou esconder o card
+			const hrElement = card.nextElementSibling;
+			if (letDisplay) {
+				totalViewCards++;
+				card.style.display = 'flex';
+				if (hrElement && hrElement.tagName === 'HR') {
+					hrElement.style.display = 'block';
+				}
+			} else {
+				card.style.display = 'none';
+				if (hrElement && hrElement.tagName === 'HR') {
+					hrElement.style.display = 'none';
+				}
+			}
+		});
+
+		//Mostrar quantidade de resultados após filtro
+		if(totalViewCards == 0){
+			totalResults.innerHTML = `Nenhum resultado encontrado`;
+		} else if (totalViewCards == 1){
+			totalResults.innerHTML = `${totalViewCards} resultado`;
+		} else{
+			totalResults.innerHTML = `${totalViewCards} resultados`;
+		}
+	}
+
+	document.querySelectorAll('.filter-sidebar select').forEach(Selection => {
+		Selection.addEventListener('change', aplicarFiltros);
+	});
+
+	document.querySelectorAll('.filter-sidebar input').forEach(input => {
+		input.addEventListener('change', aplicarFiltros);
+		input.addEventListener('keyup', aplicarFiltros);
+	});
 });

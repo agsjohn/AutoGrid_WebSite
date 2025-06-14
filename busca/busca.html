@@ -2,220 +2,230 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Busca - AutoGrid</title>
-    <link rel="icon" href="/images/AutoGrid_logo.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link href="styles.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Busca - AutoGrid</title>
+	<link rel="icon" href="/images/AutoGrid_logo.png">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<link href="styles.css" rel="stylesheet">
 </head>
 
 <body>
-    <header>
-        <div class="header">
-            <h1>AutoGrid</h1>
-        </div>
-        <ul class="sidebar">
-            <div>
-                <li class="sidebar-close" onclick=hideSidebar()>
-                    <img src="/images/X.png">
-                </li>
-                <li class="sidebar-login" onclick=hideSidebar()>
-                    <a href="/login/login.html">
-                        <img src="/images/user_icon.png">
-                    </a>
-                </li>
-            </div>
-            <li onclick=hideSidebar()><a href="/index/index.html"><h2>Início</h2></a></li>
-            <li onclick=hideSidebar()><a href="/index/index.html#destaque"><h2>Destaque</h2></a></li>
-            <li onclick=hideSidebar()><a href="/index/index.html#products"><h2>Produtos</h2></a></li>
-            <li onclick=hideSidebar()><a href=""><h2>Busca</h2></a></li>
-            <li onclick=hideSidebar()><a href="/index/index.html#car-brands"><h2>Marcas</h2></a></li>
-            <li onclick=hideSidebar()><a href="/index/index.html#contact" class="hideOnMobile"><h2>Contato</h2></a></li>
-        </ul>
-        <div class="nav">
-            <a href="/index/index.html" class="hideOnMobile"><h2>Início</h2></a>
-            <a href="/index/index.html#destaque" class="hideOnMobile"><h2>Destaque</h2></a>
-            <a href="/index/index.html#products" class="hideOnMobile"><h2>Produtos</h2></a>
-            <a href="" class="hideOnMobile"><h2>Busca</h2></a>
-            <a href="/index/index.html#car-brands" class="hideOnMobile"><h2>Marcas</h2></a>
-            <a href="/index/index.html#contact" class="hideOnMobile"><h2>Contato</h2></a>
-        </div>
-        <div class="login">
-            <a href="/login/login.html" class="loginIcon hideOnMobile"></a>
-        </div>
-        <li class="menu-button" onclick=showSidebar()>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
-                <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
-            </svg>
-        </li>
-    </header>
+	<header>
+		<div class="header">
+			<h1>AutoGrid</h1>
+		</div>
+		<ul class="sidebar">
+			<div>
+				<li class="sidebar-close" onclick=hideSidebar()>
+					<img src="/images/X.png">
+				</li>
+				<li class="sidebar-login" onclick=hideSidebar()>
+					<a href="/login/login.html">
+						<img src="/images/user_icon.png">
+					</a>
+				</li>
+			</div>
+			<li onclick=hideSidebar()><a href="/index/index.html"><h2>Início</h2></a></li>
+			<li onclick=hideSidebar()><a href="/index/index.html#destaque"><h2>Destaque</h2></a></li>
+			<li onclick=hideSidebar()><a href="/index/index.html#products"><h2>Produtos</h2></a></li>
+			<li onclick=hideSidebar()><a href=""><h2>Busca</h2></a></li>
+			<li onclick=hideSidebar()><a href="/index/index.html#car-brands"><h2>Marcas</h2></a></li>
+			<li onclick=hideSidebar()><a href="/index/index.html#contact" class="hideOnMobile"><h2>Contato</h2></a></li>
+		</ul>
+		<div class="nav">
+			<a href="/index/index.html" class="hideOnMobile"><h2>Início</h2></a>
+			<a href="/index/index.html#destaque" class="hideOnMobile"><h2>Destaque</h2></a>
+			<a href="/index/index.html#products" class="hideOnMobile"><h2>Produtos</h2></a>
+			<a href="" class="hideOnMobile"><h2>Busca</h2></a>
+			<a href="/index/index.html#car-brands" class="hideOnMobile"><h2>Marcas</h2></a>
+			<a href="/index/index.html#contact" class="hideOnMobile"><h2>Contato</h2></a>
+		</div>
+		<div class="login">
+			<a href="/login/login.html" class="loginIcon hideOnMobile"></a>
+		</div>
+		<li class="menu-button" onclick=showSidebar()>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
+				<path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
+			</svg>
+		</li>
+	</header>
 
-    <main class="search-page-container">
-        <div class="container-fluid">
-            <div class="row">
+	<main class="search-page-container">
+		<div class="container-fluid">
+			<div class="row">
 
-                <aside class="col-lg-3 filter-sidebar">
-                    <div class="breadcrumb-nav mb-3">
-                        <a href="/index.html">Início</a> > <a href="#">Carros</a>
-                    </div>
-                    <h2>Resultados da Busca</h2>
-                    <p class="text-muted">4 resultados</p>
-                    <hr>
+				<aside class="col-lg-3 filter-sidebar">
+					<div class="breadcrumb-nav mb-3">
+						<a href="/index/index.html">Início</a> > <a href="#">Carros</a>
+					</div>
+					<h2>Resultados da Busca</h2>
+					<p id="total-results"></p>
+					<hr>
 
-                    <div class="filter-group">
-                        <h5 class="filter-title">Condição</h5>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="condicao" id="condicao-novos" checked>
-                            <label class="form-check-label" for="condicao-novos">Novos</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="condicao" id="condicao-usados">
-                            <label class="form-check-label" for="condicao-usados">Usados</label>
-                        </div>
-                    </div>
+					<div class="filter-group">
+						<h5 class="filter-title">Condição</h5>
+						<div class="form-check">
+							<input class="form-check-input filtro-estado" type="checkbox" value="Novos" id="condicao-novos">
+							<label class="form-check-label" for="condicao-novos">Novos</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input filtro-estado" type="checkbox" value="Usados" id="condicao-usados">
+							<label class="form-check-label" for="condicao-usados">Usados</label>
+						</div>
+					</div>
 
-                    <div class="filter-group">
-                        <h5 class="filter-title">Localização</h5>
-                        <select class="form-select bg-dark text-white">
-                            <option selected>Porto Alegre - RS</option>
-                            <option>São Paulo - SP</option>
-                            <option>Rio de Janeiro - RJ</option>
-                        </select>
-                    </div>
+					<div class="filter-group">
+						<h5 class="filter-title">Localização</h5>
+						<select class="form-select bg-dark text-white" id="filtro-localizacao">
+							<option selected>Todos</option>
+							<option>Porto Alegre - RS</option>
+							<option>São Paulo - SP</option>
+							<option>Rio de Janeiro - RJ</option>
+						</select>
+					</div>
 
-                    <div class="filter-group">
-                        <h5 class="filter-title">Preço</h5>
-                        <div class="d-flex align-items-center">
-                            <input type="text" class="form-control bg-dark text-white me-2" placeholder="Mínimo">
-                            <span>-</span>
-                            <input type="text" class="form-control bg-dark text-white ms-2" placeholder="Máximo">
-                        </div>
-                    </div>
+					<div class="filter-group">
+						<h5 class="filter-title">Preço</h5>
+						<div class="d-flex align-items-center">
+							<input type="text" class="form-control bg-dark text-white me-2" placeholder="Mínimo" id="preco-min">
+							<span>-</span>
+							<input type="text" class="form-control bg-dark text-white ms-2" placeholder="Máximo" id="preco-max">
+						</div>
+					</div>
 
-                    <div class="filter-group">
-                        <h5 class="filter-title">Ano</h5>
-                         <div class="d-flex align-items-center">
-                            <input type="text" class="form-control bg-dark text-white me-2" placeholder="De">
-                            <span>-</span>
-                            <input type="text" class="form-control bg-dark text-white ms-2" placeholder="Até">
-                        </div>
-                    </div>
+					<div class="filter-group">
+						<h5 class="filter-title">Ano</h5>
+						 <div class="d-flex align-items-center">
+							<input type="text" class="form-control bg-dark text-white me-2" placeholder="De" id="ano-min">
+							<span>-</span>
+							<input type="text" class="form-control bg-dark text-white ms-2" placeholder="Até" id="ano-max">
+						</div>
+					</div>
 
-                    <div class="filter-group">
-                        <h5 class="filter-title">Marca</h5>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="marca-porsche" checked>
-                            <label class="form-check-label" for="marca-porsche">Porsche (1)</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="marca-ford" checked>
-                            <label class="form-check-label" for="marca-ford">Ford (1)</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="marca-chevrolet" checked>
-                            <label class="form-check-label" for="marca-chevrolet">Chevrolet (1)</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="marca-nissan" checked>
-                            <label class="form-check-label" for="marca-nissan">Nissan (1)</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="marca-bmw">
-                            <label class="form-check-label" for="marca-bmw">BMW</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="marca-toyota">
-                            <label class="form-check-label" for="marca-toyota">Toyota</label>
-                        </div>
-                    </div>
+					<div class="filter-group">
+						<h5 class="filter-title">Marca</h5>
+						<div class="form-check">
+							<input class="form-check-input filtro-marca" type="checkbox" value="porsche" id="marca-porsche">
+							<label class="form-check-label" for="marca-porsche">Porsche</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input filtro-marca" type="checkbox" value="ford" id="marca-ford">
+							<label class="form-check-label" for="marca-ford">Ford</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input filtro-marca" type="checkbox" value="chevrolet" id="marca-chevrolet">
+							<label class="form-check-label" for="marca-chevrolet">Chevrolet</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input filtro-marca" type="checkbox" value="nissan" id="marca-nissan">
+							<label class="form-check-label" for="marca-nissan">Nissan</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input filtro-marca" type="checkbox" value="bmw" id="marca-bmw">
+							<label class="form-check-label" for="marca-bmw">BMW</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input filtro-marca" type="checkbox" value="toyota" id="marca-toyota">
+							<label class="form-check-label" for="marca-toyota">Toyota</label>
+						</div>
+					</div>
 
-                </aside>
+				</aside>
 
-                <section class="col-lg-9 results-area">
-                    <div class="results-header">
-                        <div class="sort-options">
-                            <label for="sort" class="me-2">Ordenar por:</label>
-                            <select id="sort" class="form-select bg-dark text-white">
-                                <option selected>Mais relevantes</option>
-                                <option>Menor preço</option>
-                                <option>Maior preço</option>
-                                <option>Mais recentes</option>
-                            </select>
-                        </div>
-                    </div>
+				<section class="col-lg-9 results-area">
+					<div class="results-header">
+						<!-- <div class="show-options me-4">
+							<label for="show" class="me-2">Exibir por página:</label>
+							<select id="show" class="form-select bg-dark text-white">
+								<option selected>10</option>
+								<option>20</option>
+								<option>50</option>
+								<option>100</option>
+							</select>
+						</div> -->
+						<!-- <div class="sort-options">
+							<label for="sort" class="me-2">Ordenar por:</label>
+							<select id="sort" class="form-select bg-dark text-white">
+								<option selected>Mais relevantes</option>
+								<option>Menor preço</option>
+								<option>Maior preço</option>
+								<option>Mais recentes</option>
+							</select>
+						</div> -->
+					</div>
 
-                    <div class="results-list">
-                        <div class="product-card">
-                            <a href="#" class="product-link">
-                                <img src="https://placehold.co/250x180/444/fff?text=GT3+RS" alt="Porsche GT3 RS">
-                                <div class="product-card-body">
-                                    <h5 class="product-title">2019 Porsche Gt3 Rs</h5>
-                                    <p class="product-price">R$ 1.850.000</p>
-                                    <p class="product-details">2019 | 8.000 km</p>
-                                    <p class="product-location">Porto Alegre, Rio Grande do Sul</p>
-                                </div>
-                            </a>
-                        </div>
-                        <hr>
-                        <div class="product-card">
-                             <a href="#" class="product-link">
-                                <img src="https://placehold.co/250x180/444/fff?text=Ford+GT" alt="Ford GT MK II">
-                                <div class="product-card-body">
-                                    <h5 class="product-title">2019 Ford GT MK II</h5>
-                                    <p class="product-price">R$ 6.500.000</p>
-                                    <p class="product-details">2019 | 1.500 km</p>
-                                    <p class="product-location">Porto Alegre, Rio Grande do Sul</p>
-                                </div>
-                            </a>
-                        </div>
-                        <hr>
-                        <div class="product-card">
-                            <a href="#" class="product-link">
-                                <img src="https://placehold.co/250x180/444/fff?text=Corvette+ZR1" alt="Chevrolet Corvette ZR1">
-                                <div class="product-card-body">
-                                    <h5 class="product-title">2019 Chevrolet Corvette ZR1</h5>
-                                    <p class="product-price">R$ 1.600.000</p>
-                                    <p class="product-details">2019 | 12.000 km</p>
-                                    <p class="product-location">Porto Alegre, Rio Grande do Sul</p>
-                                </div>
-                            </a>
-                        </div>
-                        <hr>
-                        <div class="product-card">
-                            <a href="#" class="product-link">
-                                <img src="https://placehold.co/250x180/444/fff?text=370z" alt="Nissan 370z">
-                                <div class="product-card-body">
-                                    <h5 class="product-title">Nissan 370z</h5>
-                                    <p class="product-price">R$ 350.000</p>
-                                    <p class="product-details">2020 | 25.000 km</p>
-                                    <p class="product-location">Porto Alegre, Rio Grande do Sul</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+					<div class="results-list">
+						<div class="product-card" data-marca="porsche" data-ano="2019" data-preco="1850000" data-localizacao="São Paulo - SP" data-estado="Novos">
+							<a href="#" class="product-link">
+								<img src="https://placehold.co/250x180/444/fff?text=GT3+RS" alt="Porsche GT3 RS">
+								<div class="product-card-body">
+									<h5 class="product-title">2019 Porsche Gt3 Rs</h5>
+									<p class="product-price">R$ 1.850.000</p>
+									<p class="product-details">2019 | 8.000 km</p>
+									<p class="product-location">São Paulo, São Paulo</p>
+								</div>
+							</a>
+						</div>
+						<hr>
+						<div class="product-card" data-marca="ford" data-ano="2019" data-preco="6500000" data-localizacao="Porto Alegre - RS" data-estado="Novos">
+							<a href="#" class="product-link">
+								<img src="https://placehold.co/250x180/444/fff?text=Ford+GT" alt="Ford GT MK II">
+								<div class="product-card-body">
+									<h5 class="product-title">2019 Ford GT MK II</h5>
+									<p class="product-price">R$ 6.500.000</p>
+									<p class="product-details">2019 | 1.500 km</p>
+									<p class="product-location">Porto Alegre, Rio Grande do Sul</p>
+								</div>
+							</a>
+						</div>
+						<hr>
+						<div class="product-card" data-marca="chevrolet" data-ano="2019" data-preco="1600000" data-localizacao="Porto Alegre - RS" data-estado="Usados">
+							<a href="#" class="product-link">
+								<img src="https://placehold.co/250x180/444/fff?text=Corvette+ZR1" alt="Chevrolet Corvette ZR1">
+								<div class="product-card-body">
+									<h5 class="product-title">2019 Chevrolet Corvette ZR1</h5>
+									<p class="product-price">R$ 1.600.000</p>
+									<p class="product-details">2019 | 12.000 km</p>
+									<p class="product-location">Porto Alegre, Rio Grande do Sul</p>
+								</div>
+							</a>
+						</div>
+						<hr>
+						<div class="product-card" data-marca="nissan" data-ano="2020" data-preco="350000" data-localizacao="Rio de Janeiro - RJ" data-estado="Usados">
+							<a href="#" class="product-link">
+								<img src="https://placehold.co/250x180/444/fff?text=370z" alt="Nissan 370z">
+								<div class="product-card-body">
+									<h5 class="product-title">Nissan 370z</h5>
+									<p class="product-price">R$ 350.000</p>
+									<p class="product-details">2020 | 25.000 km</p>
+									<p class="product-location">Rio de Janeiro, Rio de Janeiro</p>
+								</div>
+							</a>
+						</div>
+					</div>
 
-                    <nav aria-label="Page navigation" class="mt-4 d-flex justify-content-center">
-                        <ul class="pagination">
-                            <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Próximo</a></li>
-                        </ul>
-                    </nav>
+					<nav aria-label="Page navigation" class="mt-4 d-flex justify-content-center">
+						<ul class="pagination">
+							<li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
+							<li class="page-item active"><a class="page-link" href="#">1</a></li>
+							<li class="page-item disabled"><a class="page-link" href="#">2</a></li>
+							<li class="page-item disabled"><a class="page-link" href="#">3</a></li>
+							<li class="page-item disabled"><a class="page-link" href="#">Próximo</a></li>
+						</ul>
+					</nav>
 
-                </section>
-            </div>
-        </div>
-    </main>
+				</section>
+			</div>
+		</div>
+	</main>
 
-    <script src="func.js"></script>
+	<script src="func.js"></script>
 </body>
 
 </html>
