@@ -1,20 +1,20 @@
-function showSidebar(){
+function showSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const menubutton = document.querySelector('.menu-button svg');
     sidebar.style.display = 'flex';
     menubutton.style.fill = "none";
 }
 
-function hideSidebar(){
+function hideSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const menubutton = document.querySelector('.menu-button svg');
     sidebar.style.display = 'none';
     menubutton.style.fill = "white";
 }
 
-window.addEventListener('resize', function() {
+window.addEventListener('resize', function () {
     const currentWidth = window.innerWidth;
-    if(currentWidth > 800){
+    if (currentWidth > 800) {
         hideSidebar();
     }
 });
@@ -24,7 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Seleção de Elementos ---
     const totalResults = document.getElementById('total-results');
     const productCards = document.querySelectorAll('.product-card');
-    const resultsList = document.querySelector('.results-list'); 
+    const resultsList = document.querySelector('.results-list');
+    const paginationNav = document.getElementById('pagination-nav');
+    const paginationContainer = paginationNav.querySelector('.pagination');
 
     // Filtros
     const estadosInput = document.querySelectorAll('.filtro-estado');
@@ -35,116 +37,162 @@ document.addEventListener('DOMContentLoaded', () => {
     const anoMaxInput = document.getElementById('ano-max');
     const filtroMarcas = document.querySelectorAll('.filtro-marca');
 
-    // Ordenação
+    // Ordenação e Paginação
     const sortSelect = document.getElementById('sort');
+    const showSelect = document.getElementById('show');
 
+	let currentPage = 1;
+    let itemsPerPage = parseInt(showSelect.value);
 
-    // --- Função Principal para Atualizar os Resultados (Filtrar e Ordenar) ---
+    // --- Função para Renderizar a Paginação ---
+    function setupPagination(totalItems, itemsPerPage, currentPage) {
+        paginationContainer.innerHTML = ''; 
+        paginationNav.style.display = 'flex';
+
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+        // Se tiver 1 página ou menos, não mostra a paginação
+        if (totalPages <= 1) {
+            paginationNav.style.display = 'none';
+            return;
+        }
+
+        // Botão "Anterior"
+        let prevLi = `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                        <a class="page-link" href="#" data-page="${currentPage - 1}">Anterior</a>
+                      </li>`;
+        paginationContainer.insertAdjacentHTML('beforeend', prevLi);
+
+        // Botões de Página
+        for (let i = 1; i <= totalPages; i++) {
+            let pageLi = `<li class="page-item ${i === currentPage ? 'active' : ''}">
+                            <a class="page-link" href="#" data-page="${i}">${i}</a>
+                          </li>`;
+            paginationContainer.insertAdjacentHTML('beforeend', pageLi);
+        }
+
+        // Botão "Próximo"
+        let nextLi = `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                        <a class="page-link" href="#" data-page="${currentPage + 1}">Próximo</a>
+                      </li>`;
+        paginationContainer.insertAdjacentHTML('beforeend', nextLi);
+    }
+
+    // --- Função Principal para Atualizar os Resultados (Filtrar, Ordenar e Paginar) ---
     function updateResults() {
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+		
         // Obter valores dos filtros
-        const estadosSelecionados = Array.from(estadosInput)
-            .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.value);
+        const estadosSelecionados = Array.from(estadosInput).filter(cb => cb.checked).map(cb => cb.value);
         const localizacaoSelecionada = localizacaoInput.value;
         const precoMin = parseFloat(precoMinInput.value) || 0;
         const precoMax = parseFloat(precoMaxInput.value) || Infinity;
         const anoMin = parseInt(anoMinInput.value) || 0;
         const anoMax = parseInt(anoMaxInput.value) || Infinity;
-        const marcasSelecionadas = Array.from(filtroMarcas)
-            .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.value);
-
-        // Converte NodeList para Array para poder usar o .sort()
+        const marcasSelecionadas = Array.from(filtroMarcas).filter(cb => cb.checked).map(cb => cb.value);
+        
         let cardsArray = Array.from(productCards);
 
-        // --- LÓGICA DE ORDENAÇÃO ---
+        // FILTRAR
+        const filteredCards = cardsArray.filter(card => {
+            const cardEstado = card.dataset.estado;
+            const cardLocalizacao = card.dataset.localizacao;
+            const cardPreco = parseFloat(card.dataset.preco);
+            const cardAno = parseInt(card.dataset.ano);
+            const cardMarca = card.dataset.marca;
+
+            const estadoMatch = estadosSelecionados.length === 0 || estadosSelecionados.includes(cardEstado);
+            const localizacaoMatch = localizacaoSelecionada === 'Todos' || cardLocalizacao === localizacaoSelecionada;
+            const precoMatch = cardPreco >= precoMin && cardPreco <= precoMax;
+            const anoMatch = cardAno >= anoMin && cardAno <= anoMax;
+            const marcaMatch = marcasSelecionadas.length === 0 || marcasSelecionadas.includes(cardMarca);
+
+            return estadoMatch && localizacaoMatch && precoMatch && anoMatch && marcaMatch;
+        });
+
+        // ORDENAR
         const sortValue = sortSelect.value;
-        cardsArray.sort((a, b) => {
+        filteredCards.sort((a, b) => {
             const precoA = parseFloat(a.dataset.preco);
             const precoB = parseFloat(b.dataset.preco);
             const anoA = parseInt(a.dataset.ano);
             const anoB = parseInt(b.dataset.ano);
 
             switch (sortValue) {
-                case 'Menor preço':
-                    return precoA - precoB; // Ordena do menor para o maior preço
-                case 'Maior preço':
-                    return precoB - precoA; // Ordena do maior para o menor preço
-                case 'Mais recentes':
-                    return anoB - anoA; // Ordena do maior para o menor ano (mais recente primeiro)
-                default:
-                    return 0; // 'Mais relevantes', mantém a ordem original
+                case 'Menor preço': return precoA - precoB;
+                case 'Maior preço': return precoB - precoA;
+                case 'Mais recentes': return anoB - anoA;
+                default: return 0;
             }
         });
-        
-        // Limpa a lista de resultados para adicionar os itens em ordem
-        resultsList.innerHTML = '';
-        
-        let visibleCardsCount = 0;
-
-        // Filtra o array já ordenado
-        cardsArray.forEach(card => {
-            const cardEstado = card.dataset.estado;
-            const cardLocalizacao = card.dataset.localizacao;
-            const cardPreco = parseFloat(card.dataset.preco);
-            const cardAno = parseInt(card.dataset.ano);
-            const cardMarca = card.dataset.marca;
-            
-            let shouldDisplay = true;
-
-            if (estadosSelecionados.length > 0 && !estadosSelecionados.includes(cardEstado)) {
-                shouldDisplay = false;
-            }
-            if (localizacaoSelecionada !== 'Todos' && cardLocalizacao !== localizacaoSelecionada) {
-                shouldDisplay = false;
-            }
-            if (cardPreco < precoMin || cardPreco > precoMax) {
-                shouldDisplay = false;
-            }
-            if (cardAno < anoMin || cardAno > anoMax) {
-                shouldDisplay = false;
-            }
-            if (marcasSelecionadas.length > 0 && !marcasSelecionadas.includes(cardMarca)) {
-                shouldDisplay = false;
-            }
-
-            // Se o card passar por todos os filtros, ele é exibido
-            if (shouldDisplay) {
-                // Adiciona o card e o seu respectivo <hr> de volta na lista
-                resultsList.appendChild(card);
-                const hr = document.createElement('hr');
-                resultsList.appendChild(hr);
-
-                visibleCardsCount++;
-            }
-        });
-        
-        // Remove o último <hr> que foi adicionado desnecessariamente
-        if (resultsList.lastChild && resultsList.lastChild.tagName === 'HR') {
-            resultsList.removeChild(resultsList.lastChild);
-        }
 
         // Atualiza a contagem de resultados
-        if(visibleCardsCount === 0){
+        const totalVisibleCards = filteredCards.length;
+        if (totalVisibleCards === 0) {
             totalResults.innerHTML = `Nenhum resultado encontrado`;
-        } else if (visibleCardsCount === 1){
-            totalResults.innerHTML = `${visibleCardsCount} resultado`;
-        } else{
-            totalResults.innerHTML = `${visibleCardsCount} resultados`;
+        } else if (totalVisibleCards === 1) {
+            totalResults.innerHTML = `${totalVisibleCards} resultado`;
+        } else {
+            totalResults.innerHTML = `${totalVisibleCards} resultados`;
         }
+
+        // PAGINAR
+        itemsPerPage = parseInt(showSelect.value);
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const paginatedCards = filteredCards.slice(startIndex, endIndex);
+        
+        // RENDERIZAR
+        resultsList.innerHTML = ''; 
+        paginatedCards.forEach((card, index) => {
+            resultsList.appendChild(card.cloneNode(true)); 
+
+            // Adiciona <hr> entre os cards
+            if (index < paginatedCards.length - 1) {
+                const hr = document.createElement('hr');
+                resultsList.appendChild(hr);
+            }
+        });
+
+        // RENDERIZAR CONTROLES DA PAGINAÇÃO
+        setupPagination(totalVisibleCards, itemsPerPage, currentPage);
     }
+	
 
     // --- Adicionando os Event Listeners ---
+    // Função genérica para resetar para a primeira página e atualizar
+    function handleFilterChange() {
+        currentPage = 1;
+        updateResults();
+    }
     
-    sortSelect.addEventListener('change', updateResults);
+    sortSelect.addEventListener('change', handleFilterChange);
+    showSelect.addEventListener('change', handleFilterChange);
 
     document.querySelectorAll('.filter-sidebar select, .filter-sidebar input[type="checkbox"]').forEach(element => {
-        element.addEventListener('change', updateResults);
+        element.addEventListener('change', handleFilterChange);
     });
 
     document.querySelectorAll('.filter-sidebar input[type="text"]').forEach(input => {
-        input.addEventListener('keyup', updateResults);
+        input.addEventListener('keyup', handleFilterChange);
+    });
+
+
+    // Event Listener para os cliques na paginação
+    paginationContainer.addEventListener('click', (e) => {
+        e.preventDefault();
+        const link = e.target.closest('a.page-link');
+        if (!link) return;
+
+        const li = link.parentElement;
+        if (li.classList.contains('disabled') || li.classList.contains('active')) {
+            return;
+        }
+        
+        currentPage = parseInt(link.dataset.page);
+        updateResults();
     });
     
-    updateResults(); 
+    // Chamada inicial para carregar os resultados
+    updateResults();
 });
