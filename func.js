@@ -94,3 +94,22 @@ window.addEventListener('resize', function() {
         hideSidebar();
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const imagens1 = document.querySelectorAll('.sub-img1');
+    const imagens2 = document.querySelectorAll('.sub-img2');
+
+    
+    imagens1.forEach(e => {
+        e.addEventListener('click', function() {
+            window.location.href = '/produto/produto.html'; 
+        });
+    });
+
+    imagens2.forEach(e => {
+        e.addEventListener('click', function() {
+            window.location.href = '/produto/produto.html'; 
+        });
+    });
+    
+});

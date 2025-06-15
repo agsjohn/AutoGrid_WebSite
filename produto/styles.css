@@ -36,6 +36,10 @@ header{
     border-bottom: 1px solid rgb(158, 158, 158);
 }
 
+header div{
+    width: 100%;
+}
+
 header svg{
     fill: white;
     width: 3rem;

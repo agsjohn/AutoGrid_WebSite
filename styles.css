@@ -394,10 +394,6 @@ header svg{
     opacity: 1;
 }
 
-.mySlides:hover {
-    cursor: pointer;
-}
-
 .image-text h2 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
@@ -587,7 +583,7 @@ header svg{
     padding: 0 15px; 
 }
 
-#sub-img1 {
+.sub-img1 {
     justify-self: center;
     object-fit: cover;
     width: 100%;
@@ -595,8 +591,8 @@ header svg{
     border-radius: 15px;
 }
 
-#sub-img2, #sub-img3 {
-    padding: 10px;
+.sub-img2 {
+    padding: 0.7rem;
     object-fit: cover;
     flex-grow: 1; 
     flex-shrink: 1; 
@@ -605,19 +601,16 @@ header svg{
     border-radius: 15px;
 }
 
-#sub-img1:hover {
+.sub-img1:hover {
     transform: scale(1.03);
     transition: 0.3s ease;
+    cursor: pointer;
 }
 
-#sub-img2:hover {
+.sub-img2:hover {
     transform: scale(1.03);
     transition: 0.3s ease;
-}
-
-#sub-img3:hover {
-    transform: scale(1.03);
-    transition: 0.3s ease;
+    cursor: pointer;
 }
 
 #morePort{

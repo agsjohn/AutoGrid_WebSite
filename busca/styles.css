@@ -272,10 +272,6 @@ header svg{
     max-width: 1400px;
 }
 
-.filter-sidebar {
-    padding: 1rem;
-}
-
 .filter-sidebar h2 {
     font-size: 1.5rem;
     font-weight: 500;
