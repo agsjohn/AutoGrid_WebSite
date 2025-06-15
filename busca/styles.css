@@ -200,7 +200,7 @@ header svg{
 }
 
 .loginIcon{
-    background-image: url("/images/user_icon.png");
+    background-image: url("../images/user_icon.png");
     background-repeat: no-repeat;
     background-size: contain;
     filter: invert();
