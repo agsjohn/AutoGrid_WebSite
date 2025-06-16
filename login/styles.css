@@ -78,6 +78,14 @@
 
 
 
+/* INVALID LOGIN */
+#invalidLogin{
+    margin: 0;
+    color: red;
+}
+
+
+
 /* Login button style */
 .btn-login {
     width: 100%;

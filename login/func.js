@@ -4,14 +4,18 @@ document.addEventListener('DOMContentLoaded', function() {
     if (loginForm) {
         loginForm.addEventListener('submit', function(event) {
             event.preventDefault();
-
-            const email = document.getElementById('loginEmail').value;
-
-            if (email) {
-                alert('Login solicitado para: ' + email + '\n(Esta é uma simulação)');
-            } else {
-                alert('Por favor, preencha o campo de e-mail.');
-            }
+            login();
         });
     }
 });
+
+function login(){
+    var login = document.getElementById('loginUser').value;
+    var password = document.getElementById('loginPassword').value;
+
+    if(login == 'admin' && password == 'admin'){
+        window.location.href = '../crud/crud.html';
+    } else{
+        document.getElementById('invalidLogin').classList.remove('d-none');
+    }
+}
