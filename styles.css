@@ -34,24 +34,6 @@
     cursor: pointer;
 }
 
-@media (max-width: 1024px) {
-    #initial-images{
-        height: 30rem;
-    }
-}
-
-@media (max-width: 800px) {
-    #initial-images>h1{
-        transform: scale(0.8);
-    }
-}
-
-@media (max-width: 480px) {
-    #initial-images>h1{
-        transform: scale(0.6);
-    }
-}
-
 
 
 /* DESTAQUE */
@@ -189,72 +171,6 @@
     background-color: #717171;
 }
 
-@media(max-width: 800px){
-    #destaque{
-        padding: 0;
-    }
-
-    .slideshow {
-        margin: 0;
-        padding: 0;
-    }
-
-    .slideshow>div {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-
-    .slideshow-container {
-        position: relative;
-        background-color: gray;
-        overflow: hidden;
-        width: 100%;
-    }
-
-    .mySlides img { 
-        height: 80vw;
-        filter: blur(0); 
-    }
-
-    .mySlides .image-text {
-        opacity: 1;
-    }
-
-    .image-text h2 {
-        transform: scale(0.7);
-    }
-
-    .image-text p {
-        transform: scale(0.7);
-    }
-
-    .dot{
-        display: none;
-    }
-}
-
-@media(max-width: 540px){
-    .image-text {
-        padding: 0;
-        max-width: 90%;
-    }
-
-    .mySlides img { 
-        height: 100vw;
-    }
-
-    .image-text h2 {
-        font-size: 2rem;
-        margin-bottom: 0;
-    }
-
-    .image-text p {
-        font-size: 1rem;
-        line-height: 1.5rem;
-    }
-}
-
 
 
 /* PRODUCTS */
@@ -297,16 +213,6 @@
     justify-content: center;
     margin: 0;
     padding: 0;
-}
-
-@media (max-width: 800px) {
-    .date{
-        justify-content: center;
-    }
-
-    .date>h1 {
-        font-size: 2em;
-    }
 }
 
 .fill {
@@ -471,6 +377,136 @@
     border-radius: 15px;
 }
 
+.brands img:hover {
+    transform: scale(1.03);
+    transition: 0.3s ease;
+}
+
+
+
+/* CONTACT */
+#contact{
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 8%;
+    background-color: #1f1f22;
+}
+
+#contact label{
+    padding-top: 1rem;
+}
+
+#contact button{
+    margin: 1rem 0;
+}
+
+
+
+/* RESPONSIVITY */
+/* INITIAL IMAGES */
+@media (max-width: 1024px) {
+    #initial-images{
+        height: 30rem;
+    }
+}
+
+@media (max-width: 800px) {
+    #initial-images>h1{
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 480px) {
+    #initial-images>h1{
+        transform: scale(0.6);
+    }
+}
+
+
+
+/* DESTAQUE */
+@media(max-width: 800px){
+    #destaque{
+        padding: 0;
+    }
+
+    .slideshow {
+        margin: 0;
+        padding: 0;
+    }
+
+    .slideshow>div {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .slideshow-container {
+        position: relative;
+        background-color: gray;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .mySlides img { 
+        height: 80vw;
+        filter: blur(0); 
+    }
+
+    .mySlides .image-text {
+        opacity: 1;
+    }
+
+    .image-text h2 {
+        transform: scale(0.7);
+    }
+
+    .image-text p {
+        transform: scale(0.7);
+    }
+
+    .dot{
+        display: none;
+    }
+}
+
+@media(max-width: 540px){
+    .image-text {
+        padding: 0;
+        max-width: 90%;
+    }
+
+    .mySlides img { 
+        height: 100vw;
+    }
+
+    .image-text h2 {
+        font-size: 2rem;
+        margin-bottom: 0;
+    }
+
+    .image-text p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+}
+
+
+
+/* PRODUCTS */
+@media (max-width: 800px) {
+    .date{
+        justify-content: center;
+    }
+
+    .date>h1 {
+        font-size: 2em;
+    }
+}
+
+
+
+/* MARCA */
 @media (max-width: 900px) { 
     .brands p{
         font-size: 0.8rem;
@@ -505,27 +541,4 @@
     .car-brand-text-right{
         padding-right: 0;
     }
-}
-
-.brands img:hover {
-    transform: scale(1.03);
-    transition: 0.3s ease;
-}
-
-
-
-/* CONTACT */
-#contact{
-    display: flex;
-    flex-direction: column;
-    padding: 3rem 8%;
-    background-color: #1f1f22;
-}
-
-#contact label{
-    padding-top: 1rem;
-}
-
-#contact button{
-    margin: 1rem 0;
 }
