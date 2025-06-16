@@ -1,4 +1,4 @@
-/*  */
+/* SEARCH PAGE */
 .search-page-container {
     padding-top: 7rem; 
     padding-bottom: 2rem;
@@ -9,6 +9,9 @@
     max-width: 1400px;
 }
 
+
+
+/* LEFT SIDEBAR */
 .filter-sidebar h2 {
     font-size: 1.5rem;
     font-weight: 500;
@@ -24,6 +27,10 @@
     color: white;
 }
 
+
+
+
+/* FILTER GROUP */
 .filter-group {
     margin-bottom: 1.5rem;
 }
@@ -51,6 +58,9 @@
     border-color: #0d6efd;
 }
 
+
+
+/* RESULTS AREA */
 .results-area {
     padding: 1rem;
 }
@@ -82,6 +92,9 @@
     width: 50%;
 }
 
+
+
+/* RESULTS LIST */
 .results-list hr {
     border-color: #555;
 }
@@ -139,6 +152,9 @@
     color: #aaa;
 }
 
+
+
+/* PAGINATION NAV */
 .pagination .page-item .page-link {
     background-color: #3a3a40;
     border-color: #555;
@@ -155,6 +171,9 @@
     color: #6c757d;
 }
 
+
+
+/* RESPONSIVITY */
 @media (max-width: 992px) {
     .filter-sidebar {
         border-bottom: 1px solid #555;
