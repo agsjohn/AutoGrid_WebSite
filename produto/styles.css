@@ -1,3 +1,14 @@
+/* PRODUCT VIEW PAGE */
+.product-view-container {
+    padding-top: 7rem;
+    padding-bottom: 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+
+
+/* LEFT SIDEBAR */
 .breadcrumb-nav{
     width: fit-content;
 }
@@ -14,14 +25,7 @@
 
 
 
-/* PRODUCT VIEW PAGE */
-.product-view-container {
-    padding-top: 7rem;
-    padding-bottom: 3rem;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
+/* PRODUCT GALLERY */
 .product-gallery .main-image img {
     width: 100%;
     height: auto;
@@ -54,6 +58,9 @@
     border-color: #0d6efd;
 }
 
+
+
+/* PRODUCT INFO */
 .product-info {
     padding: 1rem;
     background-color: #3a3a40;
@@ -96,7 +103,7 @@
 
 
 
-/* Product Details Tabs */
+/* PRODUCT DETAILS TABS */
 .product-details-tabs .nav-tabs {
     border-bottom: 1px solid #555;
 }
@@ -122,6 +129,9 @@
     color: #eee;
 }
 
+
+
+/* RESPONSIVITY */
 @media (max-width: 992px) {
     .product-info {
         margin-top: 2rem;
