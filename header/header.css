@@ -222,6 +222,9 @@ header svg{
     padding-right: 1rem;
 }
 
+
+
+/* RESPONSIVITY */
 @media (max-width: 1200px) {
     .nav h2{
         font-size: 1rem;
