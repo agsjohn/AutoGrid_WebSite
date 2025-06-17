@@ -1,274 +1,10 @@
-/* GENERAL */
-
-@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap');
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
-
-*{
-    padding: 0;
-    margin: 0;
-    font-family: "Kanit", sans-serif;
-    color: white;
-}
-
-body{
-    background-color: #2c2c30;
-}
-
-div{
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-
-
-
-/* HEADER */
-header{
-    background-color: #2c2c30;
-    height: 5rem;
-    width: 100%; 
-    position: fixed;
-    top: 0rem;
-    display: flex;
-    align-items: end;
-    justify-content: center;
-    z-index: 10;
-    border-bottom: 1px solid rgb(158, 158, 158);
-}
-
-header svg{
-    fill: white;
-    width: 3rem;
-    height: 3rem;
-}
-
-.header {
-    display: flex;
-    justify-content: end;
-    width: 20rem;
-    padding: 0;
-    margin: 0;
-}
-
-.header > h1 {
-    margin: 0;
-    font-size: 3rem;
-    letter-spacing: 2px;
-    font-weight: 1000;
-    font-family: "Impact, fantasy";
-    padding: 0.5rem;
-}
-
-.header > h1:hover {
-    cursor: default;
-}
-
-.sidebar{
-    position: fixed;
-    top: 0; 
-    right: 0;
-    height: 100vh;
-    width: 250px;
-    background-color: rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(12px);
-    box-shadow: -10px 0 10px rgba(0, 0, 0, 0.2);
-    list-style: none;
-    display: none;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-}
-
-.sidebar > div {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row-reverse;
-    align-items: center;
-    width: 100%;
-}
-
-.sidebar li{
-    height: 3rem;
-    padding: 0 1rem;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    color: black;
-    width: 100%;
-    transition: 0.3s;
-}
-
-.sidebar li:hover{
-    transform: scale(1.1);
-}
-
-.sidebar .sidebar-close{
-    padding: 1rem;
-    height: 3.5rem;
-    width: fit-content;
-    margin: 0;
-}
-
-.sidebar .sidebar-close img{
-    height: 100%;
-    filter: invert();
-}
-
-.sidebar .sidebar-login{
-    padding: 1rem;
-    height: 3.5rem;
-    width: fit-content;
-    margin: 0;
-}
-
-.sidebar .sidebar-login img{
-    height: 100%;
-    filter: invert();
-}
-
-.sidebar a{
-    height: 100%;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    color: black;
-    width: 100%;
-}
-
-.sidebar h2{
-    color: white;
-}
-
-.nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem;
-    padding-bottom: 1rem;
-    gap: 2rem;
-}
-
-.nav > a {
-    text-align: center;
-    font-weight: 300;
-    letter-spacing: 0.05em;
-    text-decoration: none;
-    color: white;
-    text-decoration: none; 
-    padding-bottom: 3px;
-}
-
-.nav>a:hover {
-    transform: scale(1.1);
-    transition: 0.4s ease;
-    cursor: pointer;
-}
-
-.nav h2{
-    font-size: 1.5rem;
-    padding: 0; 
-    margin: 0;
-    position: relative;
-}
-
-.nav a h2::after{
-    content: '';
-    background-color: white;
-    border-radius: 10rem;
-    height: 0.1rem;
-    width: 0;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: width 0.2s ease;
-}
-
-.nav a h2:hover::after{
-    width: 100%;
-}
-
-.login{
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    width: 20rem;
-    padding-right: 2rem;
-    padding-bottom: 0.5rem;
-    margin: 0;
-}
-
-.loginIcon{
-    background-image: url("images/user_icon.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    filter: invert();
-    height: 3rem;
-    width: 3rem;
-}
-
-.loginIcon:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-    transition: 0.4s ease;
-}
-
-.menu-button{
-    display: none;
-    padding-right: 1rem;
-}
-
-@media (max-width: 1200px) {
-    .nav h2{
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 960px) {
-    .header{
-        padding-left: 1rem;
-    }
-    .header > h1{
-        font-size: 2rem;
-    }
-    .nav h2{
-        font-size: 0.8rem;
-    }
-    .login{
-        width: 13rem;
-    }
-    .header {
-        justify-content: center;
-        width: 13rem;
-    }
-}
-
-@media(max-width: 800px){
-  .hideOnMobile{
-    display: none;
-  }
-  .menu-button{
-    display: block;
-  }
-}
-
-@media(max-width: 400px){
-  .sidebar{
-    width: 100%;
-  }
-}
-
-
-
 /* INITIAL IMAGES */
 #initial-images{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-image: url("images/1.jpg");
+    background-image: url("../images/1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -296,24 +32,6 @@ header svg{
     transform: scale(1.1);
     background-color: rgba(255, 255, 255, 0.3);
     cursor: pointer;
-}
-
-@media (max-width: 1024px) {
-    #initial-images{
-        height: 30rem;
-    }
-}
-
-@media (max-width: 800px) {
-    #initial-images>h1{
-        transform: scale(0.8);
-    }
-}
-
-@media (max-width: 480px) {
-    #initial-images>h1{
-        transform: scale(0.6);
-    }
 }
 
 
@@ -394,10 +112,6 @@ header svg{
     opacity: 1;
 }
 
-.mySlides:hover {
-    cursor: pointer;
-}
-
 .image-text h2 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
@@ -457,72 +171,6 @@ header svg{
     background-color: #717171;
 }
 
-@media(max-width: 800px){
-    #destaque{
-        padding: 0;
-    }
-
-    .slideshow {
-        margin: 0;
-        padding: 0;
-    }
-
-    .slideshow>div {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-
-    .slideshow-container {
-        position: relative;
-        background-color: gray;
-        overflow: hidden;
-        width: 100%;
-    }
-
-    .mySlides img { 
-        height: 80vw;
-        filter: blur(0); 
-    }
-
-    .mySlides .image-text {
-        opacity: 1;
-    }
-
-    .image-text h2 {
-        transform: scale(0.7);
-    }
-
-    .image-text p {
-        transform: scale(0.7);
-    }
-
-    .dot{
-        display: none;
-    }
-}
-
-@media(max-width: 540px){
-    .image-text {
-        padding: 0;
-        max-width: 90%;
-    }
-
-    .mySlides img { 
-        height: 100vw;
-    }
-
-    .image-text h2 {
-        font-size: 2rem;
-        margin-bottom: 0;
-    }
-
-    .image-text p {
-        font-size: 1rem;
-        line-height: 1.5rem;
-    }
-}
-
 
 
 /* PRODUCTS */
@@ -567,16 +215,6 @@ header svg{
     padding: 0;
 }
 
-@media (max-width: 800px) {
-    .date{
-        justify-content: center;
-    }
-
-    .date>h1 {
-        font-size: 2em;
-    }
-}
-
 .fill {
     display: flex;
     justify-content: space-between;
@@ -587,7 +225,7 @@ header svg{
     padding: 0 15px; 
 }
 
-#sub-img1 {
+.sub-img1 {
     justify-self: center;
     object-fit: cover;
     width: 100%;
@@ -595,8 +233,8 @@ header svg{
     border-radius: 15px;
 }
 
-#sub-img2, #sub-img3 {
-    padding: 10px;
+.sub-img2 {
+    padding: 0.7rem;
     object-fit: cover;
     flex-grow: 1; 
     flex-shrink: 1; 
@@ -605,19 +243,16 @@ header svg{
     border-radius: 15px;
 }
 
-#sub-img1:hover {
+.sub-img1:hover {
     transform: scale(1.03);
     transition: 0.3s ease;
+    cursor: pointer;
 }
 
-#sub-img2:hover {
+.sub-img2:hover {
     transform: scale(1.03);
     transition: 0.3s ease;
-}
-
-#sub-img3:hover {
-    transform: scale(1.03);
-    transition: 0.3s ease;
+    cursor: pointer;
 }
 
 #morePort{
@@ -742,6 +377,136 @@ header svg{
     border-radius: 15px;
 }
 
+.brands img:hover {
+    transform: scale(1.03);
+    transition: 0.3s ease;
+}
+
+
+
+/* CONTACT */
+#contact{
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 8%;
+    background-color: #1f1f22;
+}
+
+#contact label{
+    padding-top: 1rem;
+}
+
+#contact button{
+    margin: 1rem 0;
+}
+
+
+
+/* RESPONSIVITY */
+/* INITIAL IMAGES */
+@media (max-width: 1024px) {
+    #initial-images{
+        height: 30rem;
+    }
+}
+
+@media (max-width: 800px) {
+    #initial-images>h1{
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 480px) {
+    #initial-images>h1{
+        transform: scale(0.6);
+    }
+}
+
+
+
+/* DESTAQUE */
+@media(max-width: 800px){
+    #destaque{
+        padding: 0;
+    }
+
+    .slideshow {
+        margin: 0;
+        padding: 0;
+    }
+
+    .slideshow>div {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .slideshow-container {
+        position: relative;
+        background-color: gray;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .mySlides img { 
+        height: 80vw;
+        filter: blur(0); 
+    }
+
+    .mySlides .image-text {
+        opacity: 1;
+    }
+
+    .image-text h2 {
+        transform: scale(0.7);
+    }
+
+    .image-text p {
+        transform: scale(0.7);
+    }
+
+    .dot{
+        display: none;
+    }
+}
+
+@media(max-width: 540px){
+    .image-text {
+        padding: 0;
+        max-width: 90%;
+    }
+
+    .mySlides img { 
+        height: 100vw;
+    }
+
+    .image-text h2 {
+        font-size: 2rem;
+        margin-bottom: 0;
+    }
+
+    .image-text p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+}
+
+
+
+/* PRODUCTS */
+@media (max-width: 800px) {
+    .date{
+        justify-content: center;
+    }
+
+    .date>h1 {
+        font-size: 2em;
+    }
+}
+
+
+
+/* MARCA */
 @media (max-width: 900px) { 
     .brands p{
         font-size: 0.8rem;
@@ -776,27 +541,4 @@ header svg{
     .car-brand-text-right{
         padding-right: 0;
     }
-}
-
-.brands img:hover {
-    transform: scale(1.03);
-    transition: 0.3s ease;
-}
-
-
-
-/* CONTACT */
-#contact{
-    display: flex;
-    flex-direction: column;
-    padding: 3rem 8%;
-    background-color: #1f1f22;
-}
-
-#contact label{
-    padding-top: 1rem;
-}
-
-#contact button{
-    margin: 1rem 0;
 }

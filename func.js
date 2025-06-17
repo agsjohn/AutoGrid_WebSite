@@ -74,23 +74,21 @@ function Confirmar() {
     document.getElementById("resposta").innerHTML = text;
 }
 
-function showSidebar(){
-    const sidebar = document.querySelector('.sidebar');
-    const menubutton = document.querySelector('.menu-button svg');
-    sidebar.style.display = 'flex';
-    menubutton.style.fill = "none";
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const imagens1 = document.querySelectorAll('.sub-img1');
+    const imagens2 = document.querySelectorAll('.sub-img2');
 
-function hideSidebar(){
-    const sidebar = document.querySelector('.sidebar');
-    const menubutton = document.querySelector('.menu-button svg');
-    sidebar.style.display = 'none';
-    menubutton.style.fill = "white";
-}
+    
+    imagens1.forEach(e => {
+        e.addEventListener('click', function() {
+            window.location.href = '/produto/produto.html'; 
+        });
+    });
 
-window.addEventListener('resize', function() {
-    const currentWidth = window.innerWidth;
-    if(currentWidth > 800){
-        hideSidebar();
-    }
+    imagens2.forEach(e => {
+        e.addEventListener('click', function() {
+            window.location.href = '/produto/produto.html'; 
+        });
+    });
+    
 });
