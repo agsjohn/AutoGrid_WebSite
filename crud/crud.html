@@ -2,206 +2,247 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciamento - AutoGrid</title>
-    <link rel="icon" href="../images/AutoGrid_logo.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        
-    <link href="../header/header.css" rel="stylesheet">
-    <link href="crud.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gerenciamento - AutoGrid</title>
+	<link rel="icon" href="../images/AutoGrid_logo.png">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
+	<link href="../header/header.css" rel="stylesheet">
+	<link href="crud.css" rel="stylesheet">
 </head>
 
 <body>
-    <script src="../header/header.js"></script>
-    <header>
-        <div class="header">
-            <h1>AutoGrid</h1>
-        </div>
-        <ul class="sidebar">
-            <div>
-                <li class="sidebar-close" onclick=hideSidebar()>
-                    <img src="../images/X.png">
-                </li>
-                <li class="sidebar-login" onclick=hideSidebar()>
-                    <a href="../login/login.html">
-                        <img src="../images/user_icon.png">
-                    </a>
-                </li>
-            </div>
-            <li onclick=hideSidebar()><a href="../index.html#initial-images"><h2>Início</h2></a></li>
-            <li onclick=hideSidebar()><a href="../index.html#destaque"><h2>Destaque</h2></a></li>
-            <li onclick=hideSidebar()><a href="../index.html#products"><h2>Produtos</h2></a></li>
-            <li onclick=hideSidebar()><a href="../busca/busca.html"><h2>Busca</h2></a></li onclick=hideSidebar()>
-            <li onclick=hideSidebar()><a href="../index.html#car-brands"><h2>Marcas</h2></a></li>
-            <li onclick=hideSidebar()><a href="../index.html#contact" class="hideOnMobile"><h2>Contato</h2></a></li>
-        </ul>
-        <div class="nav">
-            <a href="../index.html#initial-images" class="hideOnMobile"><h2>Início</h2></a>
-            <a href="../index.html#destaque" class="hideOnMobile"><h2>Destaque</h2></a>
-            <a href="../index.html#products" class="hideOnMobile"><h2>Produtos</h2></a>
-            <a href="../busca/busca.html" class="hideOnMobile"><h2>Busca</h2></a>
-            <a href="../index.html#car-brands" class="hideOnMobile"><h2>Marcas</h2></a>
-            <a href="../index.html#contact" class="hideOnMobile"><h2>Contato</h2></a>
-        </div>
-        <div class="login">
-            <a href="../login/login.html" class="loginIcon hideOnMobile"></a>
-        </div>
-        <li class="menu-button" onclick=showSidebar()>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
-                <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/>
-            </svg>
-        </li>
-    </header>
+	<script src="../header/header.js"></script>
+	<header>
+		<div class="header">
+			<h1>AutoGrid</h1>
+		</div>
+		<ul class="sidebar">
+			<div>
+				<li class="sidebar-close" onclick=hideSidebar()>
+					<img src="../images/X.png">
+				</li>
+				<li class="sidebar-login" onclick=hideSidebar()>
+					<a href="../login/login.html">
+						<img src="../images/user_icon.png">
+					</a>
+				</li>
+			</div>
+			<li onclick=hideSidebar()><a href="../index.html#initial-images"><h2>Início</h2></a></li>
+			<li onclick=hideSidebar()><a href="../index.html#destaque"><h2>Destaque</h2></a></li>
+			<li onclick=hideSidebar()><a href="../index.html#products"><h2>Produtos</h2></a></li>
+			<li onclick=hideSidebar()><a href="../busca/busca.html"><h2>Busca</h2></a></li onclick=hideSidebar()>
+			<li onclick=hideSidebar()><a href="../index.html#car-brands"><h2>Marcas</h2></a></li>
+			<li onclick=hideSidebar()><a href="../index.html#contact" class="hideOnMobile"><h2>Contato</h2></a></li>
+		</ul>
+		<div class="nav">
+			<a href="../index.html#initial-images" class="hideOnMobile"><h2>Início</h2></a>
+			<a href="../index.html#destaque" class="hideOnMobile"><h2>Destaque</h2></a>
+			<a href="../index.html#products" class="hideOnMobile"><h2>Produtos</h2></a>
+			<a href="../busca/busca.html" class="hideOnMobile"><h2>Busca</h2></a>
+			<a href="../index.html#car-brands" class="hideOnMobile"><h2>Marcas</h2></a>
+			<a href="../index.html#contact" class="hideOnMobile"><h2>Contato</h2></a>
+		</div>
+		<div class="login">
+			<a href="../login/login.html" class="loginIcon hideOnMobile"></a>
+		</div>
+		<li class="menu-button" onclick=showSidebar()>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
+				<path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/>
+			</svg>
+		</li>
+	</header>
 
-    <main class="crud-container">
-        <div class="container-fluid">
-            <div class="breadcrumb-nav mb-4">
-                <a href="../index.html">Início</a> > <a href="#">Gerenciamento de Veículos</a>
-            </div>
+	<main class="crud-container">
+		<div class="container-fluid">
+			<div class="breadcrumb-nav mb-4">
+				<a href="../index.html">Início</a> > <a href="#">Gerenciamento de Veículos</a>
+			</div>
 
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2>Veículos Cadastrados</h2>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#vehicleModal" id="btn-add-vehicle">
-                    <i class="bi bi-plus-circle me-2"></i>Adicionar Novo Veículo
-                </button>
-            </div>
+			<div class="d-flex justify-content-between align-items-center mb-4">
+				<h2>Veículos Cadastrados</h2>
+				<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#vehicleModal" id="btn-add-vehicle">
+					<i class="bi bi-plus-circle me-2"></i>Adicionar Novo Veículo
+				</button>
+			</div>
 
-            <div class="table-responsive">
-                <table class="table table-dark table-striped table-hover align-middle">
-                    <thead>
-                        <tr>
-                            <th scope="col">Imagem</th>
-                            <th scope="col">Veículo</th>
-                            <th scope="col">Preço</th>
-                            <th scope="col">KM</th>
-                            <th scope="col">Localização</th>
-                            <th scope="col" class="text-center">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody id="vehicle-table-body">
-                        <tr data-id="1">
-                            <td><img src="https://placehold.co/150x100/444/fff?text=GT3+RS" alt="Porsche GT3 RS" class="table-img-thumbnail"></td>
-                            <td class="vehicle-title">2019 Porsche Gt3 Rs</td>
-                            <td class="vehicle-price">R$ 1.850.000</td>
-                            <td class="vehicle-km">8.000</td>
-                            <td class="vehicle-location">São Paulo, SP</td>
-                            <td class="text-center">
-                                <button class="btn btn-sm btn-warning btn-edit" title="Editar"><i class="bi bi-pencil-square"></i></button>
-                                <button class="btn btn-sm btn-danger btn-delete" title="Excluir"><i class="bi bi-trash-fill"></i></button>
-                            </td>
-                        </tr>
-                        <tr data-id="2">
-                            <td><img src="https://placehold.co/150x100/444/fff?text=Ford+GT" alt="Ford GT" class="table-img-thumbnail"></td>
-                            <td class="vehicle-title">2019 Ford GT MK II</td>
-                            <td class="vehicle-price">R$ 6.500.000</td>
-                            <td class="vehicle-km">1.500</td>
-                            <td class="vehicle-location">Porto Alegre, RS</td>
-                            <td class="text-center">
-                                <button class="btn btn-sm btn-warning btn-edit" title="Editar"><i class="bi bi-pencil-square"></i></button>
-                                <button class="btn btn-sm btn-danger btn-delete" title="Excluir"><i class="bi bi-trash-fill"></i></button>
-                            </td>
-                        </tr>
-                        <tr data-id="3">
-                            <td><img src="https://placehold.co/150x100/444/fff?text=Corvette" alt="Corvette ZR1" class="table-img-thumbnail"></td>
-                            <td class="vehicle-title">2019 Chevrolet Corvette ZR1</td>
-                            <td class="vehicle-price">R$ 1.600.000</td>
-                            <td class="vehicle-km">12.000</td>
-                            <td class="vehicle-location">Porto Alegre, RS</td>
-                            <td class="text-center">
-                                <button class="btn btn-sm btn-warning btn-edit" title="Editar"><i class="bi bi-pencil-square"></i></button>
-                                <button class="btn btn-sm btn-danger btn-delete" title="Excluir"><i class="bi bi-trash-fill"></i></button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </main>
+			<div class="table-responsive">
+				<table class="table table-dark table-striped table-hover align-middle">
+					<thead>
+						<tr>
+							<th scope="col">Imagem</th>
+							<th scope="col">Veículo</th>
+							<th scope="col">Preço</th>
+							<th scope="col">KM</th>
+							<th scope="col">Ano</th>
+							<th scope="col">Marca</th>
+							<th scope="col">Localização</th>
+							<th scope="col" class="text-center">Ações</th>
+						</tr>
+					</thead>
+					<tbody id="vehicle-table-body">
+						<tr data-id="1">
+							<td><img src="https://placehold.co/150x100/444/fff?text=GT3+RS" alt="Porsche GT3 RS" class="table-img-thumbnail"></td>
+							<td class="vehicle-title">2019 Porsche Gt3 Rs</td>
+							<td class="vehicle-price">R$ 1.850.000</td>
+							<td class="vehicle-km">8.000</td>
+							<td class="vehicle-year">2019</td>
+							<td class="vehicle-brand">Porsche</td>
+							<td class="vehicle-location">São Paulo, SP</td>
+							<td class="text-center">
+								<button class="btn btn-sm btn-warning btn-edit" title="Editar"><i class="bi bi-pencil-square"></i></button>
+								<button class="btn btn-sm btn-danger btn-delete" title="Excluir"><i class="bi bi-trash-fill"></i></button>
+							</td>
+						</tr>
+						<tr data-id="2">
+							<td><img src="https://placehold.co/150x100/444/fff?text=Ford+GT" alt="Ford GT" class="table-img-thumbnail"></td>
+							<td class="vehicle-title">2019 Ford GT MK II</td>
+							<td class="vehicle-price">R$ 6.500.000</td>
+							<td class="vehicle-km">1.500</td>
+							<td class="vehicle-year">2019</td>
+							<td class="vehicle-brand">Ford</td>
+							<td class="vehicle-location">São Paulo, SP</td>
+							<td class="text-center">
+								<button class="btn btn-sm btn-warning btn-edit" title="Editar"><i class="bi bi-pencil-square"></i></button>
+								<button class="btn btn-sm btn-danger btn-delete" title="Excluir"><i class="bi bi-trash-fill"></i></button>
+							</td>
+						</tr>
+						<tr data-id="3">
+							<td><img src="https://placehold.co/150x100/444/fff?text=Corvette" alt="Corvette ZR1" class="table-img-thumbnail"></td>
+							<td class="vehicle-title">2019 Chevrolet Corvette ZR1</td>
+							<td class="vehicle-price">R$ 1.600.000</td>
+							<td class="vehicle-km">12.000</td>
+							<td class="vehicle-year">2019</td>
+							<td class="vehicle-brand">Chevrolet</td>
+							<td class="vehicle-location">São Paulo, SP</td>
+							<td class="text-center">
+								<button class="btn btn-sm btn-warning btn-edit" title="Editar"><i class="bi bi-pencil-square"></i></button>
+								<button class="btn btn-sm btn-danger btn-delete" title="Excluir"><i class="bi bi-trash-fill"></i></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</main>
 
-    <div class="modal fade" id="vehicleModal" tabindex="-1" aria-labelledby="vehicleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content bg-dark text-white">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="vehicleModalLabel">Adicionar Novo Veículo</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="vehicleForm">
-                        <input type="hidden" id="vehicleId">
-                        <div class="row">
-                            <div class="col-md-8 mb-3">
-                                <label for="formVehicleTitle" class="form-label">Título do Anúncio (Ex: 2019 Porsche Gt3 Rs)</label>
-                                <input type="text" class="form-control bg-dark text-white" id="formVehicleTitle" required>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="formVehiclePrice" class="form-label">Preço (R$)</label>
-                                <input type="text" class="form-control bg-dark text-white" id="formVehiclePrice" required>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label for="formVehicleKm" class="form-label">Quilometragem</label>
-                                <input type="number" class="form-control bg-dark text-white" id="formVehicleKm" required>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="formVehicleLocation" class="form-label">Localização (Cidade, UF)</label>
-                                <input type="text" class="form-control bg-dark text-white" id="formVehicleLocation" required>
-                            </div>
-                             <div class="col-md-4 mb-3">
-                                <label for="formVehicleCondition" class="form-label">Condição</label>
-                                <select class="form-select bg-dark text-white" id="formVehicleCondition">
-                                    <option value="Novos">Novo</option>
-                                    <option value="Usados">Usado</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="formVehicleImage" class="form-label">URL da Imagem Principal</label>
-                            <input type="url" class="form-control bg-dark text-white" id="formVehicleImage" placeholder="https://..." required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="formVehicleDescription" class="form-label">Descrição Completa</label>
-                            <textarea class="form-control bg-dark text-white" id="formVehicleDescription" rows="4"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" form="vehicleForm" id="btn-save-vehicle">Salvar Alterações</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="modal fade" id="vehicleModal" tabindex="-1" aria-labelledby="vehicleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content bg-dark text-white">
+				<div class="modal-header">
+					<h5 class="modal-title" id="vehicleModalLabel">Adicionar Novo Veículo</h5>
+					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form id="vehicleForm">
+						<input type="hidden" id="vehicleId">
+						<div class="row">
+							<div class="col-md-8 mb-3">
+								<label for="formVehicleTitle" class="form-label">Título do Anúncio (Ex: 2019 Porsche Gt3 Rs)</label>
+								<input type="text" class="form-control bg-dark text-white" id="formVehicleTitle" required>
+							</div>
+							<div class="col-md-4 mb-3">
+								<label for="formVehiclePrice" class="form-label">Preço (R$)</label>
+								<input type="text" placeholder="0,00" inputmode="numeric" class="form-control bg-dark text-white" id="formVehiclePrice" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4 mb-3">
+								<label for="formVehicleKm" class="form-label">Quilometragem</label>
+								<input type="number" min="0" class="form-control bg-dark text-white" id="formVehicleKm" required>
+							</div>
+							<div class="col-md-4 mb-3">
+								<label for="formState" class="form-label">Estado</label>
+								<select class="form-select bg-dark text-white" id="formState" required>
+									<option value="">Selecione um estado...</option>
+								</select>
+							</div>
+							<div class="col-md-4 mb-3">
+								<label for="formCity" class="form-label">Cidade</label>
+								<select class="form-select bg-dark text-white" id="formCity" required>
+									<option value="">Aguardando estado...</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4 mb-3">
+								<label for="formVehicleYear" class="form-label">Ano de Fabricação</label>
+								<input type="number" min="1886" class="form-control bg-dark text-white" id="formVehicleYear" required>
+							</div>
+							<div class="col-md-4 mb-3">
+								<label for="formVehicleBrand" class="form-label">Marca</label>
+								<input type="text" class="form-control bg-dark text-white" id="formVehicleBrand" required>
+							</div>
+							<div class="col-md-4 mb-3">
+								<label for="formVehicleCondition" class="form-label">Condição</label>
+								<select class="form-select bg-dark text-white" id="formVehicleCondition">
+									<option value="Novos">Novo</option>
+									<option value="Usados">Usado</option>
+								</select>
+							</div>
+						</div>
+						<div class="mb-3">
+							<label for="formVehicleImage" class="form-label">URL da Imagem Principal</label>
+							<input type="url" class="form-control bg-dark text-white" id="formVehicleImage" placeholder="https://..." required>
+						</div>
+						<div class="mb-3">
+							<label for="formVehicleImage2" class="form-label">URL da Segunda Imagem (opcional)</label>
+							<input type="url" class="form-control bg-dark text-white" id="formVehicleImage2" placeholder="https://...">
+						</div>
+						<div class="mb-3">
+							<label for="formVehicleImage3" class="form-label">URL da Terceira Imagem (opcional)</label>
+							<input type="url" class="form-control bg-dark text-white" id="formVehicleImage3" placeholder="https://...">
+						</div>
+						<div class="mb-3">
+							<label for="formVehicleImage4" class="form-label">URL da Quarta Imagem (opcional)</label>
+							<input type="url" class="form-control bg-dark text-white" id="formVehicleImage4" placeholder="https://...">
+						</div>
+						<div class="mb-3">
+							<label for="formVehicleShortDescription" class="form-label">Descrição Curta</label>
+							<textarea class="form-control bg-dark text-white" id="formVehicleShortDescription" rows="2"></textarea>
+						</div>
+						<div class="mb-3">
+							<label for="formVehicleLongDescription" class="form-label">Descrição Detalhada</label>
+							<textarea class="form-control bg-dark text-white" id="formVehicleLongDescription" rows="4"></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary" form="vehicleForm" id="btn-save-vehicle">Salvar Alterações</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content bg-dark text-white">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteConfirmModalLabel">Confirmar Exclusão</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Você tem certeza que deseja excluir o veículo <strong id="vehicle-to-delete-name"></strong>?</p>
-                    <p class="text-danger">Esta ação não pode ser desfeita.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger" id="btn-confirm-delete">Excluir</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content bg-dark text-white">
+				<div class="modal-header">
+					<h5 class="modal-title" id="deleteConfirmModalLabel">Confirmar Exclusão</h5>
+					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>Você tem certeza que deseja excluir o veículo <strong id="vehicle-to-delete-name"></strong>?</p>
+					<p class="text-danger">Esta ação não pode ser desfeita.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-danger" id="btn-confirm-delete">Excluir</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="../header/header.js"></script>
-    <script src="func.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="func.js"></script>
 </body>
 
 </html>
