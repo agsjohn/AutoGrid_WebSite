@@ -15,6 +15,7 @@
 </head>
 
 <body>
+	<!-- TODO: KM FORMAT -->
 	<script src="../header/header.js"></script>
 	<header>
 		<div class="header">
@@ -134,47 +135,66 @@
 			<div class="modal-content bg-dark text-white">
 				<div class="modal-header">
 					<h5 class="modal-title" id="vehicleModalLabel">Adicionar Novo Veículo</h5>
-					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" onclick="removeAllInvalid()" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<form id="vehicleForm">
 						<input type="hidden" id="vehicleId">
 						<div class="row">
 							<div class="col-md-8 mb-3">
-								<label for="formVehicleTitle" class="form-label">Título do Anúncio (Ex: 2019 Porsche Gt3 Rs)</label>
-								<input type="text" class="form-control bg-dark text-white" id="formVehicleTitle" required>
+								<label for="formVehicleTitle" class="form-label">Título do Anúncio</label>
+								<input type="text" class="form-control bg-dark text-white" id="formVehicleTitle">
+								<div class="invalid-feedback">
+									Por favor, digite um título.
+								</div>
 							</div>
 							<div class="col-md-4 mb-3">
 								<label for="formVehiclePrice" class="form-label">Preço (R$)</label>
-								<input type="text" placeholder="0,00" inputmode="numeric" class="form-control bg-dark text-white" id="formVehiclePrice" required>
+								<input type="text" placeholder="0,00" inputmode="numeric" class="form-control bg-dark text-white" id="formVehiclePrice">
+								<div class="invalid-feedback">
+									Por favor, digite um preço.
+								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-4 mb-3">
 								<label for="formVehicleKm" class="form-label">Quilometragem</label>
-								<input type="number" min="0" class="form-control bg-dark text-white" id="formVehicleKm" required>
+								<input type="number" min="0" class="form-control bg-dark text-white" id="formVehicleKm">
+								<div class="invalid-feedback">
+									Por favor, digite a kilometragem.
+								</div>
 							</div>
 							<div class="col-md-4 mb-3">
 								<label for="formState" class="form-label">Estado</label>
-								<select class="form-select bg-dark text-white" id="formState" required>
-									<option value="">Selecione um estado...</option>
+								<select class="form-control bg-dark text-white" id="formState">
 								</select>
+								<div class="invalid-feedback">
+									Por favor, selecione um estado.
+								</div>
 							</div>
 							<div class="col-md-4 mb-3">
 								<label for="formCity" class="form-label">Cidade</label>
-								<select class="form-select bg-dark text-white" id="formCity" required>
-									<option value="">Aguardando estado...</option>
+								<select class="form-select bg-dark text-white" id="formCity">
 								</select>
+								<div class="invalid-feedback">
+									Por favor, selecione uma cidade.
+								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-4 mb-3">
 								<label for="formVehicleYear" class="form-label">Ano de Fabricação</label>
-								<input type="number" min="1886" class="form-control bg-dark text-white" id="formVehicleYear" required>
+								<input type="number" min="1886" class="form-control bg-dark text-white" id="formVehicleYear">
+								<div class="invalid-feedback">
+									Por favor, digite o ano. 
+								</div>
 							</div>
 							<div class="col-md-4 mb-3">
 								<label for="formVehicleBrand" class="form-label">Marca</label>
-								<input type="text" class="form-control bg-dark text-white" id="formVehicleBrand" required>
+								<input type="text" class="form-control bg-dark text-white" id="formVehicleBrand">
+								<div class="invalid-feedback">
+									Por favor, digite a marca. 
+								</div>
 							</div>
 							<div class="col-md-4 mb-3">
 								<label for="formVehicleCondition" class="form-label">Condição</label>
@@ -186,7 +206,10 @@
 						</div>
 						<div class="mb-3">
 							<label for="formVehicleImage" class="form-label">URL da Imagem Principal</label>
-							<input type="url" class="form-control bg-dark text-white" id="formVehicleImage" placeholder="https://..." required>
+							<input type="url" class="form-control bg-dark text-white" id="formVehicleImage" placeholder="https://...">
+								<div class="invalid-feedback">
+									Por favor, digite uma URL. 
+								</div>
 						</div>
 						<div class="mb-3">
 							<label for="formVehicleImage2" class="form-label">URL da Segunda Imagem (opcional)</label>
@@ -203,15 +226,21 @@
 						<div class="mb-3">
 							<label for="formVehicleShortDescription" class="form-label">Descrição Curta</label>
 							<textarea class="form-control bg-dark text-white" id="formVehicleShortDescription" rows="2"></textarea>
+								<div class="invalid-feedback">
+									Por favor, digite uma descrição. 
+								</div>
 						</div>
 						<div class="mb-3">
 							<label for="formVehicleLongDescription" class="form-label">Descrição Detalhada</label>
 							<textarea class="form-control bg-dark text-white" id="formVehicleLongDescription" rows="4"></textarea>
+								<div class="invalid-feedback">
+									Por favor, digite uma descrição. 
+								</div>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+					<button type="button" onclick="removeAllInvalid()" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 					<button type="submit" class="btn btn-primary" form="vehicleForm" id="btn-save-vehicle">Salvar Alterações</button>
 				</div>
 			</div>
