@@ -190,6 +190,7 @@
     padding: 0 10%;
     width: 100%;
     display: flex;
+    margin-top: 2rem;
 }
 
 .date>h1 {
@@ -226,6 +227,7 @@
 }
 
 .sub-img1 {
+    padding: 0.7rem;
     justify-self: center;
     object-fit: cover;
     width: 100%;
@@ -244,7 +246,7 @@
 }
 
 .sub-img1:hover {
-    transform: scale(1.03);
+    transform: scale(1.01);
     transition: 0.3s ease;
     cursor: pointer;
 }
