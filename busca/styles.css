@@ -1,12 +1,12 @@
 /* SEARCH PAGE */
 .search-page-container {
-    padding-top: 7rem; 
+    padding-top: 5rem; 
     padding-bottom: 2rem;
 }
 
 .search-page-container .row {
     margin: 0 auto;
-    max-width: 1400px;
+    max-width: 2000px;
 }
 
 
@@ -75,21 +75,25 @@
 .show-options{
     display: flex;
     align-items: center;
-    width: 15rem;
+    width: fit-content;
+    margin-right: 1.5rem;
 }
 
-.show-options select{
-    width: 35%;
-}
-
-.sort-options {
+.sort-options{
     display: flex;
     align-items: center;
-    width: 20rem;
+    width: fit-content;
 }
 
+.show-options label,
+.sort-options label{
+    width: fit-content;
+    min-width: fit-content;
+}
+
+.show-options select,
 .sort-options select{
-    width: 50%;
+    width: fit-content;
 }
 
 
@@ -174,34 +178,59 @@
 
 
 /* RESPONSIVITY */
-@media (max-width: 992px) {
+@media (max-width: 767px) {
     .filter-sidebar {
         border-bottom: 1px solid #555;
-        margin-bottom: 1rem;
     }
-}
 
-@media (max-width: 768px) {
+    .results-header {
+        align-items: start;
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+
+    .show-options,
+    .sort-options {
+        justify-content: space-between;
+        width: 17rem;
+        margin: 0;
+    }
+
+    .sort-options select,
+    .show-options select{
+        width: 65%;
+    }
+
     .product-card {
         flex-direction: column;
     }
+
     .product-card img {
         width: 100%;
         height: auto;
         margin-right: 0;
         margin-bottom: 1rem;
     }
+
     .product-title {
         font-size: 1.2rem;
     }
+
     .product-price {
         font-size: 1.5rem;
     }
-    .results-header {
-        display: flex;
-        align-items: start;
-        gap: 1rem;
-        flex-direction: column;
-        margin-bottom: 1rem;
+}
+
+@media (max-width: 424px) {
+    .show-options,
+    .sort-options {
+        justify-content: space-between;
+        width: 100%;
+        margin: 0;
+    }
+
+    .sort-options select,
+    .show-options select{
+        width: 100%;
     }
 }
