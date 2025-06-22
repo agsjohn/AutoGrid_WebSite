@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const id = document.getElementById('vehicleId').value;
         const title = document.getElementById('formVehicleTitle').value;
         const price = `R$ ${document.getElementById('formVehiclePrice').value}`;
-        const km = document.getElementById('formVehicleKm').value;
+        const km = formatKM(document.getElementById('formVehicleKm').value);
         const year = document.getElementById('formVehicleYear').value;
         const brand = document.getElementById('formVehicleBrand').value;
         const selectedState = stateSelect.value;
@@ -330,6 +330,11 @@ document.getElementById('formVehiclePrice').addEventListener('input', (event) =>
     }).format(numberValue);
     event.target.value = formattedValue;
 });
+
+function formatKM(param) {
+    const formatador = new Intl.NumberFormat('pt-BR'); 
+    return formatador.format(param);
+}
 
 function removeInvalid(param) {
     param.addEventListener('change', (event) => {
