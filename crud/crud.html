@@ -63,7 +63,7 @@
 			</div>
 
 			<div class="d-flex justify-content-between align-items-center mb-4">
-				<h2>Veículos Cadastrados</h2>
+				<h2 class="principal-title">Veículos Cadastrados</h2>
 				<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#vehicleModal" id="btn-add-vehicle">
 					<i class="bi bi-plus-circle me-2"></i>Adicionar Novo Veículo
 				</button>
@@ -140,14 +140,14 @@
 					<form id="vehicleForm">
 						<input type="hidden" id="vehicleId">
 						<div class="row">
-							<div class="col-md-8 mb-3">
+							<div class="col-lg-8 mb-3">
 								<label for="formVehicleTitle" class="form-label">Título do Anúncio</label>
 								<input type="text" class="form-control bg-dark text-white" id="formVehicleTitle">
 								<div class="invalid-feedback">
 									Por favor, digite um título.
 								</div>
 							</div>
-							<div class="col-md-4 mb-3">
+							<div class="col-lg-4 mb-3">
 								<label for="formVehiclePrice" class="form-label">Preço (R$)</label>
 								<input type="text" placeholder="0,00" inputmode="numeric" class="form-control bg-dark text-white" id="formVehiclePrice">
 								<div class="invalid-feedback">
@@ -156,14 +156,14 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-4 mb-3">
+							<div class="col-lg-4 mb-3">
 								<label for="formVehicleKm" class="form-label">Quilometragem</label>
 								<input type="number" min="0" class="form-control bg-dark text-white" id="formVehicleKm">
 								<div class="invalid-feedback">
 									Por favor, digite a kilometragem.
 								</div>
 							</div>
-							<div class="col-md-4 mb-3">
+							<div class="col-lg-4 mb-3">
 								<label for="formState" class="form-label">Estado</label>
 								<select class="form-control bg-dark text-white" id="formState">
 								</select>
@@ -171,7 +171,7 @@
 									Por favor, selecione um estado.
 								</div>
 							</div>
-							<div class="col-md-4 mb-3">
+							<div class="col-lg-4 mb-3">
 								<label for="formCity" class="form-label">Cidade</label>
 								<select class="form-select bg-dark text-white" id="formCity">
 								</select>
@@ -181,21 +181,21 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-4 mb-3">
+							<div class="col-lg-4 mb-3">
 								<label for="formVehicleYear" class="form-label">Ano de Fabricação</label>
 								<input type="number" min="1886" class="form-control bg-dark text-white" id="formVehicleYear">
 								<div class="invalid-feedback">
 									Por favor, digite o ano. 
 								</div>
 							</div>
-							<div class="col-md-4 mb-3">
+							<div class="col-lg-4 mb-3">
 								<label for="formVehicleBrand" class="form-label">Marca</label>
 								<input type="text" class="form-control bg-dark text-white" id="formVehicleBrand">
 								<div class="invalid-feedback">
 									Por favor, digite a marca. 
 								</div>
 							</div>
-							<div class="col-md-4 mb-3">
+							<div class="col-lg-4 mb-3">
 								<label for="formVehicleCondition" class="form-label">Condição</label>
 								<select class="form-select bg-dark text-white" id="formVehicleCondition">
 									<option value="Novos">Novo</option>

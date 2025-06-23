@@ -1,11 +1,15 @@
 /* CRUD PAGE */
 .crud-container {
-    padding-top: 7rem;
+    padding-top: 5rem;
     padding-bottom: 3rem;
-    max-width: 1400px;
+    padding-left: 12px;
+    padding-right: 12px;
     margin: 0 auto;
 }
 
+.crud-container .container-fluid{
+    max-width: 1500px;
+}
 
 
 /* BREADCRUMB */
@@ -159,4 +163,18 @@
 .form-control.bg-dark::placeholder,
 .form-select.bg-dark::placeholder{
     color: #888;
+}
+
+
+
+/* RESPONSIVITY */
+@media (max-width: 767px) {
+    .principal-title{
+        font-size: 1.4rem;
+    }
+
+    #btn-add-vehicle{
+        font-size: 0.8rem;
+        padding: 0.3rem;
+    }
 }
