@@ -5,15 +5,16 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Busca - AutoGrid</title>
-	<link rel="icon" href="/images/AutoGrid_logo.png">
+	<link rel="icon" href="../images/AutoGrid_logo.png">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	<link href="styles.css" rel="stylesheet">
     <link href="../header/header.css" rel="stylesheet">
+	<link href="styles.css" rel="stylesheet">
 </head>
 
 <body>
@@ -61,13 +62,17 @@
 	<main class="search-page-container">
 		<div class="container-fluid">
 			<div class="row">
-				<aside class="col-lg-3 filter-sidebar">
+				<aside class="col-md-3 filter-sidebar">
 					<div class="breadcrumb-nav mb-3">
 						<a href="../index.html">Início</a> > <a href="#">Carros</a>
 					</div>
 					<h2>Resultados da Busca</h2>
 					<p id="total-results"></p>
 					<hr>
+
+					<div class="filter-group">
+						<input type="text" class="form-control bg-dark text-white" id="filtro-pesquisa" placeholder="Buscar carros...">
+					</div>
 
 					<div class="filter-group">
 						<h5 class="filter-title">Condição</h5>
@@ -139,9 +144,9 @@
 
 				</aside>
 
-				<section class="col-lg-9 results-area">
+				<section class="col-md-9 results-area">
 					<div class="results-header">
-						<div class="show-options me-4">
+						<div class="show-options">
 							<label for="show" class="me-2">Exibir por página:</label>
 							<select id="show" class="form-select bg-dark text-white">
 								<option selected>10</option>
@@ -219,7 +224,8 @@
 			</div>
 		</div>
 	</main>
-
+	
+  	<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 	<script src="func.js"></script>
 </body>
 

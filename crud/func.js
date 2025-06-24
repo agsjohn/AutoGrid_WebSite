@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const id = document.getElementById('vehicleId').value;
         const title = document.getElementById('formVehicleTitle').value;
         const price = `R$ ${document.getElementById('formVehiclePrice').value}`;
-        const km = document.getElementById('formVehicleKm').value;
+        const km = formatKM(document.getElementById('formVehicleKm').value);
         const year = document.getElementById('formVehicleYear').value;
         const brand = document.getElementById('formVehicleBrand').value;
         const selectedState = stateSelect.value;
@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td class="vehicle-brand">${brand}</td>
                     <td class="vehicle-location">${location}</td>
                     <td class="text-center">
-                        <button class="btn btn-sm btn-warning btn-edit" title="Editar"><i class="bi bi-pencil-square"></i></button>
+                        <button class="btn btn-sm btn-primary btn-edit" title="Editar"><i class="bi bi-pencil-square"></i></button>
                         <button class="btn btn-sm btn-danger btn-delete" title="Excluir"><i class="bi bi-trash-fill"></i></button>
                     </td>
                 </tr>
@@ -330,6 +330,25 @@ document.getElementById('formVehiclePrice').addEventListener('input', (event) =>
     }).format(numberValue);
     event.target.value = formattedValue;
 });
+
+document.getElementById('searchInput').addEventListener('keyup', function() {
+    const searchTerm = this.value.toLowerCase();
+    const tableRows = document.querySelectorAll('#vehicle-table-body tr');
+
+    tableRows.forEach(row => {
+        const rowData = row.textContent.toLowerCase();
+        if (rowData.includes(searchTerm)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+});
+
+function formatKM(param) {
+    const formatador = new Intl.NumberFormat('pt-BR'); 
+    return formatador.format(param);
+}
 
 function removeInvalid(param) {
     param.addEventListener('change', (event) => {
