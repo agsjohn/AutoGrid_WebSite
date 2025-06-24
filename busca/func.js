@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const paginationContainer = paginationNav.querySelector('.pagination');
 
     // Filtros
+    const searchInput = document.getElementById('filtro-pesquisa'); 
     const estadosInput = document.querySelectorAll('.filtro-estado');
     const localizacaoInput = document.getElementById('filtro-localizacao');
     const precoMinInput = document.getElementById('preco-min');
@@ -61,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 		
         // Obter valores dos filtros
+        const searchTerm = searchInput.value.trim().toLowerCase();
         const estadosSelecionados = Array.from(estadosInput).filter(cb => cb.checked).map(cb => cb.value);
         const localizacaoSelecionada = localizacaoInput.value;
         const precoMin = parseFloat(precoMinInput.value) || 0;
@@ -73,19 +75,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // FILTRAR
         const filteredCards = cardsArray.filter(card => {
+            const cardTitle = card.querySelector('.product-title').textContent.trim().toLowerCase();
             const cardEstado = card.dataset.estado;
             const cardLocalizacao = card.dataset.localizacao;
             const cardPreco = parseFloat(card.dataset.preco);
             const cardAno = parseInt(card.dataset.ano);
             const cardMarca = card.dataset.marca;
 
+            const searchMatch = searchTerm === '' || cardTitle.includes(searchTerm); 
             const estadoMatch = estadosSelecionados.length === 0 || estadosSelecionados.includes(cardEstado);
             const localizacaoMatch = localizacaoSelecionada === 'Todos' || cardLocalizacao === localizacaoSelecionada;
             const precoMatch = cardPreco >= precoMin && cardPreco <= precoMax;
             const anoMatch = cardAno >= anoMin && cardAno <= anoMax;
             const marcaMatch = marcasSelecionadas.length === 0 || marcasSelecionadas.includes(cardMarca);
 
-            return estadoMatch && localizacaoMatch && precoMatch && anoMatch && marcaMatch;
+            return searchMatch && estadoMatch && localizacaoMatch && precoMatch && anoMatch && marcaMatch;
         });
 
         // ORDENAR
@@ -121,9 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const paginatedCards = filteredCards.slice(startIndex, endIndex);
         
         // RENDERIZAR
-        resultsList.innerHTML = ''; 
+        resultsList.innerHTML = '';
         paginatedCards.forEach((card, index) => {
-            resultsList.appendChild(card.cloneNode(true)); 
+            resultsList.appendChild(card.cloneNode(true));
 
             // Adiciona <hr> entre os cards
             if (index < paginatedCards.length - 1) {
@@ -138,7 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 
     // --- Adicionando os Event Listeners ---
-    // Função genérica para resetar para a primeira página e atualizar
     function handleFilterChange() {
         currentPage = 1;
         updateResults();
