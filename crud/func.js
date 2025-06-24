@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td class="vehicle-brand">${brand}</td>
                     <td class="vehicle-location">${location}</td>
                     <td class="text-center">
-                        <button class="btn btn-sm btn-warning btn-edit" title="Editar"><i class="bi bi-pencil-square"></i></button>
+                        <button class="btn btn-sm btn-primary btn-edit" title="Editar"><i class="bi bi-pencil-square"></i></button>
                         <button class="btn btn-sm btn-danger btn-delete" title="Excluir"><i class="bi bi-trash-fill"></i></button>
                     </td>
                 </tr>
@@ -329,6 +329,20 @@ document.getElementById('formVehiclePrice').addEventListener('input', (event) =>
         maximumFractionDigits: 2
     }).format(numberValue);
     event.target.value = formattedValue;
+});
+
+document.getElementById('searchInput').addEventListener('keyup', function() {
+    const searchTerm = this.value.toLowerCase();
+    const tableRows = document.querySelectorAll('#vehicle-table-body tr');
+
+    tableRows.forEach(row => {
+        const rowData = row.textContent.toLowerCase();
+        if (rowData.includes(searchTerm)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
 });
 
 function formatKM(param) {
