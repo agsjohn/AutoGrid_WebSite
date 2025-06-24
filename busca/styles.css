@@ -29,7 +29,6 @@
 
 
 
-
 /* FILTER GROUP */
 .filter-group {
     margin-bottom: 1.5rem;
@@ -41,6 +40,10 @@
     font-weight: 500;
     border-bottom: 1px solid #555;
     padding-bottom: 0.5rem;
+}
+
+.form-control::placeholder{
+    color: #888;
 }
 
 .form-check-label {
