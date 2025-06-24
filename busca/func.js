@@ -23,6 +23,58 @@ document.addEventListener('DOMContentLoaded', () => {
 	let currentPage = 1;
     let itemsPerPage = parseInt(showSelect.value);
 
+    // Choices for Select customize
+    new Choices(document.getElementById('show'), {
+        itemSelectText: '',
+        searchEnabled: false,
+        classNames: {
+            containerOuter: ['choices', 'choices-show'],
+            containerInner: ['choices__inner', 'bg-dark', 'form-select'], 
+            input: ['choices__input', 'text-white'],
+            list: 'choices__list',
+            listItems: 'choices__list--multiple',
+            listSingle: 'choices__list--single',
+            listDropdown: ['choices__list--dropdown', 'bg-dark'],
+            item: ['choices__item', 'text-white'],
+            itemChoice: 'choices__item--choice',
+            itemSelectable: 'choices__item--selectable',
+        },
+    });
+    new Choices(document.getElementById('sort'), {
+        itemSelectText: '',
+        searchEnabled: false,
+        shouldSort: false,
+        classNames: {
+            containerOuter: ['choices', 'choices-sort'],
+            containerInner: ['choices__inner', 'bg-dark', 'form-select'], 
+            input: ['choices__input', 'text-white'],
+            list: 'choices__list',
+            listItems: 'choices__list--multiple',
+            listSingle: 'choices__list--single',
+            listDropdown: ['choices__list--dropdown', 'bg-dark'],
+            item: ['choices__item', 'text-white'],
+            itemChoice: 'choices__item--choice',
+            itemSelectable: 'choices__item--selectable',
+        },
+    });
+    new Choices(document.getElementById('filtro-localizacao'), {
+        itemSelectText: '',
+        searchEnabled: false,
+        shouldSort: false,
+        classNames: {
+            containerOuter: ['choices'],
+            containerInner: ['choices__inner', 'bg-dark', 'form-select'], 
+            input: ['choices__input', 'text-white'],
+            list: 'choices__list',
+            listItems: 'choices__list--multiple',
+            listSingle: 'choices__list--single',
+            listDropdown: ['choices__list--dropdown', 'bg-dark'],
+            item: ['choices__item', 'text-white'],
+            itemChoice: 'choices__item--choice',
+            itemSelectable: 'choices__item--selectable',
+        },
+    });
+
     // --- Função para Renderizar a Paginação ---
     function setupPagination(totalItems, itemsPerPage, currentPage) {
         paginationContainer.innerHTML = ''; 
