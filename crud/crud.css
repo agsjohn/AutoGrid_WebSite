@@ -32,11 +32,8 @@
     padding-right: 0.1rem;
 }
 
-.search-group:has(#searchInput:focus) #search-addon{
-    background-color: #333;
-}
-
 .search-group{
+    background-color: rgb(33, 37, 41);
     border: 1px solid #555;
     border-radius: 4px;
 }
@@ -47,6 +44,7 @@
 }
 
 #searchInput{
+    background-color: transparent;
     border: transparent;
 }
 
@@ -54,6 +52,11 @@
     border-left: transparent;
     box-shadow: none;
 }
+
+#searchInput::placeholder{
+    color: #888;
+}
+
 
 
 
@@ -104,6 +107,11 @@
     background-color: #2c2c30 !important;
     border-color: #555;
     color: #fff;
+}
+
+.form-control.bg-dark::placeholder,
+.form-select.bg-dark::placeholder{
+    color: #888;
 }
 
 .form-control.bg-dark:focus,
@@ -197,14 +205,6 @@
 
 .choices.is-invalid .choices__inner {
     border-color: #dc3545; /* Cor de perigo padrão do Bootstrap */
-}
-
-
-
-/* For placeholder text color */
-.form-control.bg-dark::placeholder,
-.form-select.bg-dark::placeholder{
-    color: #888;
 }
 
 
