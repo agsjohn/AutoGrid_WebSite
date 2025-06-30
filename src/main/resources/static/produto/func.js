@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Verifica se os elementos da galeria existem na página atual
     const mainImage = document.getElementById('main-product-image');
     const thumbnails = document.querySelectorAll('.thumbnail-images .thumbnail');
 
@@ -12,11 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Adiciona a classe 'active' à miniatura clicada
                 this.classList.add('active');
                 
-                // Altera a imagem principal para a imagem da miniatura clicada
-                // Modifica o URL do placehold para pegar a imagem maior
-                const newSrc = this.src.replace(/150x113/g, '800x600');
-                mainImage.src = newSrc;
-                mainImage.alt = this.alt.replace(/Thumbnail/g, 'Principal');
+                // Altera a imagem principal usando o atributo 'data-large-src'
+                const newSrc = this.dataset.largeSrc; // Lê o atributo data-large-src
+                if (newSrc) {
+                   mainImage.src = newSrc;
+                   mainImage.alt = this.alt.replace(/Thumbnail \d+/g, '').trim(); // Limpa o alt text
+                }
             });
         });
     }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produto - AutoGrid</title>
+    <title th:text="${carro.titulo} + ' - AutoGrid'"></title>
     <link rel="icon" href="/images/AutoGrid_logo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -12,12 +12,13 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link href="produto/styles.css" rel="stylesheet">
-    <link href="../static/header/header.css" rel="stylesheet">
+    <link href="/produto/styles.css" rel="stylesheet">
+    <link href="/header/header.css" rel="stylesheet">
 </head>
 
 <body>
-    <script src="../static/header/header.js"></script>
+    <!-- TODO: OPTIONAL IMAGES -->
+    <script src="/header/header.js"></script>
     <header>
         <div class="header">
             <h1>AutoGrid</h1>
@@ -25,31 +26,31 @@
         <ul class="sidebar">
             <div>
                 <li class="sidebar-close" onclick=hideSidebar()>
-                    <img src="../static/images/X.png">
+                    <img src="/images/X.png">
                 </li>
                 <li class="sidebar-login" onclick=hideSidebar()>
-                    <a href="login.html">
-                        <img src="../static/images/user_icon.png">
+                    <a th:href="@{/login}">
+                        <img src="/images/user_icon.png">
                     </a>
                 </li>
             </div>
-            <li onclick=hideSidebar()><a href="index.html#initial-images"><h2>Início</h2></a></li>
-            <li onclick=hideSidebar()><a href="index.html#destaque"><h2>Destaque</h2></a></li>
-            <li onclick=hideSidebar()><a href="index.html#products"><h2>Produtos</h2></a></li>
-            <li onclick=hideSidebar()><a href="busca.html"><h2>Busca</h2></a></li>
-            <li onclick=hideSidebar()><a href="index.html#car-brands"><h2>Marcas</h2></a></li>
-            <li onclick=hideSidebar()><a href="index.html#contact" class="hideOnMobile"><h2>Contato</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#initial-images}"><h2>Início</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#destaque}"><h2>Destaque</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#products}"><h2>Produtos</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/busca}"><h2>Busca</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#car-brands}"><h2>Marcas</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#contact}" class="hideOnMobile"><h2>Contato</h2></a></li>
         </ul>
         <div class="nav">
-            <a href="index.html#initial-images" class="hideOnMobile"><h2>Início</h2></a>
-            <a href="index.html#destaque" class="hideOnMobile"><h2>Destaque</h2></a>
-            <a href="index.html#products" class="hideOnMobile"><h2>Produtos</h2></a>
-            <a href="busca.html" class="hideOnMobile"><h2>Busca</h2></a>
-            <a href="index.html#car-brands" class="hideOnMobile"><h2>Marcas</h2></a>
-            <a href="index.html#contact" class="hideOnMobile"><h2>Contato</h2></a>
+            <a th:href="@{/#initial-images}"><h2>Início</h2></a>
+            <a th:href="@{/#destaque}"><h2>Destaque</h2></a>
+            <a th:href="@{/#products}"><h2>Produtos</h2></a>
+            <a th:href="@{/busca}"><h2>Busca</h2></a>
+            <a th:href="@{/#car-brands}"><h2>Marcas</h2></a>
+            <a th:href="@{/#contact}" class="hideOnMobile"><h2>Contato</h2></a>
         </div>
         <div class="login">
-            <a href="login.html" class="loginIcon hideOnMobile"></a>
+            <a th:href="@{/login}" class="loginIcon hideOnMobile"></a>
         </div>
         <li class="menu-button" onclick=showSidebar()>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
@@ -61,30 +62,30 @@
     <main class="product-view-container">
         <div class="container-fluid">
             <div class="breadcrumb-nav mb-4">
-                <a href="index.html">Início</a> > <a href="busca.html">Carros</a> > <a href="#">2019 Porsche Gt3 Rs</a>
+                <a th:href="@{/}">Início</a> > <a th:href="@{/busca}">Carros</a> > <a href="#" th:text="${carro.titulo}">Nome do Carro</a>
             </div>
 
             <div class="row">
                 <div class="product-gallery">
                     <div class="main-image">
-                        <img src="https://placehold.co/800x600/444/fff?text=GT3+RS" alt="Porsche GT3 RS Principal" id="main-product-image">
+                        <img th:src="${carro.imageUrl}" th:alt="${carro.titulo}" id="main-product-image">
                     </div>
-                    <div class="thumbnail-images">
-                        <img src="https://placehold.co/800x600/444/fff?text=GT3+RS" alt="Porsche GT3 RS Principal" class="thumbnail active">
-                        <img src="https://placehold.co/150x113/444/fff?text=GT3+RS+1" alt="Porsche GT3 RS Thumbnail 1" class="thumbnail">
-                        <img src="https://placehold.co/150x113/444/fff?text=GT3+RS+2" alt="Porsche GT3 RS Thumbnail 2" class="thumbnail">
-                        <img src="https://placehold.co/150x113/444/fff?text=GT3+RS+3" alt="Porsche GT3 RS Thumbnail 3" class="thumbnail">
+                    <div class="thumbnail-images" th:if="${!#strings.isEmpty(carro.imageUrl1) or !#strings.isEmpty(carro.imageUrl2) or !#strings.isEmpty(carro.imageUrl3)}">
+                        <img th:src="${carro.imageUrl}" th:alt="${carro.titulo}" class="thumbnail active" th:data-large-src="${carro.imageUrl}">
+                        <img th:if="${!#strings.isEmpty(carro.imageUrl1)}" th:src="${carro.imageUrl1}" th:alt="${carro.titulo} + ' Thumbnail 1'" class="thumbnail" th:data-large-src="${carro.imageUrl1}">
+                        <img th:if="${!#strings.isEmpty(carro.imageUrl2)}" th:src="${carro.imageUrl2}" th:alt="${carro.titulo} + ' Thumbnail 2'" class="thumbnail" th:data-large-src="${carro.imageUrl2}">
+                        <img th:if="${!#strings.isEmpty(carro.imageUrl3)}" th:src="${carro.imageUrl3}" th:alt="${carro.titulo} + ' Thumbnail 3'" class="thumbnail" th:data-large-src="${carro.imageUrl3}">
                     </div>
                 </div>
 
                 <div class="info-side">
                     <div class="product-info">
-                        <h2 class="product-title-large">2019 Porsche Gt3 Rs</h2>
-                        <p class="product-subtitle">2019 | 8.000 km</p>
+                        <h2 class="product-title-large" th:text="${carro.titulo}">Titulo</h2>
+                        <p class="product-subtitle" th:text="${carro.ano} + ' | ' + ${#numbers.formatDecimal(carro.quilometragem, 1, 'POINT', 0, 'POINT')} + ' km'">Ano | Quilometragem</p>
                         <hr>
-                        <p class="product-price-large">R$ 1.850.000</p>
-                        <p class="product-description">
-                            Este Porsche 911 GT3 RS é uma máquina de performance pura, projetada para as pistas mas legalizada para as ruas. Com motor boxer de 6 cilindros e 4.0 litros, entrega uma experiência de condução inigualável.
+                        <p class="product-price-large" th:text="'R$ ' + ${#numbers.formatDecimal(carro.preco, 1, 'POINT', 2, 'COMMA')}">Preço</p>
+                        <p class="product-description" th:text="${carro.descricaoCurta}">
+                            Descrição curta. 
                         </p>
                         <div class="product-actions">
                             <button class="btn btn-primary btn-lg w-100 mb-3">Comprar Agora</button>
@@ -92,13 +93,13 @@
                         </div>
                         <div class="seller-info mt-4">
                             <!-- <h5>Vendido por: <strong>Concessionária Premium</strong></h5> -->
-                            <p class="location"><i class="bi bi-geo-alt-fill"></i> São Paulo, São Paulo</p>
+                            <p class="location"><i class="bi bi-geo-alt-fill"></i> <span th:text="${carro.localizacao}">Localização</span></p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row mt-5">
+            <div class="row">
                 <div class="col-12">
                     <div class="product-details-tabs">
                         <ul class="nav nav-tabs" id="detailsTab" role="tablist">
@@ -114,7 +115,9 @@
                         </ul>
                         <div class="tab-content" id="detailsTabContent">
                             <div class="tab-pane fade show active" id="description" role="tabpanel">
-                                <p>Carro em estado impecável, com todas as revisões feitas na concessionária. Baixa quilometragem. Cor exterior em Prata GT Metálico com interior em couro e Alcântara. Pacote Clubsport com gaiola de proteção e cintos de 6 pontos.</p>
+                                <p th:text="${carro.descricaoLonga}">
+                                    Descrição longa. 
+                                </p>
                             </div>
                             <div class="tab-pane fade" id="specs" role="tabpanel">
                                 <table class="table table-dark table-striped">
@@ -152,7 +155,7 @@
         </div>
     </main>
 
-    <script src="produto/func.js"></script>
+    <script src="/produto/func.js"></script>
 </body>
 
 </html>

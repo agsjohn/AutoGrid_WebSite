@@ -28,28 +28,28 @@
                     <img src="/images/X.png">
                 </li>
                 <li class="sidebar-login" onclick=hideSidebar()>
-                    <a href="login">
+                    <a th:href="@{/login}">
                         <img src="/images/user_icon.png">
                     </a>
                 </li>
             </div>
-            <li onclick=hideSidebar()><a href="#initial-images"><h2>Início</h2></a></li>
-            <li onclick=hideSidebar()><a href="#destaque"><h2>Destaque</h2></a></li>
-            <li onclick=hideSidebar()><a href="#products"><h2>Produtos</h2></a></li>
-            <li onclick=hideSidebar()><a href="busca"><h2>Busca</h2></a></li>
-            <li onclick=hideSidebar()><a href="#car-brands"><h2>Marcas</h2></a></li>
-            <li onclick=hideSidebar()><a href="#contact" class="hideOnMobile"><h2>Contato</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#initial-images}"><h2>Início</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#destaque}"><h2>Destaque</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#products}"><h2>Produtos</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/busca}"><h2>Busca</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#car-brands}"><h2>Marcas</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#contact}" class="hideOnMobile"><h2>Contato</h2></a></li>
         </ul>
         <div class="nav">
-            <a href="#initial-images" class="hideOnMobile"><h2>Início</h2></a>
-            <a href="#destaque" class="hideOnMobile"><h2>Destaque</h2></a>
-            <a href="#products" class="hideOnMobile"><h2>Produtos</h2></a>
-            <a href="busca" class="hideOnMobile"><h2>Busca</h2></a>
-            <a href="#car-brands" class="hideOnMobile"><h2>Marcas</h2></a>
-            <a href="#contact" class="hideOnMobile"><h2>Contato</h2></a>
+            <a th:href="@{/#initial-images}"><h2>Início</h2></a>
+            <a th:href="@{/#destaque}"><h2>Destaque</h2></a>
+            <a th:href="@{/#products}"><h2>Produtos</h2></a>
+            <a th:href="@{/busca}"><h2>Busca</h2></a>
+            <a th:href="@{/#car-brands}"><h2>Marcas</h2></a>
+            <a th:href="@{/#contact}" class="hideOnMobile"><h2>Contato</h2></a>
         </div>
         <div class="login">
-            <a href="login" class="loginIcon hideOnMobile"></a>
+            <a th:href="@{/login}" class="loginIcon hideOnMobile"></a>
         </div>
         <li class="menu-button" onclick=showSidebar()>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
@@ -60,14 +60,14 @@
 
     <section id="initial-images">
         <h1>NOVIDADES</h1>
-        <a href="busca.html">VEJA AQUI</a>
+        <a th:href="@{/busca}">VEJA AQUI</a>
     </section>
 
     <section id="destaque">
         <div class=" slideshow">
             <div class="offset-1 col-10">
                 <div class="slideshow-container">
-                    <a href="produto.html" class="mySlides">
+                    <a th:href="@{/produtos/2}" class="mySlides">
                         <div class="numbertext">1 / 4</div>
                         <img src="/images/31.jpg" id="img-slide">
                         <div class="image-text">
@@ -75,7 +75,7 @@
                             <p>Uma máquina de corrida sem concessões, nascida para dominar as pistas com sua aerodinâmica extrema e performance brutal, levando a lenda do GT a um novo patamar de exclusividade e velocidade.</p>
                         </div>
                     </a>
-                    <a href="produto.html" class="mySlides">
+                    <a th:href="@{/produtos/1}" class="mySlides">
                         <div class="numbertext">2 / 4</div>
                         <img src="/images/32.jpg" id="img-slide">
                         <div class="image-text">
@@ -83,7 +83,7 @@
                             <p>Um bólido focado nas pistas, que combina uma engenharia de precisão alemã com desempenho arrebatador, oferecendo uma experiência de condução visceral e emocionante para os puristas.</p>
                         </div>
                     </a>
-                    <a href="produto.html" class="mySlides">
+                    <a th:href="@{/produtos/4}" class="mySlides">
                         <div class="numbertext">3 / 4</div>
                         <img src="/images/33.jpg" id="img-slide">
                         <div class="image-text">
@@ -91,7 +91,7 @@
                             <p>Um coupé esportivo que oferece uma experiência de condução divertida e envolvente, com um motor V6 potente e um design clássico de carro esportivo japonês.</p>
                         </div>
                     </a>
-                    <a href="produto.html" class="mySlides">
+                    <a th:href="@{/produtos/3}" class="mySlides">
                         <div class="numbertext">4 / 4</div>
                         <img src="/images/34.jpg" id="img-slide">
                         <div class="image-text">
@@ -181,7 +181,7 @@
         </div>
 
         <div class="brands">
-            <a href="busca.html" class="brand-img">
+            <a href="busca" class="brand-img">
                 <img src="/images/Toyota.png">
             </a>
             <div class="brand-align">
@@ -220,12 +220,12 @@
                     </p>
                 </div>
             </div>
-            <a href="busca.html" class="brand-img">
+            <a href="busca" class="brand-img">
                 <img src="/images/MercedesBenz.png">
             </a>
         </div>
         <div class="brands">
-            <a href="busca.html" class="brand-img">
+            <a href="busca" class="brand-img">
                 <img src="/images/BMW.jpg">
             </a>
             <div class="brand-align">
@@ -262,12 +262,12 @@
                     </p>
                 </div>
             </div>
-            <a href="busca.html" class="brand-img">
+            <a href="busca" class="brand-img">
                 <img src="/images/Volkswagen.png">
             </a>
         </div>
         <div class="brands">
-            <a href="busca.html" class="brand-img">
+            <a href="busca" class="brand-img">
                 <img src="/images/Honda.jpg">
             </a>
             <div class="brand-align">

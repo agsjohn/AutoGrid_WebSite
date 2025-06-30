@@ -185,7 +185,7 @@ public class CarroController {
         return carros;
     }
 
-    @GetMapping("/produto/{id}")
+    @GetMapping("/produtos/{id}")
     public String detalhesCarro(@PathVariable Long id, org.springframework.ui.Model model) {
         Carro carro = carroRepository.findById(id).orElse(null);
         if (carro == null) {

@@ -20,52 +20,52 @@
 <body>
 	<!-- TODO: marcas e localização automático -->
     <script src="/header/header.js"></script>
-	<header>
-		<div class="header">
-			<h1>AutoGrid</h1>
-		</div>
-		<ul class="sidebar">
-			<div>
-				<li class="sidebar-close" onclick=hideSidebar()>
-					<img src="/images/X.png">
-				</li>
-				<li class="sidebar-login" onclick=hideSidebar()>
-					<a href="login">
-						<img src="/images/user_icon.png">
-					</a>
-				</li>
-			</div>
+    <header>
+        <div class="header">
+            <h1>AutoGrid</h1>
+        </div>
+        <ul class="sidebar">
+            <div>
+                <li class="sidebar-close" onclick=hideSidebar()>
+                    <img src="/images/X.png">
+                </li>
+                <li class="sidebar-login" onclick=hideSidebar()>
+                    <a th:href="@{/login}">
+                        <img src="/images/user_icon.png">
+                    </a>
+                </li>
+            </div>
             <li onclick=hideSidebar()><a th:href="@{/#initial-images}"><h2>Início</h2></a></li>
             <li onclick=hideSidebar()><a th:href="@{/#destaque}"><h2>Destaque</h2></a></li>
             <li onclick=hideSidebar()><a th:href="@{/#products}"><h2>Produtos</h2></a></li>
-            <li onclick=hideSidebar()><a href=""><h2>Busca</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/busca}"><h2>Busca</h2></a></li>
             <li onclick=hideSidebar()><a th:href="@{/#car-brands}"><h2>Marcas</h2></a></li>
             <li onclick=hideSidebar()><a th:href="@{/#contact}" class="hideOnMobile"><h2>Contato</h2></a></li>
-		</ul>
-		<div class="nav">
+        </ul>
+        <div class="nav">
             <a th:href="@{/#initial-images}"><h2>Início</h2></a>
             <a th:href="@{/#destaque}"><h2>Destaque</h2></a>
             <a th:href="@{/#products}"><h2>Produtos</h2></a>
-            <a href=""><h2>Busca</h2></a>
+            <a th:href="@{/busca}"><h2>Busca</h2></a>
             <a th:href="@{/#car-brands}"><h2>Marcas</h2></a>
             <a th:href="@{/#contact}" class="hideOnMobile"><h2>Contato</h2></a>
-		</div>
-		<div class="login">
-			<a href="login" class="loginIcon hideOnMobile"></a>
-		</div>
-		<li class="menu-button" onclick=showSidebar()>
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
-				<path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
-			</svg>
-		</li>
-	</header>
+        </div>
+        <div class="login">
+            <a th:href="@{/login}" class="loginIcon hideOnMobile"></a>
+        </div>
+        <li class="menu-button" onclick=showSidebar()>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
+                <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/>
+            </svg>
+        </li>
+    </header>
 
 	<main class="search-page-container">
 		<div class="container-fluid">
 			<div class="row">
 				<aside class="col-md-3 filter-sidebar">
 					<div class="breadcrumb-nav mb-3">
-						<a href="index.html">Início</a> > <a href="#">Carros</a>
+						<a th:href="@{/}">Início</a> > <a href="#">Carros</a>
 					</div>
 					<h2>Resultados da Busca</h2>
 					<p id="total-results"></p>

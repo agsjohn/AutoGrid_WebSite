@@ -81,13 +81,13 @@ document.addEventListener('DOMContentLoaded', () => {
     
     imagens1.forEach(e => {
         e.addEventListener('click', function() {
-            window.location.href = '../../templates/produto.html';
+            window.location.href = '/busca';
         });
     });
 
     imagens2.forEach(e => {
         e.addEventListener('click', function() {
-            window.location.href = '../../templates/produto.html';
+            window.location.href = '/busca';
         });
     });
     

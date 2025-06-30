@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     data-preco="${carro.preco}" 
                     data-localizacao="${carro.localizacao}" 
                     data-estado="${carro.estado}">
-                    <a href="/produto/${carro.id}" class="product-link">
+                    <a href="/produtos/${carro.id}" class="product-link">
                         <img src="${carro.imageUrl}" alt="${carro.nome}">
                         <div class="product-card-body">
                             <h5 class="product-title">${carro.titulo}</h5>
