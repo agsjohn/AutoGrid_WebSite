@@ -75,6 +75,45 @@ document.addEventListener('DOMContentLoaded', () => {
         },
     });
 
+    function renderCards(carros) {
+        resultsList.innerHTML = ''; // Limpa a lista atual
+
+        if (carros.length === 0) {
+            resultsList.innerHTML = '<p>Nenhum resultado encontrado para os filtros selecionados.</p>';
+            return;
+        }
+
+        carros.forEach((carro, index) => {
+            // Construa o HTML do card dinamicamente
+            // Certifique-se que os nomes das propriedades (carro.nome, carro.preco)
+            // correspondem aos atributos da sua classe Carro em Java.
+            const cardHTML = `
+                <div class="product-card" 
+                    data-marca="${carro.marca.toLowerCase()}" 
+                    data-ano="${carro.ano}" 
+                    data-preco="${carro.preco}" 
+                    data-localizacao="${carro.localizacao}" 
+                    data-estado="${carro.estado}">
+                    <a href="/produto/${carro.id}" class="product-link">
+                        <img src="${carro.imageUrl}" alt="${carro.nome}">
+                        <div class="product-card-body">
+                            <h5 class="product-title">${carro.titulo}</h5>
+                            <p class="product-price">R$ ${carro.preco.toLocaleString('pt-BR')}</p>
+                            <p class="product-details">${carro.ano} | ${carro.quilometragem} km</p>
+                            <p class="product-location">${carro.localizacao}</p>
+                        </div>
+                    </a>
+                </div>
+            `;
+            resultsList.insertAdjacentHTML('beforeend', cardHTML);
+
+            // Adiciona <hr> entre os cards
+            if (index < carros.length - 1) {
+                resultsList.insertAdjacentHTML('beforeend', '<hr>');
+            }
+        });
+    }
+
     // --- Função para Renderizar a Paginação ---
     function setupPagination(totalItems, itemsPerPage, currentPage) {
         paginationContainer.innerHTML = ''; 
@@ -110,86 +149,71 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Função Principal para Atualizar os Resultados (Filtrar, Ordenar e Paginar) ---
-    function updateResults() {
-		window.scrollTo({ top: 0, behavior: 'smooth' });
-		
-        // Obter valores dos filtros
+    async function updateResults() { // Transformada em uma função assíncrona
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // 1. Obter valores dos filtros (isso continua igual)
         const searchTerm = searchInput.value.trim().toLowerCase();
         const estadosSelecionados = Array.from(estadosInput).filter(cb => cb.checked).map(cb => cb.value);
         const localizacaoSelecionada = localizacaoInput.value;
         const precoMin = parseFloat(precoMinInput.value) || 0;
         const precoMax = parseFloat(precoMaxInput.value) || Infinity;
-        const anoMin = parseInt(anoMinInput.value) || 0;
-        const anoMax = parseInt(anoMaxInput.value) || Infinity;
+        const anoMin = parseInt(anoMinInput.value) || null;
+        const anoMax = parseInt(anoMaxInput.value) || null;
         const marcasSelecionadas = Array.from(filtroMarcas).filter(cb => cb.checked).map(cb => cb.value);
-        
-        let cardsArray = Array.from(productCards);
+        // ... pegue todos os outros filtros
 
-        // FILTRAR
-        const filteredCards = cardsArray.filter(card => {
-            const cardTitle = card.querySelector('.product-title').textContent.trim().toLowerCase();
-            const cardEstado = card.dataset.estado;
-            const cardLocalizacao = card.dataset.localizacao;
-            const cardPreco = parseFloat(card.dataset.preco);
-            const cardAno = parseInt(card.dataset.ano);
-            const cardMarca = card.dataset.marca;
+        // 2. Construir a URL da API com os parâmetros de busca
+        const params = new URLSearchParams();
+        if (searchTerm) params.append('titulo', searchTerm);
+        if (estadosSelecionados.length > 0) params.append('tipo', estadosSelecionados.join(',')); // Pode precisar de tratamento no backend se for mais de uma
+        if (localizacaoSelecionada != 'Todos') params.append('localizacao', localizacaoSelecionada);
+        if (precoMin) params.append('precoMin', precoMin);
+        if (precoMax) params.append('precoMax', precoMax);
+        if (anoMin) params.append('anoMin', anoMin);
+        if (anoMax) params.append('anoMax', anoMax);
+        if (marcasSelecionadas.length > 0) params.append('marca', marcasSelecionadas.join(',')); // Pode precisar de tratamento no backend se for mais de uma
+        // ... adicione outros parâmetros
 
-            const searchMatch = searchTerm === '' || cardTitle.includes(searchTerm); 
-            const estadoMatch = estadosSelecionados.length === 0 || estadosSelecionados.includes(cardEstado);
-            const localizacaoMatch = localizacaoSelecionada === 'Todos' || cardLocalizacao === localizacaoSelecionada;
-            const precoMatch = cardPreco >= precoMin && cardPreco <= precoMax;
-            const anoMatch = cardAno >= anoMin && cardAno <= anoMax;
-            const marcaMatch = marcasSelecionadas.length === 0 || marcasSelecionadas.includes(cardMarca);
+        const apiUrl = `/api/buscar?${params.toString()}`;
 
-            return searchMatch && estadoMatch && localizacaoMatch && precoMatch && anoMatch && marcaMatch;
-        });
-
-        // ORDENAR
-        const sortValue = sortSelect.value;
-        filteredCards.sort((a, b) => {
-            const precoA = parseFloat(a.dataset.preco);
-            const precoB = parseFloat(b.dataset.preco);
-            const anoA = parseInt(a.dataset.ano);
-            const anoB = parseInt(b.dataset.ano);
-
-            switch (sortValue) {
-                case 'Menor preço': return precoA - precoB;
-                case 'Maior preço': return precoB - precoA;
-                case 'Mais recentes': return anoB - anoA;
-                default: return 0;
+        try {
+            // 3. Fazer a chamada AJAX com fetch
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error('A resposta da rede não foi bem-sucedida.');
             }
-        });
+            let filteredCars = await response.json(); // Os dados vêm filtrados do backend!
 
-        // Atualiza a contagem de resultados
-        const totalVisibleCards = filteredCards.length;
-        if (totalVisibleCards === 0) {
-            totalResults.innerHTML = `Nenhum resultado encontrado`;
-        } else if (totalVisibleCards === 1) {
-            totalResults.innerHTML = `${totalVisibleCards} resultado`;
-        } else {
-            totalResults.innerHTML = `${totalVisibleCards} resultados`;
+            // 4. ORDENAR (pode ser feito no frontend ou backend)
+            // Por simplicidade, vamos manter a ordenação e paginação no frontend por enquanto.
+            const sortValue = sortSelect.value;
+            filteredCars.sort((a, b) => {
+                switch (sortValue) {
+                    case 'Menor preço': return a.preco - b.preco;
+                    case 'Maior preço': return b.preco - a.preco;
+                    case 'Mais recentes': return b.ano - a.ano;
+                    default: return 0;
+                }
+            });
+
+            // 5. Atualizar contagem de resultados
+            totalResults.textContent = `${filteredCars.length} resultado(s)`;
+            
+            // 6. PAGINAR
+            itemsPerPage = parseInt(showSelect.value);
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const paginatedCars = filteredCars.slice(startIndex, endIndex);
+
+            // 7. RENDERIZAR
+            renderCards(paginatedCars); // Usa a nova função para criar os cards
+            setupPagination(filteredCars.length, itemsPerPage, currentPage);
+
+        } catch (error) {
+            console.error('Erro ao buscar carros:', error);
+            resultsList.innerHTML = '<p>Ocorreu um erro ao carregar os resultados. Tente novamente mais tarde.</p>';
         }
-
-        // PAGINAR
-        itemsPerPage = parseInt(showSelect.value);
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const paginatedCards = filteredCards.slice(startIndex, endIndex);
-        
-        // RENDERIZAR
-        resultsList.innerHTML = '';
-        paginatedCards.forEach((card, index) => {
-            resultsList.appendChild(card.cloneNode(true));
-
-            // Adiciona <hr> entre os cards
-            if (index < paginatedCards.length - 1) {
-                const hr = document.createElement('hr');
-                resultsList.appendChild(hr);
-            }
-        });
-
-        // RENDERIZAR CONTROLES DA PAGINAÇÃO
-        setupPagination(totalVisibleCards, itemsPerPage, currentPage);
     }
 	
 

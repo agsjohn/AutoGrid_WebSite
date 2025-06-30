@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Busca - AutoGrid</title>
-	<link rel="icon" href="../images/AutoGrid_logo.png">
+	<link rel="icon" href="/images/AutoGrid_logo.png">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -13,12 +13,13 @@
 		crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link href="../header/header.css" rel="stylesheet">
-	<link href="styles.css" rel="stylesheet">
+    <link href="/header/header.css" rel="stylesheet">
+	<link href="/busca/styles.css" rel="stylesheet">
 </head>
 
 <body>
-    <script src="../header/header.js"></script>
+	<!-- TODO: marcas e localização automático -->
+    <script src="/header/header.js"></script>
 	<header>
 		<div class="header">
 			<h1>AutoGrid</h1>
@@ -26,31 +27,31 @@
 		<ul class="sidebar">
 			<div>
 				<li class="sidebar-close" onclick=hideSidebar()>
-					<img src="../images/X.png">
+					<img src="/images/X.png">
 				</li>
 				<li class="sidebar-login" onclick=hideSidebar()>
-					<a href="../login/login.html">
-						<img src="../images/user_icon.png">
+					<a href="login">
+						<img src="/images/user_icon.png">
 					</a>
 				</li>
 			</div>
-			<li onclick=hideSidebar()><a href="../index.html"><h2>Início</h2></a></li>
-			<li onclick=hideSidebar()><a href="../index.html#destaque"><h2>Destaque</h2></a></li>
-			<li onclick=hideSidebar()><a href="../index.html#products"><h2>Produtos</h2></a></li>
-			<li onclick=hideSidebar()><a href="#"><h2>Busca</h2></a></li>
-			<li onclick=hideSidebar()><a href="../index.html#car-brands"><h2>Marcas</h2></a></li>
-			<li onclick=hideSidebar()><a href="../index.html#contact" class="hideOnMobile"><h2>Contato</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#initial-images}"><h2>Início</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#destaque}"><h2>Destaque</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#products}"><h2>Produtos</h2></a></li>
+            <li onclick=hideSidebar()><a href=""><h2>Busca</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#car-brands}"><h2>Marcas</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#contact}" class="hideOnMobile"><h2>Contato</h2></a></li>
 		</ul>
 		<div class="nav">
-			<a href="../index.html" class="hideOnMobile"><h2>Início</h2></a>
-			<a href="../index.html#destaque" class="hideOnMobile"><h2>Destaque</h2></a>
-			<a href="../index.html#products" class="hideOnMobile"><h2>Produtos</h2></a>
-			<a href="#" class="hideOnMobile"><h2>Busca</h2></a>
-			<a href="../index.html#car-brands" class="hideOnMobile"><h2>Marcas</h2></a>
-			<a href="../index.html#contact" class="hideOnMobile"><h2>Contato</h2></a>
+            <a th:href="@{/#initial-images}"><h2>Início</h2></a>
+            <a th:href="@{/#destaque}"><h2>Destaque</h2></a>
+            <a th:href="@{/#products}"><h2>Produtos</h2></a>
+            <a href=""><h2>Busca</h2></a>
+            <a th:href="@{/#car-brands}"><h2>Marcas</h2></a>
+            <a th:href="@{/#contact}" class="hideOnMobile"><h2>Contato</h2></a>
 		</div>
 		<div class="login">
-			<a href="../login/login.html" class="loginIcon hideOnMobile"></a>
+			<a href="login" class="loginIcon hideOnMobile"></a>
 		</div>
 		<li class="menu-button" onclick=showSidebar()>
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
@@ -64,7 +65,7 @@
 			<div class="row">
 				<aside class="col-md-3 filter-sidebar">
 					<div class="breadcrumb-nav mb-3">
-						<a href="../index.html">Início</a> > <a href="#">Carros</a>
+						<a href="index.html">Início</a> > <a href="#">Carros</a>
 					</div>
 					<h2>Resultados da Busca</h2>
 					<p id="total-results"></p>
@@ -90,9 +91,9 @@
 						<h5 class="filter-title">Localização</h5>
 						<select class="form-select bg-dark text-white" id="filtro-localizacao">
 							<option selected>Todos</option>
-							<option>Porto Alegre - RS</option>
-							<option>São Paulo - SP</option>
-							<option>Rio de Janeiro - RJ</option>
+							<option>Porto Alegre, Rio Grande do Sul</option>
+							<option>São Paulo, São Paulo</option>
+							<option>Rio de Janeiro, Rio de Janeiro</option>
 						</select>
 					</div>
 
@@ -167,8 +168,9 @@
 					</div>
 
 					<div class="results-list">
-						<div class="product-card" data-marca="porsche" data-ano="2019" data-preco="1850000" data-localizacao="São Paulo - SP" data-estado="Novos">
-							<a href="../produto/produto.html" class="product-link">
+							<p>Buscando carros...</p>
+						<!-- <div class="product-card" data-marca="porsche" data-ano="2019" data-preco="1850000" data-localizacao="São Paulo - SP" data-estado="Novos">
+							<a href="produto.html" class="product-link">
 								<img src="https://placehold.co/250x180/444/fff?text=GT3+RS" alt="Porsche GT3 RS">
 								<div class="product-card-body">
 									<h5 class="product-title">2019 Porsche Gt3 Rs</h5>
@@ -180,7 +182,7 @@
 						</div>
 						<hr>
 						<div class="product-card" data-marca="ford" data-ano="2019" data-preco="6500000" data-localizacao="Porto Alegre - RS" data-estado="Novos">
-							<a href="../produto/produto.html" class="product-link">
+							<a href="produto.html" class="product-link">
 								<img src="https://placehold.co/250x180/444/fff?text=Ford+GT" alt="Ford GT MK II">
 								<div class="product-card-body">
 									<h5 class="product-title">2019 Ford GT MK II</h5>
@@ -192,7 +194,7 @@
 						</div>
 						<hr>
 						<div class="product-card" data-marca="chevrolet" data-ano="2019" data-preco="1600000" data-localizacao="Porto Alegre - RS" data-estado="Usados">
-							<a href="../produto/produto.html" class="product-link">
+							<a href="produto.html" class="product-link">
 								<img src="https://placehold.co/250x180/444/fff?text=Corvette+ZR1" alt="Chevrolet Corvette ZR1">
 								<div class="product-card-body">
 									<h5 class="product-title">2019 Chevrolet Corvette ZR1</h5>
@@ -204,7 +206,7 @@
 						</div>
 						<hr>
 						<div class="product-card" data-marca="nissan" data-ano="2020" data-preco="350000" data-localizacao="Rio de Janeiro - RJ" data-estado="Usados">
-							<a href="../produto/produto.html" class="product-link">
+							<a href="produto.html" class="product-link">
 								<img src="https://placehold.co/250x180/444/fff?text=370z" alt="Nissan 370z">
 								<div class="product-card-body">
 									<h5 class="product-title">Nissan 370z</h5>
@@ -213,7 +215,7 @@
 									<p class="product-location">Rio de Janeiro, Rio de Janeiro</p>
 								</div>
 							</a>
-						</div>
+						</div> -->
 					</div>
 
 					<nav id="pagination-nav" aria-label="Page navigation" class="mt-4 d-flex justify-content-center">
@@ -226,7 +228,7 @@
 	</main>
 	
   	<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
-	<script src="func.js"></script>
+	<script src="/busca/func.js"></script>
 </body>
 
 </html>

@@ -12,12 +12,12 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link href="styles.css" rel="stylesheet">
-    <link href="../header/header.css" rel="stylesheet">
+    <link href="login/styles.css" rel="stylesheet">
+    <link href="/header/header.css" rel="stylesheet">
 </head>
 
 <body>
-    <script src="../header/header.js"></script>
+    <script src="/header/header.js"></script>
     <header>
         <div class="header">
             <h1>AutoGrid</h1>
@@ -25,28 +25,28 @@
         <ul class="sidebar">
             <div>
                 <li class="sidebar-close" onclick=hideSidebar()>
-                    <img src="../images/X.png">
+                    <img src="/images/X.png">
                 </li>
                 <li class="sidebar-login" onclick=hideSidebar()>
-                    <a href="../login/login.html">
-                        <img src="../images/user_icon.png">
+                    <a href="login">
+                        <img src="/images/user_icon.png">
                     </a>
                 </li>
             </div>
-            <li onclick=hideSidebar()><a href="../index.html#initial-images"><h2>Início</h2></a></li>
-            <li onclick=hideSidebar()><a href="../index.html#destaque"><h2>Destaque</h2></a></li>
-            <li onclick=hideSidebar()><a href="../index.html#products"><h2>Produtos</h2></a></li>
-            <li onclick=hideSidebar()><a href="../busca/busca.html"><h2>Busca</h2></a></li onclick=hideSidebar()>
-            <li onclick=hideSidebar()><a href="../index.html#car-brands"><h2>Marcas</h2></a></li>
-            <li onclick=hideSidebar()><a href="../index.html#contact" class="hideOnMobile"><h2>Contato</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#initial-images}"><h2>Início</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#destaque}"><h2>Destaque</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#products}"><h2>Produtos</h2></a></li>
+            <li onclick=hideSidebar()><a href="busca"><h2>Busca</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#car-brands}"><h2>Marcas</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#contact}" class="hideOnMobile"><h2>Contato</h2></a></li>
         </ul>
         <div class="nav">
-            <a href="../index.html#initial-images" class="hideOnMobile"><h2>Início</h2></a>
-            <a href="../index.html#destaque" class="hideOnMobile"><h2>Destaque</h2></a>
-            <a href="../index.html#products" class="hideOnMobile"><h2>Produtos</h2></a>
-            <a href="../busca/busca.html" class="hideOnMobile"><h2>Busca</h2></a>
-            <a href="../index.html#car-brands" class="hideOnMobile"><h2>Marcas</h2></a>
-            <a href="../index.html#contact" class="hideOnMobile"><h2>Contato</h2></a>
+            <a th:href="@{/#initial-images}"><h2>Início</h2></a>
+            <a th:href="@{/#destaque}"><h2>Destaque</h2></a>
+            <a th:href="@{/#products}"><h2>Produtos</h2></a>
+            <a href="busca"><h2>Busca</h2></a>
+            <a th:href="@{/#car-brands}"><h2>Marcas</h2></a>
+            <a th:href="@{/#contact}" class="hideOnMobile"><h2>Contato</h2></a>
         </div>
         <div class="login">
             <a href="" class="loginIcon hideOnMobile"></a>
@@ -61,14 +61,14 @@
     <main id="login-section">
         <div class="login-container">
             <h2>Acesse sua Conta</h2>
-            <form id="login-form">
+            <form id="login-form" method="POST" action="/do-login">
                 <div class="mb-4">
                     <label for="loginUser" class="form-label">Login de Usuário</label>
-                    <input type="text" class="form-control" id="loginUser" required>
+                    <input type="text" class="form-control" id="loginUser" name="username" required>
                 </div>
                 <div class="mb-3">
                     <label for="loginPassword" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="loginPassword" required>
+                    <input type="password" class="form-control" id="loginPassword" name="password" required>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <!-- <div class="form-check">
@@ -80,7 +80,7 @@
                     <a href="#" class="forgot-password">Esqueceu a senha?</a> -->
                     <p class="bi bi-exclamation-circle d-none" id="invalidLogin"> Usuário ou senha incorretos</p>
                 </div>
-                <button type="submit" onsubmit="login()" class="btn-login">ENTRAR</button>
+                <button type="submit" class="btn-login">ENTRAR</button>
             </form>
             <!-- <div class="signup-link">
                 <p>Não tem uma conta? <a href="#">Cadastre-se</a></p>
@@ -88,7 +88,7 @@
         </div>
     </main>
 
-    <script src="func.js"></script>
+    <script src="login/func.js"></script>
 </body>
 
 </html>
