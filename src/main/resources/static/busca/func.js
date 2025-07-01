@@ -166,13 +166,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // 2. Construir a URL da API com os parâmetros de busca
         const params = new URLSearchParams();
         if (searchTerm) params.append('titulo', searchTerm);
-        if (estadosSelecionados.length > 0) params.append('tipo', estadosSelecionados.join(',')); // Pode precisar de tratamento no backend se for mais de uma
+        if (estadosSelecionados.length > 0) estadosSelecionados.forEach(estado => params.append('tipo', estado));
         if (localizacaoSelecionada != 'Todos') params.append('localizacao', localizacaoSelecionada);
         if (precoMin) params.append('precoMin', precoMin);
         if (precoMax) params.append('precoMax', precoMax);
         if (anoMin) params.append('anoMin', anoMin);
         if (anoMax) params.append('anoMax', anoMax);
-        if (marcasSelecionadas.length > 0) params.append('marca', marcasSelecionadas.join(',')); // Pode precisar de tratamento no backend se for mais de uma
+        if (marcasSelecionadas.length > 0) marcasSelecionadas.forEach(m => params.append('marca', m));
         // ... adicione outros parâmetros
 
         const apiUrl = `/api/buscar?${params.toString()}`;

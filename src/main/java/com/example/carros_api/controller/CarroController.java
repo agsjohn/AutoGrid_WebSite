@@ -2,10 +2,10 @@ package com.example.carros_api.controller;
 
 import com.example.carros_api.model.Carro;
 import com.example.carros_api.repository.CarroRepository;
+import jakarta.persistence.criteria.Expression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.stereotype.Controller;
@@ -71,33 +71,38 @@ public class CarroController {
     }
 
     @GetMapping("/api/buscar")
-    @ResponseBody // Garante que a resposta será o corpo da requisição (JSON)
+    @ResponseBody
     public List<Carro> buscarCarros(
             @RequestParam(required = false) String titulo,
-            @RequestParam(required = false) String marca,
-            @RequestParam(required = false) String tipo,
+            @RequestParam(required = false) List<String> marca,
+            @RequestParam(required = false) List<String> tipo,
             @RequestParam(required = false) String localizacao,
             @RequestParam(required = false) Integer anoMin,
             @RequestParam(required = false) Integer anoMax,
             @RequestParam(required = false) Double precoMin,
             @RequestParam(required = false) Double precoMax
-            // Adicione outros filtros que precisar: precoMin, precoMax, etc.
     ) {
-        // Usando Specification para criar uma query dinâmica e segura
         List<Carro> carros = carroRepository.findAll((root, criteriaQuery, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
-
             if (titulo != null && !titulo.isEmpty()) {
                 predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("titulo")), "%" + titulo.toLowerCase() + "%"));
             }
             if (marca != null && !marca.isEmpty()) {
-                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("marca")), "%" + marca.toLowerCase() + "%"));
+                // Primeiro, garantimos que a coluna 'marca' no banco será comparada em minúsculas
+                Expression<String> marcaEmMinusculas = criteriaBuilder.lower(root.get("marca"));
+                // Agora, a cláusula IN será usada com a coluna já em minúsculas.
+                // O frontend já envia os valores em minúsculas ('porsche', 'ford'), então não precisamos converter a lista aqui.
+                predicates.add(marcaEmMinusculas.in(marca));
             }
             if (localizacao != null && !localizacao.isEmpty()) {
                 predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("localizacao")), "%" + localizacao.toLowerCase() + "%"));
             }
             if (tipo != null && !tipo.isEmpty()) {
-                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("tipo")), "%" + tipo.toLowerCase() + "%"));
+                // A condição ("Novos", "Usados") provavelmente já corresponde exatamente no DB e no HTML,
+                // mas adicionar 'lower' aqui por segurança não faz mal.
+                Expression<String> tipoEmMinusculas = criteriaBuilder.lower(root.get("tipo"));
+                List<String> tiposMinusculos = tipo.stream().map(String::toLowerCase).toList();
+                predicates.add(tipoEmMinusculas.in(tiposMinusculos));
             }
             if (anoMin != null) {
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("ano"), anoMin));
@@ -111,12 +116,8 @@ public class CarroController {
             if (precoMax != null) {
                 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("preco"), precoMax));
             }
-
-            // ... adicione outros predicados para preço, localização, etc.
-
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         });
-
         return carros;
     }
 
