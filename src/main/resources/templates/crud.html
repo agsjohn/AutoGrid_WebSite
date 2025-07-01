@@ -15,7 +15,6 @@
 </head>
 
 <body>
-	<!-- TODO: adicionar logout -->
     <script src="/header/header.js"></script>
     <header>
         <div class="header">
@@ -27,8 +26,8 @@
                     <img src="/images/X.png">
                 </li>
                 <li class="sidebar-login" onclick=hideSidebar()>
-                    <a th:href="@{/login}">
-                        <img src="/images/user_icon.png">
+                    <a th:href="@{/logout}">
+                        <img src="/images/logout.png">
                     </a>
                 </li>
             </div>
@@ -48,7 +47,7 @@
             <a th:href="@{/#contact}" class="hideOnMobile"><h2>Contato</h2></a>
         </div>
         <div class="login">
-            <a th:href="@{/login}" class="loginIcon hideOnMobile"></a>
+            <a th:href="@{/logout}" class="logoutIcon hideOnMobile"></a>
         </div>
         <li class="menu-button" onclick=showSidebar()>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">

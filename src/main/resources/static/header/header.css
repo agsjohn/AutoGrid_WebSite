@@ -119,9 +119,8 @@ header svg{
     margin: 0;
 }
 
-
 .loginIcon{
-    background-image: url("../images/user_icon.png");
+    background-image: url("/images/user_icon.png");
     background-repeat: no-repeat;
     background-size: contain;
     filter: invert();
@@ -132,6 +131,23 @@ header svg{
 }
 
 .loginIcon:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.4s ease;
+}
+
+.logoutIcon{
+    background-image: url("/images/logout.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: invert();
+    height: 2.7rem;
+    width: 2.7rem;
+    margin-bottom: 0.5rem;
+    margin-right: 1rem;
+}
+
+.logoutIcon:hover{
     cursor: pointer;
     transform: scale(1.1);
     transition: 0.4s ease;
@@ -242,7 +258,8 @@ header svg{
         width: 12rem;
     }
 
-    .loginIcon{
+    .loginIcon,
+    .logoutIcon{
         height: 2.3rem;
         width: 2.3rem;
     }

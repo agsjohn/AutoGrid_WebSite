@@ -27,7 +27,7 @@ public class CarroController {
 
     @GetMapping
     public String index() {
-        return "index"; // Corresponde a src/main/resources/templates/index.html
+        return "index";
     }
 
     @GetMapping("/login")
@@ -37,7 +37,6 @@ public class CarroController {
         } else {
             return "redirect:/crud";
         }
-//        return "login"; // Corresponde a src/main/resources/templates/login.html
     }
 
     @PostMapping("/do-login")
@@ -62,12 +61,12 @@ public class CarroController {
         }
         List<Carro> carros = carroRepository.findAll();
         model.addAttribute("carros", carros);
-        return "crud"; // Corresponde a src/main/resources/templates/crud_carros.html
+        return "crud";
     }
 
     @GetMapping("/busca")
     public String carregarPaginaBusca() {
-        return "busca"; // Apenas renderiza a página HTML vazia
+        return "busca";
     }
 
     @GetMapping("/api/buscar")
