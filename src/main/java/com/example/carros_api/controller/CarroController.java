@@ -70,71 +70,6 @@ public class CarroController {
         return "busca"; // Apenas renderiza a página HTML vazia
     }
 
-
-//    @GetMapping("/crud/adicionar")
-//    public String adicionarCarroPage(HttpSession session, org.springframework.ui.Model model) {
-//        if (session.getAttribute("loggedIn") == null || !(boolean) session.getAttribute("loggedIn")) {
-//            return "redirect:/login";
-//        }
-//        model.addAttribute("carro", new Carro()); // Objeto vazio para o formulário de adição
-//        model.addAttribute("action", "/crud/salvar"); // Ação do formulário
-//        return "form_carro";
-//    }
-
-//    @GetMapping("/crud/editar/{id}")
-//    public String editarCarroPage(@PathVariable Long id, HttpSession session, org.springframework.ui.Model model) {
-//        if (session.getAttribute("loggedIn") == null || !(boolean) session.getAttribute("loggedIn")) {
-//            return "redirect:/login";
-//        }
-//        Carro carro = carroRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("ID de carro inválido:" + id));
-//        model.addAttribute("carro", carro);
-//        model.addAttribute("action", "/crud/salvar");
-//        return "form_carro";
-//    }
-
-//    @PostMapping("/crud/salvar")
-//    public String salvarCarro(@ModelAttribute Carro carro, HttpSession session) {
-//        if (session.getAttribute("loggedIn") == null || !(boolean) session.getAttribute("loggedIn")) {
-//            return "redirect:/login";
-//        }
-//        carroRepository.save(carro);
-//        return "redirect:/crud";
-//    }
-
-//    @PostMapping("/crud/deletar/{id}")
-//    public String deletarCarro(@PathVariable Long id, HttpSession session) {
-//        if (session.getAttribute("loggedIn") == null || !(boolean) session.getAttribute("loggedIn")) {
-//            return "redirect:/login";
-//        }
-//        carroRepository.deleteById(id);
-//        return "redirect:/crud";
-//    }
-
-    // --- Rotas para a busca e detalhes (consumindo dados do DB) ---
-//    @GetMapping("/busca")
-//    public String buscarCarros(@RequestParam(required = false) String marca,
-//                               @RequestParam(required = false) String tipo,
-//                               @RequestParam(required = false) String ano,
-//                               org.springframework.ui.Model model) {
-//        List<Carro> carros;
-//
-//        if (marca != null && !marca.isEmpty()) {
-//            carros = carroRepository.findByMarcaContainingIgnoreCase(marca);
-//        } else if (tipo != null && !tipo.isEmpty()) {
-//            carros = carroRepository.findByTipoContainingIgnoreCase(tipo);
-//        } else if (ano != null && !ano.isEmpty()) {
-//            try {
-//                carros = carroRepository.findByAno(Integer.parseInt(ano));
-//            } catch (NumberFormatException e) {
-//                carros = carroRepository.findAll(); // Ou lide com o erro de forma mais sofisticada
-//            }
-//        } else {
-//            carros = carroRepository.findAll(); // Se nenhum filtro, retorna todos
-//        }
-//        model.addAttribute("carros", carros);
-//        return "busca"; // Corresponde a src/main/resources/templates/busca.html
-//    }
-
     @GetMapping("/api/buscar")
     @ResponseBody // Garante que a resposta será o corpo da requisição (JSON)
     public List<Carro> buscarCarros(
@@ -185,8 +120,77 @@ public class CarroController {
         return carros;
     }
 
+    @GetMapping("/api/{id}")
+    public ResponseEntity<Carro> getCarroById(@PathVariable Long id) {
+        Optional<Carro> carroOptional = carroRepository.findById(id);
+
+        if (carroOptional.isPresent()) {
+            // Se o carro for encontrado, retorna o objeto Carro com status 200 OK.
+            // O Spring se encarrega de converter o objeto Carro para JSON.
+            return ResponseEntity.ok(carroOptional.get());
+        } else {
+            // Se não encontrar, retorna um status 404 Not Found.
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/api")
+    public ResponseEntity<Carro> createCarro(@RequestBody Carro carro) {
+        // @RequestBody converte o JSON vindo no corpo da requisição para um objeto Carro
+        // O ID deve ser nulo para que o JPA entenda que é uma nova entidade
+        carro.setId(null);
+        Carro savedCarro = carroRepository.save(carro);
+        // Retorna o objeto salvo (agora com ID) e o status 201 Created
+        return new ResponseEntity<>(savedCarro, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/api/{id}")
+    public ResponseEntity<Carro> updateCarro(@PathVariable Long id, @RequestBody Carro carroDetails) {
+        Optional<Carro> carroOptional = carroRepository.findById(id);
+
+        if (carroOptional.isPresent()) {
+            Carro existingCarro = carroOptional.get();
+
+            // Atualiza os campos do carro existente com os detalhes recebidos
+            existingCarro.setTitulo(carroDetails.getTitulo());
+            existingCarro.setMarca(carroDetails.getMarca());
+            existingCarro.setAno(carroDetails.getAno());
+            existingCarro.setPreco(carroDetails.getPreco());
+            existingCarro.setQuilometragem(carroDetails.getQuilometragem());
+            existingCarro.setImageUrl(carroDetails.getImageUrl());
+            existingCarro.setImageUrl1(carroDetails.getImageUrl1());
+            existingCarro.setImageUrl2(carroDetails.getImageUrl2());
+            existingCarro.setImageUrl3(carroDetails.getImageUrl3());
+            existingCarro.setLocalizacao(carroDetails.getLocalizacao());
+            existingCarro.setTipo(carroDetails.getTipo());
+            existingCarro.setDescricaoCurta(carroDetails.getDescricaoCurta());
+            existingCarro.setDescricaoLonga(carroDetails.getDescricaoLonga());
+
+            Carro updatedCarro = carroRepository.save(existingCarro);
+            return ResponseEntity.ok(updatedCarro);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/api/{id}")
+    public ResponseEntity<Void> deleteCarro(@PathVariable Long id) {
+        // Primeiro, verificamos se o carro com este ID realmente existe.
+        if (!carroRepository.existsById(id)) {
+            // Se não existir, retornamos 404 Not Found.
+            return ResponseEntity.notFound().build();
+        }
+
+        // Se existir, chamamos o método para deletar pelo ID.
+        carroRepository.deleteById(id);
+
+        // A convenção para uma operação DELETE bem-sucedida é retornar o status 204 No Content.
+        // Isso significa "A operação foi um sucesso e não há conteúdo para retornar".
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/produtos/{id}")
-    public String detalhesCarro(@PathVariable Long id, org.springframework.ui.Model model) {
+    public String paginaProduto(@PathVariable Long id, org.springframework.ui.Model model) {
         Carro carro = carroRepository.findById(id).orElse(null);
         if (carro == null) {
             return "redirect:/busca";

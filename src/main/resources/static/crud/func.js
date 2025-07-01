@@ -1,5 +1,7 @@
 // A lógica principal do seu CRUD e dos seletores
 document.addEventListener('DOMContentLoaded', function () {
+    let allStatesData = []; // <--- ADICIONE ESTA LINHA
+
     // Seletores e Instâncias
     const stateSelect = document.getElementById('formState');
     const citySelect = document.getElementById('formCity');
@@ -10,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const vehicleTableBody = document.getElementById('vehicle-table-body');
     let rowToDelete = null;
 
-    new Choices(document.getElementById('formVehicleCondition'), {
+    const conditionChoices = new Choices(document.getElementById('formVehicleCondition'), {
         itemSelectText: '',
         searchEnabled: false,
         classNames: {
@@ -76,6 +78,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 value: state.sigla,
                 label: state.nome
             }));
+
+            allStatesData = stateOptions;
+
             stateChoices.enable();
             stateChoices.setChoices(stateOptions, 'value', 'label', false);
             
@@ -139,41 +144,71 @@ document.addEventListener('DOMContentLoaded', function () {
         const vehicleId = row.getAttribute('data-id');
         
         // Ação de EDITAR
+        // Ação de EDITAR (VERSÃO FINAL CORRIGIDA)
+        // Ação de EDITAR (VERSÃO FINAL CORRIGIDA E GARANTIDA)
         if (target.classList.contains('btn-edit')) {
             vehicleModalLabel.textContent = 'Editar Veículo';
             vehicleForm.reset();
-
-            // Pega os dados da tabela
-            const title = row.querySelector('.vehicle-title').textContent;
-            const price = row.querySelector('.vehicle-price').textContent.replace('R$ ', ''); 
-            const km = row.querySelector('.vehicle-km').textContent.replace('.', ''); 
-            const location = row.querySelector('.vehicle-location').textContent;
-            const imageSrc = row.querySelector('.table-img-thumbnail').src;
-            const year = row.querySelector('.vehicle-year').textContent;
-            const brand = row.querySelector('.vehicle-brand').textContent;
-            
-            // Preenche o formulário
-            document.getElementById('vehicleId').value = vehicleId;
-            document.getElementById('formVehicleTitle').value = title;
-            document.getElementById('formVehiclePrice').value = price;
-            document.getElementById('formVehicleKm').value = km;
-            document.getElementById('formVehicleImage').value = imageSrc;
-            document.getElementById('formVehicleYear').value = year;
-            document.getElementById('formVehicleBrand').value = brand;
-
-            // Preenche o estado e a cidade
-            if (location.includes(',')) {
-                const [cityName, stateAbbr] = location.split(',').map(item => item.trim());
-                
-                // Seleciona o estado
-                stateChoices.setChoiceByValue(stateAbbr);
-                
-                // Carrega as cidades e depois seleciona a cidade correta
-                await fetchAndSetCities(stateAbbr);
-                cityChoices.setChoiceByValue(cityName);
-            }
             
             vehicleModal.show();
+
+            try {
+                const response = await fetch(`/api/${vehicleId}`);
+                if (!response.ok) {
+                    throw new Error('Veículo não encontrado.');
+                }
+                const carro = await response.json();
+
+                // Popula o formulário (campos gerais)
+                document.getElementById('vehicleId').value = carro.id;
+                document.getElementById('formVehicleTitle').value = carro.titulo;
+                const priceInput = document.getElementById('formVehiclePrice');
+                priceInput.value = (carro.preco || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+                document.getElementById('formVehicleKm').value = carro.quilometragem;
+                document.getElementById('formVehicleYear').value = carro.ano;
+                document.getElementById('formVehicleBrand').value = carro.marca;
+                document.getElementById('formVehicleImage').value = carro.imageUrl;
+                document.getElementById('formVehicleImage2').value = carro.imageUrl1 || '';
+                document.getElementById('formVehicleImage3').value = carro.imageUrl2 || '';
+                document.getElementById('formVehicleImage4').value = carro.imageUrl3 || '';
+                document.getElementById('formVehicleShortDescription').value = carro.descricaoCurta;
+                document.getElementById('formVehicleLongDescription').value = carro.descricaoLonga;
+
+                // Seleciona a condição (novo/usado)
+                conditionChoices.setChoiceByValue(carro.tipo || 'Usados');
+
+                // Lógica robusta para Estado e Cidade
+                if (carro.localizacao && carro.localizacao.includes(',')) {
+                    const [cityName, stateNameOrAbbr] = carro.localizacao.split(',').map(item => item.trim());
+                    
+                    let stateAbbr = stateNameOrAbbr;
+
+                    // Se a string do estado tiver mais de 2 caracteres, é o nome completo.
+                    if (stateNameOrAbbr.length > 2) {
+                        // --- AQUI ESTÁ A CORREÇÃO FINAL ---
+                        // Usamos o nosso array 'allStatesData' que guardamos no início.
+                        const stateData = allStatesData.find(state => state.label === stateNameOrAbbr);
+                        
+                        if (stateData) {
+                            stateAbbr = stateData.value; // Encontramos a sigla! Ex: "SP"
+                        }
+                    }
+                    
+                    // Agora 'stateAbbr' com certeza contém a sigla/UF
+                    stateChoices.setChoiceByValue(stateAbbr);
+                    
+                    // Espera as cidades serem carregadas para o estado correto
+                    await fetchAndSetCities(stateAbbr);
+                    
+                    // Seleciona a cidade correta
+                    cityChoices.setChoiceByValue(cityName);
+                }
+
+            } catch (error) {
+                console.error("Erro ao buscar dados do veículo:", error);
+                alert('Não foi possível carregar os dados do veículo. Tente novamente.');
+                vehicleModal.hide();
+            }
         }
 
         // Ação de EXCLUIR
@@ -186,134 +221,183 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Confirmação de exclusão
-    document.getElementById('btn-confirm-delete').addEventListener('click', function() {
-        if (rowToDelete) {
-            rowToDelete.remove();
+    // Confirmação de exclusão (VERSÃO FINAL COM CHAMADA À API)
+    document.getElementById('btn-confirm-delete').addEventListener('click', async function() {
+        if (!rowToDelete) return; // Segurança: verifica se há uma linha para deletar
+
+        const vehicleId = rowToDelete.getAttribute('data-id');
+
+        try {
+            // Faz a chamada à API usando o método DELETE
+            const response = await fetch(`/api/${vehicleId}`, {
+                method: 'DELETE'
+            });
+
+            // Verifica se a resposta do servidor foi bem-sucedida (ex: 204 No Content)
+            if (response.ok) {
+                // Se a exclusão no backend deu certo, removemos a linha da tabela na tela
+                rowToDelete.remove();
+                console.log(`Veículo com ID ${vehicleId} excluído com sucesso.`);
+            } else {
+                // Se o servidor retornou um erro (ex: 404, 500), informamos o usuário
+                const errorData = await response.json().catch(() => ({})); // Tenta pegar detalhes do erro
+                throw new Error(errorData.message || `Falha ao excluir o veículo. Status: ${response.status}`);
+            }
+
+        } catch (error) {
+            console.error('Erro ao excluir veículo:', error);
+            alert('Não foi possível excluir o veículo. Tente novamente.');
+        
+        } finally {
+            // Independentemente de sucesso ou falha, fechamos o modal e limpamos a variável
             rowToDelete = null;
+            deleteConfirmModal.hide();
         }
-        deleteConfirmModal.hide();
     });
 
     // Lógica para SALVAR (Adicionar ou Editar)
-    vehicleForm.addEventListener('submit', function (event) {
+    // Lógica para SALVAR (Adicionar ou Editar) - VERSÃO COMPLETA COM API
+    vehicleForm.addEventListener('submit', async function (event) {
         event.preventDefault();
 
-        let isFormValid = true;
-
-        // --- Validação do Estado ---
-        // 1. A partir do <select>, sobe até o ancestral <div class="col-md-4">
-        const stateContainer = stateSelect.closest('.col-md-4');
-        // 2. A partir deste container, encontra o elemento .choices
-        const stateElement = stateContainer ? stateContainer.querySelector('.choices') : null;
-        
-        const stateValue = stateChoices.getValue(true);
-
-        if (!stateValue) {
-            isFormValid = false;
-            if (stateElement) {
-                stateElement.classList.add('is-invalid');
-            } else {
-                console.error("Não foi possível encontrar o elemento .choices para o seletor de ESTADO.");
-            }
-        } else {
-            if (stateElement) {
-                stateElement.classList.remove('is-invalid');
-            }
-        }
-
-        // --- Validação da Cidade  ---
-        const cityContainer = citySelect.closest('.col-md-4');
-        const cityElement = cityContainer ? cityContainer.querySelector('.choices') : null;
-
-        const cityValue = cityChoices.getValue(true);
-
-        if (!cityValue) {
-            isFormValid = false;
-            if (cityElement) {
-                cityElement.classList.add('is-invalid');
-            } else {
-                console.error("Não foi possível encontrar o elemento .choices para o seletor de CIDADE.");
-            }
-        } else {
-            if (cityElement) {
-                cityElement.classList.remove('is-invalid');
-            }
-        }
-
-        // Outras validações
-        function validateInput(input){
-            if (input.value.trim() === '') {
-                isFormValid = false;
-                input.classList.add('is-invalid');
-            } else {
-                input.classList.remove('is-invalid');
-            }
-        }
-        
-        const priceInput = document.getElementById('formVehiclePrice');
-        if (priceInput.value.trim() === '' || priceInput.value.trim() === '0,00') {
-            isFormValid = false;
-            priceInput.classList.add('is-invalid');
-        } else {
-            priceInput.classList.remove('is-invalid');
-        }
-
-        validateInput(document.getElementById('formVehicleTitle'));
-        validateInput(document.getElementById('formVehicleKm'));
-        validateInput(document.getElementById('formVehicleYear'));
-        validateInput(document.getElementById('formVehicleBrand'));
-        validateInput(document.getElementById('formVehicleImage'));
-        validateInput(document.getElementById('formVehicleShortDescription'));
-        validateInput(document.getElementById('formVehicleLongDescription'));
-
-        if (!isFormValid) {
+        // Reutiliza a sua lógica de validação
+        if (!validateForm()) { // Vamos criar essa função de validação
             return;
         }
         
+        // 1. Coleta os dados do formulário e cria um objeto
         const id = document.getElementById('vehicleId').value;
-        const title = document.getElementById('formVehicleTitle').value;
-        const price = `R$ ${document.getElementById('formVehiclePrice').value}`;
-        const km = formatKM(document.getElementById('formVehicleKm').value);
-        const year = document.getElementById('formVehicleYear').value;
-        const brand = document.getElementById('formVehicleBrand').value;
-        const selectedState = stateSelect.value;
-        const selectedCity = citySelect.value;
-        const location = selectedCity && selectedState ? `${selectedCity}, ${selectedState}` : '';
-        const imageUrl = document.getElementById('formVehicleImage').value;
+        const precoValue = document.getElementById('formVehiclePrice').value.replace(/\./g, '').replace(',', '.');
+        const kmValue = document.getElementById('formVehicleKm').value.replace(/\./g, '');
 
-        if (id) { // Se tem ID, está editando
-            const rowToUpdate = vehicleTableBody.querySelector(`tr[data-id="${id}"]`);
-            if (rowToUpdate) {
-                rowToUpdate.querySelector('.table-img-thumbnail').src = imageUrl;
-                rowToUpdate.querySelector('.vehicle-title').textContent = title;
-                rowToUpdate.querySelector('.vehicle-price').textContent = price;
-                rowToUpdate.querySelector('.vehicle-km').textContent = km;
-                rowToUpdate.querySelector('.vehicle-year').textContent = year;
-                rowToUpdate.querySelector('.vehicle-brand').textContent = brand;
-                rowToUpdate.querySelector('.vehicle-location').textContent = location;
+        const carroData = {
+            titulo: document.getElementById('formVehicleTitle').value,
+            preco: parseFloat(precoValue),
+            quilometragem: parseInt(kmValue, 10),
+            ano: parseInt(document.getElementById('formVehicleYear').value, 10),
+            marca: document.getElementById('formVehicleBrand').value,
+            localizacao: `${cityChoices.getValue(true)}, ${stateChoices.getValue(true)}`,
+            tipo: document.getElementById('formVehicleCondition').value,
+            imageUrl: document.getElementById('formVehicleImage').value,
+            imageUrl1: document.getElementById('formVehicleImage2').value || null,
+            imageUrl2: document.getElementById('formVehicleImage3').value || null,
+            imageUrl3: document.getElementById('formVehicleImage4').value || null,
+            descricaoCurta: document.getElementById('formVehicleShortDescription').value,
+            descricaoLonga: document.getElementById('formVehicleLongDescription').value,
+        };
+
+        // Define o método e a URL da API com base na existência de um ID
+        const method = id ? 'PUT' : 'POST';
+        const url = id ? `/api/${id}` : '/api';
+
+        try {
+            // 2. Envia os dados para a API
+            const response = await fetch(url, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(carroData) // Converte o objeto para uma string JSON
+            });
+
+            if (!response.ok) {
+                throw new Error('Falha ao salvar os dados do veículo.');
             }
-        } else { // Senão, está adicionando um novo
-            const newId = Date.now(); // ID simples para o exemplo
-            const newRow = `
-                <tr data-id="${newId}">
-                    <td><img src="${imageUrl}" alt="${title}" class="table-img-thumbnail"></td>
-                    <td class="vehicle-title">${title}</td>
-                    <td class="vehicle-price">${price}</td>
-                    <td class="vehicle-km">${km}</td>
-                    <td class="vehicle-year">${year}</td>
-                    <td class="vehicle-brand">${brand}</td>
-                    <td class="vehicle-location">${location}</td>
+
+            const savedCarro = await response.json(); // Pega a resposta do servidor
+
+            // 3. Atualiza a tabela na interface do usuário
+            upsertTableRow(savedCarro);
+
+            vehicleModal.hide(); // Fecha o modal com sucesso
+
+        } catch (error) {
+            console.error('Erro ao salvar:', error);
+            alert('Ocorreu um erro ao salvar. Verifique o console para mais detalhes.');
+        }
+    });
+
+    // FUNÇÃO HELPER PARA VALIDAR O FORMULÁRIO (Refatorando seu código original)
+    // FUNÇÃO HELPER PARA VALIDAR O FORMULÁRIO (VERSÃO CORRIGIDA E COMPLETA)
+    function validateForm() {
+        let isValid = true;
+        const inputsToValidate = [
+            'formVehicleTitle', 'formVehiclePrice', 'formVehicleKm', 'formVehicleYear', 
+            'formVehicleBrand', 'formVehicleImage', 'formVehicleShortDescription', 
+            'formVehicleLongDescription'
+        ];
+
+        // Valida os campos de texto e número normais
+        inputsToValidate.forEach(id => {
+            const input = document.getElementById(id);
+            if (!input.value.trim() || (input.id === 'formVehiclePrice' && input.value.trim() === '0,00')) {
+                input.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                input.classList.remove('is-invalid');
+            }
+        });
+
+        // Validação específica e correta para os seletores do Choices.js
+        // Incluímos stateChoices, cityChoices e conditionChoices no array
+        [stateChoices, cityChoices, conditionChoices].forEach(choiceInstance => {
+            // 'choiceInstance.containerOuter.element' é a forma correta de pegar o contêiner principal do Choices.js
+            const choicesElement = choiceInstance.containerOuter.element;
+
+            if (!choiceInstance.getValue(true)) {
+                // Adiciona a classe de erro ao contêiner visível
+                if (choicesElement) {
+                    choicesElement.classList.add('is-invalid');
+                }
+                isValid = false;
+            } else {
+                // Remove a classe de erro
+                if (choicesElement) {
+                    choicesElement.classList.remove('is-invalid');
+                }
+            }
+        });
+
+        return isValid;
+    }
+
+
+    // FUNÇÃO HELPER PARA CRIAR OU ATUALIZAR UMA LINHA DA TABELA
+    function upsertTableRow(carro) {
+        // Formata os dados para exibição
+        const precoFormatado = (carro.preco || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        const kmFormatado = (carro.quilometragem || 0).toLocaleString('pt-BR');
+
+        // Verifica se a linha já existe na tabela
+        let row = vehicleTableBody.querySelector(`tr[data-id="${carro.id}"]`);
+
+        if (row) { // Se a linha existe, atualiza as células (UPDATE)
+            row.querySelector('.table-img-thumbnail').src = carro.imageUrl;
+            row.querySelector('.table-img-thumbnail').alt = carro.titulo;
+            row.querySelector('.vehicle-title').textContent = carro.titulo;
+            row.querySelector('.vehicle-price').textContent = precoFormatado;
+            row.querySelector('.vehicle-km').textContent = kmFormatado;
+            row.querySelector('.vehicle-year').textContent = carro.ano;
+            row.querySelector('.vehicle-brand').textContent = carro.marca;
+            row.querySelector('.vehicle-location').textContent = carro.localizacao;
+        } else { // Se não existe, cria uma nova linha (CREATE)
+            const newRowHTML = `
+                <tr data-id="${carro.id}">
+                    <td><img src="${carro.imageUrl}" alt="${carro.titulo}" class="table-img-thumbnail"></td>
+                    <td class="vehicle-title">${carro.titulo}</td>
+                    <td class="vehicle-price">${precoFormatado}</td>
+                    <td class="vehicle-km">${kmFormatado}</td>
+                    <td class="vehicle-year">${carro.ano}</td>
+                    <td class="vehicle-brand">${carro.marca}</td>
+                    <td class="vehicle-location">${carro.localizacao}</td>
                     <td class="text-center">
                         <button class="btn btn-sm btn-primary btn-edit" title="Editar"><i class="bi bi-pencil-square"></i></button>
                         <button class="btn btn-sm btn-danger btn-delete" title="Excluir"><i class="bi bi-trash-fill"></i></button>
                     </td>
-                </tr>
-            `;
-            vehicleTableBody.insertAdjacentHTML('beforeend', newRow);
+                </tr>`;
+            vehicleTableBody.insertAdjacentHTML('beforeend', newRowHTML);
         }
-
-        vehicleModal.hide();
-    });
+    }
 });
 
 // Lógica para formatar o campo de Preço

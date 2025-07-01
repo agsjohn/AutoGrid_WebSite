@@ -15,6 +15,7 @@
 </head>
 
 <body>
+	<!-- TODO: adicionar logout -->
     <script src="/header/header.js"></script>
     <header>
         <div class="header">
@@ -89,47 +90,23 @@
 							<th scope="col" class="text-center">Ações</th>
 						</tr>
 					</thead>
-					<tbody id="vehicle-table-body">
-						<tr data-id="1">
-							<td><img src="https://placehold.co/150x100/444/fff?text=GT3+RS" alt="Porsche GT3 RS" class="table-img-thumbnail"></td>
-							<td class="vehicle-title">2019 Porsche Gt3 Rs</td>
-							<td class="vehicle-price">R$ 1.850.000</td>
-							<td class="vehicle-km">8.000</td>
-							<td class="vehicle-year">2019</td>
-							<td class="vehicle-brand">Porsche</td>
-							<td class="vehicle-location">São Paulo, SP</td>
+					<tbody id="vehicle-table-body" th:remove="all-but-first">
+						<tr th:each="carro : ${carros}" th:attr="data-id=${carro.id}">
+							<td>
+								<img th:src="${carro.imageUrl}" th:alt="${carro.titulo}" class="table-img-thumbnail">
+							</td>
+							<td class="vehicle-title" th:text="${carro.titulo}">Título do Veículo</td>
+							<td class="vehicle-price" th:text="${#numbers.formatCurrency(carro.preco)}">R$ 0,00</td>
+							<td class="vehicle-km" th:text="${#numbers.formatDecimal(carro.quilometragem, 0, 'POINT', 0, 'COMMA')}">0</td>
+							<td class="vehicle-year" th:text="${carro.ano}">2024</td>
+							<td class="vehicle-brand" th:text="${carro.marca}">Marca</td>
+							<td class="vehicle-location" th:text="${carro.localizacao}">Localização</td>
 							<td class="text-center">
 								<button class="btn btn-sm btn-primary btn-edit" title="Editar"><i class="bi bi-pencil-square"></i></button>
 								<button class="btn btn-sm btn-danger btn-delete" title="Excluir"><i class="bi bi-trash-fill"></i></button>
 							</td>
 						</tr>
-						<tr data-id="2">
-							<td><img src="https://placehold.co/150x100/444/fff?text=Ford+GT" alt="Ford GT" class="table-img-thumbnail"></td>
-							<td class="vehicle-title">2019 Ford GT MK II</td>
-							<td class="vehicle-price">R$ 6.500.000</td>
-							<td class="vehicle-km">1.500</td>
-							<td class="vehicle-year">2019</td>
-							<td class="vehicle-brand">Ford</td>
-							<td class="vehicle-location">São Paulo, SP</td>
-							<td class="text-center">
-								<button class="btn btn-sm btn-primary btn-edit" title="Editar"><i class="bi bi-pencil-square"></i></button>
-								<button class="btn btn-sm btn-danger btn-delete" title="Excluir"><i class="bi bi-trash-fill"></i></button>
-							</td>
-						</tr>
-						<tr data-id="3">
-							<td><img src="https://placehold.co/150x100/444/fff?text=Corvette" alt="Corvette ZR1" class="table-img-thumbnail"></td>
-							<td class="vehicle-title">2019 Chevrolet Corvette ZR1</td>
-							<td class="vehicle-price">R$ 1.600.000</td>
-							<td class="vehicle-km">12.000</td>
-							<td class="vehicle-year">2019</td>
-							<td class="vehicle-brand">Chevrolet</td>
-							<td class="vehicle-location">São Paulo, SP</td>
-							<td class="text-center">
-								<button class="btn btn-sm btn-primary btn-edit" title="Editar"><i class="bi bi-pencil-square"></i></button>
-								<button class="btn btn-sm btn-danger btn-delete" title="Excluir"><i class="bi bi-trash-fill"></i></button>
-							</td>
-						</tr>
-					</tbody>
+						</tbody>
 				</table>
 			</div>
 		</div>
