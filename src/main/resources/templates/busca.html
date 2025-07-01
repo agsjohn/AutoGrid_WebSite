@@ -18,7 +18,6 @@
 </head>
 
 <body>
-	<!-- TODO: marcas e localização automático -->
     <script src="/header/header.js"></script>
     <header>
         <div class="header">
@@ -90,10 +89,7 @@
 					<div class="filter-group">
 						<h5 class="filter-title">Localização</h5>
 						<select class="form-select bg-dark text-white" id="filtro-localizacao">
-							<option selected>Todos</option>
-							<option>Porto Alegre, Rio Grande do Sul</option>
-							<option>São Paulo, São Paulo</option>
-							<option>Rio de Janeiro, Rio de Janeiro</option>
+							<option value="Todos" selected>Todos</option>
 						</select>
 					</div>
 
@@ -117,30 +113,8 @@
 
 					<div class="filter-group">
 						<h5 class="filter-title">Marca</h5>
-						<div class="form-check">
-							<input class="form-check-input filtro-marca" type="checkbox" value="porsche" id="marca-porsche">
-							<label class="form-check-label" for="marca-porsche">Porsche</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input filtro-marca" type="checkbox" value="ford" id="marca-ford">
-							<label class="form-check-label" for="marca-ford">Ford</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input filtro-marca" type="checkbox" value="chevrolet" id="marca-chevrolet">
-							<label class="form-check-label" for="marca-chevrolet">Chevrolet</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input filtro-marca" type="checkbox" value="nissan" id="marca-nissan">
-							<label class="form-check-label" for="marca-nissan">Nissan</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input filtro-marca" type="checkbox" value="bmw" id="marca-bmw">
-							<label class="form-check-label" for="marca-bmw">BMW</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input filtro-marca" type="checkbox" value="toyota" id="marca-toyota">
-							<label class="form-check-label" for="marca-toyota">Toyota</label>
-						</div>
+						<div id="filtro-marcas-container">
+							</div>
 					</div>
 
 				</aside>
@@ -168,54 +142,7 @@
 					</div>
 
 					<div class="results-list">
-							<p>Buscando carros...</p>
-						<!-- <div class="product-card" data-marca="porsche" data-ano="2019" data-preco="1850000" data-localizacao="São Paulo - SP" data-estado="Novos">
-							<a href="produto.html" class="product-link">
-								<img src="https://placehold.co/250x180/444/fff?text=GT3+RS" alt="Porsche GT3 RS">
-								<div class="product-card-body">
-									<h5 class="product-title">2019 Porsche Gt3 Rs</h5>
-									<p class="product-price">R$ 1.850.000</p>
-									<p class="product-details">2019 | 8.000 km</p>
-									<p class="product-location">São Paulo, São Paulo</p>
-								</div>
-							</a>
-						</div>
-						<hr>
-						<div class="product-card" data-marca="ford" data-ano="2019" data-preco="6500000" data-localizacao="Porto Alegre - RS" data-estado="Novos">
-							<a href="produto.html" class="product-link">
-								<img src="https://placehold.co/250x180/444/fff?text=Ford+GT" alt="Ford GT MK II">
-								<div class="product-card-body">
-									<h5 class="product-title">2019 Ford GT MK II</h5>
-									<p class="product-price">R$ 6.500.000</p>
-									<p class="product-details">2019 | 1.500 km</p>
-									<p class="product-location">Porto Alegre, Rio Grande do Sul</p>
-								</div>
-							</a>
-						</div>
-						<hr>
-						<div class="product-card" data-marca="chevrolet" data-ano="2019" data-preco="1600000" data-localizacao="Porto Alegre - RS" data-estado="Usados">
-							<a href="produto.html" class="product-link">
-								<img src="https://placehold.co/250x180/444/fff?text=Corvette+ZR1" alt="Chevrolet Corvette ZR1">
-								<div class="product-card-body">
-									<h5 class="product-title">2019 Chevrolet Corvette ZR1</h5>
-									<p class="product-price">R$ 1.600.000</p>
-									<p class="product-details">2019 | 12.000 km</p>
-									<p class="product-location">Porto Alegre, Rio Grande do Sul</p>
-								</div>
-							</a>
-						</div>
-						<hr>
-						<div class="product-card" data-marca="nissan" data-ano="2020" data-preco="350000" data-localizacao="Rio de Janeiro - RJ" data-estado="Usados">
-							<a href="produto.html" class="product-link">
-								<img src="https://placehold.co/250x180/444/fff?text=370z" alt="Nissan 370z">
-								<div class="product-card-body">
-									<h5 class="product-title">Nissan 370z</h5>
-									<p class="product-price">R$ 350.000</p>
-									<p class="product-details">2020 | 25.000 km</p>
-									<p class="product-location">Rio de Janeiro, Rio de Janeiro</p>
-								</div>
-							</a>
-						</div> -->
+						<p>Buscando carros...</p>
 					</div>
 
 					<nav id="pagination-nav" aria-label="Page navigation" class="mt-4 d-flex justify-content-center">

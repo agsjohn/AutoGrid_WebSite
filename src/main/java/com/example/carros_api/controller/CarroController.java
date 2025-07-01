@@ -121,6 +121,19 @@ public class CarroController {
         return carros;
     }
 
+    @GetMapping("/api/marcas")
+    @ResponseBody
+    public List<String> getMarcas() {
+        return carroRepository.findDistinctMarcas();
+    }
+
+    @GetMapping("/api/localizacoes")
+    @ResponseBody
+    public List<String> getLocalizacoes() {
+        return carroRepository.findDistinctLocalizacoes();
+    }
+
+
     @GetMapping("/api/{id}")
     public ResponseEntity<Carro> getCarroById(@PathVariable Long id) {
         Optional<Carro> carroOptional = carroRepository.findById(id);

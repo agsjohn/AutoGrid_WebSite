@@ -159,9 +159,10 @@
 .choices[data-type*=select-one] .choices__input {
     display: block;
     width: 100%;
-    padding: 10px;
+    padding: 0.5rem 0.8rem;
     border-bottom: 1px solid #ddd;
-    background-color: #333 !important;
+    font-size: 1rem;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
     margin: 0;
 }
 
