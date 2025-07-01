@@ -160,16 +160,38 @@ document.addEventListener('DOMContentLoaded', () => {
      * Configura e renderiza os controles de paginação.
      */
     function setupPagination(totalItems, itemsPerPage, currentPage) {
-        // (Sua função setupPagination existente vai aqui - sem alterações)
-        paginationContainer.innerHTML = '';
+        paginationContainer.innerHTML = ''; 
         paginationNav.style.display = 'flex';
+
         const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+        // Se tiver 1 página ou menos, não mostra a paginação
         if (totalPages <= 1) {
             paginationNav.style.display = 'none';
             return;
         }
-        // ... (resto da lógica de paginação)
+
+        // Botão "Anterior"
+        let prevLi = `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                        <a class="page-link" href="#" data-page="${currentPage - 1}">Anterior</a>
+                      </li>`;
+        paginationContainer.insertAdjacentHTML('beforeend', prevLi);
+
+        // Botões de Página
+        for (let i = 1; i <= totalPages; i++) {
+            let pageLi = `<li class="page-item ${i === currentPage ? 'active' : ''}">
+                            <a class="page-link" href="#" data-page="${i}">${i}</a>
+                          </li>`;
+            paginationContainer.insertAdjacentHTML('beforeend', pageLi);
+        }
+
+        // Botão "Próximo"
+        let nextLi = `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                        <a class="page-link" href="#" data-page="${currentPage + 1}">Próximo</a>
+                      </li>`;
+        paginationContainer.insertAdjacentHTML('beforeend', nextLi);
     }
+
 
     /**
      * Função principal para buscar dados da API, filtrar, ordenar e renderizar.
