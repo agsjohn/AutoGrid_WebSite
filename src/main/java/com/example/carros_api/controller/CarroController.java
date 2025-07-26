@@ -90,18 +90,16 @@ public class CarroController {
                 predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("titulo")), "%" + titulo.toLowerCase() + "%"));
             }
             if (marca != null && !marca.isEmpty()) {
-                // Primeiro, garantimos que a coluna 'marca' no banco será comparada em minúsculas
+                // coluna 'marca' no banco será comparada em minúsculas
                 Expression<String> marcaEmMinusculas = criteriaBuilder.lower(root.get("marca"));
-                // Agora, a cláusula IN será usada com a coluna já em minúsculas.
-                // O frontend já envia os valores em minúsculas ('porsche', 'ford'), então não precisamos converter a lista aqui.
+                // cláusula IN será usada com a coluna já em minúsculas
+                // O frontend envia os valores em minúsculas
                 predicates.add(marcaEmMinusculas.in(marca));
             }
             if (localizacao != null && !localizacao.isEmpty()) {
                 predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("localizacao")), "%" + localizacao.toLowerCase() + "%"));
             }
             if (tipo != null && !tipo.isEmpty()) {
-                // A condição ("Novos", "Usados") provavelmente já corresponde exatamente no DB e no HTML,
-                // mas adicionar 'lower' aqui por segurança não faz mal.
                 Expression<String> tipoEmMinusculas = criteriaBuilder.lower(root.get("tipo"));
                 List<String> tiposMinusculos = tipo.stream().map(String::toLowerCase).toList();
                 predicates.add(tipoEmMinusculas.in(tiposMinusculos));
@@ -143,24 +141,27 @@ public class CarroController {
     }
 
     @PostMapping("/api")
-    public ResponseEntity<Carro> createCarro(@RequestBody Carro carro) {
-        // @RequestBody converte o JSON vindo no corpo da requisição para um objeto Carro
-        // O ID deve ser nulo para que o JPA entenda que é uma nova entidade
+    public ResponseEntity<Carro> createCarro(HttpSession session, @RequestBody Carro carro) {
+        if(session.getAttribute("loggedIn") == null || !(boolean) session.getAttribute("loggedIn")){
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
         carro.setId(null);
         Carro savedCarro = carroRepository.save(carro);
         carroService.SendMessageCarro(carro);
-        // Retorna o objeto salvo (agora com ID) e o status 201 Created
+
         return new ResponseEntity<>(savedCarro, HttpStatus.CREATED);
     }
 
     @PutMapping("/api/{id}")
-    public ResponseEntity<Carro> updateCarro(@PathVariable Long id, @RequestBody Carro carroDetails) {
+    public ResponseEntity<Carro> updateCarro(HttpSession session, @PathVariable Long id, @RequestBody Carro carroDetails) {
+        if(session.getAttribute("loggedIn") == null || !(boolean) session.getAttribute("loggedIn")){
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
         Optional<Carro> carroOptional = carroRepository.findById(id);
 
         if (carroOptional.isPresent()) {
             Carro existingCarro = carroOptional.get();
 
-            // Atualiza os campos do carro existente com os detalhes recebidos
             existingCarro.setTitulo(carroDetails.getTitulo());
             existingCarro.setMarca(carroDetails.getMarca());
             existingCarro.setAno(carroDetails.getAno());
@@ -183,18 +184,17 @@ public class CarroController {
     }
 
     @DeleteMapping("/api/{id}")
-    public ResponseEntity<Void> deleteCarro(@PathVariable Long id) {
-        // Primeiro, verificamos se o carro com este ID realmente existe.
+    public ResponseEntity<Void> deleteCarro(HttpSession session, @PathVariable Long id) {
+        if(session.getAttribute("loggedIn") == null || !(boolean) session.getAttribute("loggedIn")){
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
+
         if (!carroRepository.existsById(id)) {
-            // Se não existir, retornamos 404 Not Found.
             return ResponseEntity.notFound().build();
         }
 
-        // Se existir, chamamos o método para deletar pelo ID.
         carroRepository.deleteById(id);
 
-        // A convenção para uma operação DELETE bem-sucedida é retornar o status 204 No Content.
-        // Isso significa "A operação foi um sucesso e não há conteúdo para retornar".
         return ResponseEntity.noContent().build();
     }
 
