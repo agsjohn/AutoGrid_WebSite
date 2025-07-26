@@ -25,7 +25,6 @@ public class CarroController {
     @Autowired
     private CarroService carroService;
 
-    // --- Login simples para o Admin ---
     private static final String ADMIN_USERNAME = "admin";
     private static final String ADMIN_PASSWORD = "admin123";
 
@@ -85,7 +84,7 @@ public class CarroController {
             @RequestParam(required = false) Double precoMin,
             @RequestParam(required = false) Double precoMax
     ) {
-        List<Carro> carros = carroRepository.findAll((root, criteriaQuery, criteriaBuilder) -> {
+        return carroRepository.findAll((root, criteriaQuery, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
             if (titulo != null && !titulo.isEmpty()) {
                 predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("titulo")), "%" + titulo.toLowerCase() + "%"));
@@ -121,7 +120,6 @@ public class CarroController {
             }
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         });
-        return carros;
     }
 
     @GetMapping("/api/marcas")
@@ -141,14 +139,7 @@ public class CarroController {
     public ResponseEntity<Carro> getCarroById(@PathVariable Long id) {
         Optional<Carro> carroOptional = carroRepository.findById(id);
 
-        if (carroOptional.isPresent()) {
-            // Se o carro for encontrado, retorna o objeto Carro com status 200 OK.
-            // O Spring se encarrega de converter o objeto Carro para JSON.
-            return ResponseEntity.ok(carroOptional.get());
-        } else {
-            // Se não encontrar, retorna um status 404 Not Found.
-            return ResponseEntity.notFound().build();
-        }
+        return carroOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping("/api")
