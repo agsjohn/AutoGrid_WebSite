@@ -2,6 +2,7 @@ package com.example.carros_api.controller;
 
 import com.example.carros_api.model.Carro;
 import com.example.carros_api.repository.CarroRepository;
+import com.example.carros_api.service.CarroService;
 import jakarta.persistence.criteria.Expression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,9 @@ public class CarroController {
 
     @Autowired
     private CarroRepository carroRepository;
+
+    @Autowired
+    private CarroService carroService;
 
     // --- Login simples para o Admin ---
     private static final String ADMIN_USERNAME = "admin";
@@ -153,6 +157,7 @@ public class CarroController {
         // O ID deve ser nulo para que o JPA entenda que é uma nova entidade
         carro.setId(null);
         Carro savedCarro = carroRepository.save(carro);
+        carroService.SendMessageCarro(carro);
         // Retorna o objeto salvo (agora com ID) e o status 201 Created
         return new ResponseEntity<>(savedCarro, HttpStatus.CREATED);
     }
