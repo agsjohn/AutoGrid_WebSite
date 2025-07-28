@@ -15,5 +15,4 @@ public interface CarroRepository extends JpaRepository<Carro, Long>, JpaSpecific
 
     @Query("SELECT DISTINCT c.localizacao FROM Carro c ORDER BY c.localizacao ASC")
     List<String> findDistinctLocalizacoes();
-
 }

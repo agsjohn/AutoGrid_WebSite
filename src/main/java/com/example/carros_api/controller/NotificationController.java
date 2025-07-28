@@ -10,7 +10,6 @@ import org.springframework.web.util.HtmlUtils;
 @Controller
 public class NotificationController {
 
-
     @MessageMapping("/notification")
     @SendTo("/topic/newcar")
     public CarNotification carNotification(Carro carro) throws Exception {

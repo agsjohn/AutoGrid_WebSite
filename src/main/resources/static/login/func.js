@@ -11,10 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function executarLogin(form) {
-    // Pega os dados do formulário. 
     const formData = new FormData(form);
 
-    // Esconde a mensagem de erro antes de tentar o login novamente
     document.getElementById('invalidLogin').classList.add('d-none');
 
     try {
@@ -23,14 +21,15 @@ async function executarLogin(form) {
             body: new URLSearchParams(formData)
         });
 
-        if (response.redirected) {
-            window.location.href = response.url;
+        if (response.ok) {
+            window.location.href = '/painel';
         } else {
             document.getElementById('invalidLogin').classList.remove('d-none');
         }
     } catch (error) {
         console.error('Erro ao tentar fazer login:', error);
-        document.getElementById('invalidLogin').textContent = 'Erro de conexão. Tente novamente.';
-        document.getElementById('invalidLogin').classList.remove('d-none');
+        const invalidLoginEl = document.getElementById('invalidLogin');
+        invalidLoginEl.textContent = 'Erro de conexão. Tente novamente.';
+        invalidLoginEl.classList.remove('d-none');
     }
 }

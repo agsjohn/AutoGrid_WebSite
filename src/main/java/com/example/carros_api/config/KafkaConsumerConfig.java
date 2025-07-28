@@ -1,6 +1,5 @@
 package com.example.carros_api.config;
 
-
 import com.example.carros_api.model.Carro;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.beans.factory.annotation.Value;

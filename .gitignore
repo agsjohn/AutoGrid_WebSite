@@ -35,3 +35,8 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Arquivos de Configuração e Chaves Privadas ###
+application-dev.properties
+app.key
+app.pub

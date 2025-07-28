@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.stereotype.Controller;
-import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,46 +24,15 @@ public class CarroController {
     @Autowired
     private CarroService carroService;
 
-    private static final String ADMIN_USERNAME = "admin";
-    private static final String ADMIN_PASSWORD = "admin123";
-
+    // Rotas públicas
     @GetMapping
     public String index() {
         return "index";
     }
 
     @GetMapping("/login")
-    public String loginPage(HttpSession session) {
-        if (session.getAttribute("loggedIn") == null || !(boolean) session.getAttribute("loggedIn")) {
-            return "login";
-        } else {
-            return "redirect:/crud";
-        }
-    }
-
-    @PostMapping("/do-login")
-    public String doLogin(@RequestParam String username, @RequestParam String password, HttpSession session) {
-        if (ADMIN_USERNAME.equals(username) && ADMIN_PASSWORD.equals(password)) {
-            session.setAttribute("loggedIn", true);
-            return "redirect:/crud";
-        }
+    public String loginPage() {
         return "login";
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/login";
-    }
-
-    @GetMapping("/crud")
-    public String crudCarrosPage(HttpSession session, org.springframework.ui.Model model) {
-        if (session.getAttribute("loggedIn") == null || !(boolean) session.getAttribute("loggedIn")) {
-            return "redirect:/login";
-        }
-        List<Carro> carros = carroRepository.findAll();
-        model.addAttribute("carros", carros);
-        return "crud";
     }
 
     @GetMapping("/busca")
@@ -93,7 +61,7 @@ public class CarroController {
                 // coluna 'marca' no banco será comparada em minúsculas
                 Expression<String> marcaEmMinusculas = criteriaBuilder.lower(root.get("marca"));
                 // cláusula IN será usada com a coluna já em minúsculas
-                // O frontend envia os valores em minúsculas
+                // frontend envia os valores em minúsculas
                 predicates.add(marcaEmMinusculas.in(marca));
             }
             if (localizacao != null && !localizacao.isEmpty()) {
@@ -136,29 +104,32 @@ public class CarroController {
     @GetMapping("/api/{id}")
     public ResponseEntity<Carro> getCarroById(@PathVariable Long id) {
         Optional<Carro> carroOptional = carroRepository.findById(id);
-
         return carroOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/api")
-    public ResponseEntity<Carro> createCarro(HttpSession session, @RequestBody Carro carro) {
-        if(session.getAttribute("loggedIn") == null || !(boolean) session.getAttribute("loggedIn")){
-            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    @GetMapping("/produtos/{id}")
+    public String paginaProduto(@PathVariable Long id, org.springframework.ui.Model model) {
+        Carro carro = carroRepository.findById(id).orElse(null);
+        if (carro == null) {
+            return "redirect:/busca";
         }
+        model.addAttribute("carro", carro);
+        return "produto";
+    }
+
+
+    // Rotas protegidas
+    @PostMapping("/api/create")
+    public ResponseEntity<Carro> createCarro(@RequestBody Carro carro) {
         carro.setId(null);
         Carro savedCarro = carroRepository.save(carro);
         carroService.SendMessageCarro(carro);
-
         return new ResponseEntity<>(savedCarro, HttpStatus.CREATED);
     }
 
-    @PutMapping("/api/{id}")
-    public ResponseEntity<Carro> updateCarro(HttpSession session, @PathVariable Long id, @RequestBody Carro carroDetails) {
-        if(session.getAttribute("loggedIn") == null || !(boolean) session.getAttribute("loggedIn")){
-            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-        }
+    @PutMapping("/api/update/{id}")
+    public ResponseEntity<Carro> updateCarro(@PathVariable Long id, @RequestBody Carro carroDetails) {
         Optional<Carro> carroOptional = carroRepository.findById(id);
-
         if (carroOptional.isPresent()) {
             Carro existingCarro = carroOptional.get();
 
@@ -183,28 +154,19 @@ public class CarroController {
         }
     }
 
-    @DeleteMapping("/api/{id}")
-    public ResponseEntity<Void> deleteCarro(HttpSession session, @PathVariable Long id) {
-        if(session.getAttribute("loggedIn") == null || !(boolean) session.getAttribute("loggedIn")){
-            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-        }
-
+    @DeleteMapping("/api/delete/{id}")
+    public ResponseEntity<Void> deleteCarro(@PathVariable Long id) {
         if (!carroRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-
         carroRepository.deleteById(id);
-
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/produtos/{id}")
-    public String paginaProduto(@PathVariable Long id, org.springframework.ui.Model model) {
-        Carro carro = carroRepository.findById(id).orElse(null);
-        if (carro == null) {
-            return "redirect:/busca";
-        }
-        model.addAttribute("carro", carro);
-        return "produto";
+    @GetMapping("/painel")
+    public String crudCarrosPage(org.springframework.ui.Model model) {
+        List<Carro> carros = carroRepository.findAll();
+        model.addAttribute("carros", carros);
+        return "painel";
     }
 }

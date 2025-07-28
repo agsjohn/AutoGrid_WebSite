@@ -26,9 +26,9 @@
                     <img src="/images/X.png">
                 </li>
                 <li class="sidebar-login" onclick=hideSidebar()>
-                    <a th:href="@{/logout}">
-                        <img src="/images/logout.png">
-                    </a>
+					<a href="#" onclick="document.getElementById('logoutForm').submit(); return false;">
+						<img src="/images/logout.png">
+					</a>
                 </li>
             </div>
             <li onclick=hideSidebar()><a th:href="@{/#initial-images}"><h2>Início</h2></a></li>
@@ -47,7 +47,7 @@
             <a th:href="@{/#contact}" class="hideOnMobile"><h2>Contato</h2></a>
         </div>
         <div class="login">
-            <a th:href="@{/logout}" class="logoutIcon hideOnMobile"></a>
+			<a href="#" onclick="document.getElementById('logoutForm').submit(); return false;" class="logoutIcon hideOnMobile"></a>
         </div>
         <li class="menu-button" onclick=showSidebar()>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
@@ -247,12 +247,13 @@
 		</div>
 	</div>
 
+	<form id="logoutForm" th:action="@{/logout}" method="post" style="display: none;"></form>
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	<script src="crud/func.js"></script>
+	<script src="/crud/func.js"></script>
 </body>
 
 </html>
