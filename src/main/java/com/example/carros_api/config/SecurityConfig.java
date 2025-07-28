@@ -1,6 +1,6 @@
 package com.example.carros_api.config;
 
-import com.example.carros_api.service.UserDetailsServiceImpl;
+import com.example.carros_api.service.impl.UserDetailsServiceImpl;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;

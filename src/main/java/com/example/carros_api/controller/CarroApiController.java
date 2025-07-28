@@ -16,30 +16,14 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
-public class CarroController {
-
+public class CarroApiController {
     @Autowired
     private CarroRepository carroRepository;
-
     @Autowired
     private CarroService carroService;
 
+
     // Rotas públicas
-    @GetMapping
-    public String index() {
-        return "index";
-    }
-
-    @GetMapping("/login")
-    public String loginPage() {
-        return "login";
-    }
-
-    @GetMapping("/busca")
-    public String carregarPaginaBusca() {
-        return "busca";
-    }
-
     @GetMapping("/api/buscar")
     @ResponseBody
     public List<Carro> buscarCarros(
@@ -107,16 +91,6 @@ public class CarroController {
         return carroOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/produtos/{id}")
-    public String paginaProduto(@PathVariable Long id, org.springframework.ui.Model model) {
-        Carro carro = carroRepository.findById(id).orElse(null);
-        if (carro == null) {
-            return "redirect:/busca";
-        }
-        model.addAttribute("carro", carro);
-        return "produto";
-    }
-
 
     // Rotas protegidas
     @PostMapping("/api/create")
@@ -161,12 +135,5 @@ public class CarroController {
         }
         carroRepository.deleteById(id);
         return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/painel")
-    public String crudCarrosPage(org.springframework.ui.Model model) {
-        List<Carro> carros = carroRepository.findAll();
-        model.addAttribute("carros", carros);
-        return "painel";
     }
 }

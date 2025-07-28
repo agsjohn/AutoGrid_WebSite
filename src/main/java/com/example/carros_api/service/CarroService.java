@@ -2,6 +2,7 @@ package com.example.carros_api.service;
 
 import com.example.carros_api.model.CarNotification;
 import com.example.carros_api.model.Carro;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.TopicPartition;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -11,13 +12,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class CarroService {
 
-    private final KafkaTemplate<String, Carro> kafkaTemplateCarro;
-    private final SimpMessagingTemplate simpMessagingTemplate;
-
-    public CarroService(KafkaTemplate<String, Carro> kafkaTemplateCarro, SimpMessagingTemplate simpMessagingTemplate){
-        this.kafkaTemplateCarro = kafkaTemplateCarro;
-        this.simpMessagingTemplate = simpMessagingTemplate;
-    }
+    @Autowired
+    private KafkaTemplate<String, Carro> kafkaTemplateCarro;
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
 
     @SuppressWarnings("null")
     public void SendMessageCarro(Carro carro){

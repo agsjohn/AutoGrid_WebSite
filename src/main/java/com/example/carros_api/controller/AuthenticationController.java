@@ -4,6 +4,7 @@ import com.example.carros_api.model.User;
 import com.example.carros_api.service.AuthenticationService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,14 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthenticationController {
 
-    private final AuthenticationService authenticationService;
-    private final AuthenticationManager authenticationManager;
+    @Autowired
+    private AuthenticationService authenticationService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
     private final SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
 
-    public AuthenticationController(AuthenticationService authenticationService, AuthenticationManager authenticationManager) {
-        this.authenticationService = authenticationService;
-        this.authenticationManager = authenticationManager;
-    }
 
     @PostMapping("/authenticate")
     public ResponseEntity<String> authenticate(User userLogin, HttpServletRequest request, HttpServletResponse response) {

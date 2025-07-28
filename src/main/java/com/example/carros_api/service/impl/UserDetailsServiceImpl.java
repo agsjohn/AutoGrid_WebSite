@@ -1,4 +1,4 @@
-package com.example.carros_api.service;
+package com.example.carros_api.service.impl;
 
 import com.example.carros_api.model.UserAuthenticated;
 import com.example.carros_api.repository.UserRepository;

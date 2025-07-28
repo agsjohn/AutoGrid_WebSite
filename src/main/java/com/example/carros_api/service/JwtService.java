@@ -1,5 +1,6 @@
 package com.example.carros_api.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -11,11 +12,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class JwtService {
-    private final JwtEncoder encoder;
-
-    public JwtService(JwtEncoder encoder) {
-        this.encoder = encoder;
-    }
+    @Autowired
+    private JwtEncoder encoder;
 
     public String generateToken(Authentication authentication){
         Instant now = Instant.now();
