@@ -1,10 +1,7 @@
 package com.example.carros_api.config;
 
 import com.example.carros_api.service.impl.UserDetailsServiceImpl;
-import com.nimbusds.jose.jwk.JWKSet;
-import com.nimbusds.jose.jwk.RSAKey;
-import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
-import org.springframework.beans.factory.annotation.Value;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -15,56 +12,42 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    @Value("${jwt.public.key}")
-    private RSAPublicKey key;
-    @Value("${jwt.private.key}")
-    private RSAPrivateKey priv;
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/api/**", "/authenticate"))
+        http
                 .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/login", "/authenticate", "/error",
+                        .requestMatchers("/login", "/authenticate", "/error", "/api/v1/csrf-token",
                                 "/busca/**", "/header/**", "/html/**", "/images/**", "/login/**", "/notification/**", "/produto/**",
                                 "/", "/authenticate", "/busca", "/produtos/{id}", "/login",
-                                "/api/buscar", "/api/marcas", "/api/localizacoes","/ws-carros/**").permitAll()
+                                "/api/buscar", "/api/marcas", "/api/localizacoes", "/ws-carros/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/{id}").permitAll()
-                .anyRequest().authenticated()
-            )
-            .exceptionHandling(e -> e
-                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
-            )
-            .logout(logout -> logout
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout=true")
-                .permitAll()
-        );
+                        .anyRequest().authenticated()
+                )
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/painel", true)
+                        .failureHandler((request, response, exception) -> {
+                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                        })
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout=true")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                        .permitAll()
+                )
+                .exceptionHandling(e -> e
+                        .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+                );;
 
         return http.build();
-    }
-
-    @Bean
-    JwtDecoder jwtDecoder(){
-        return NimbusJwtDecoder.withPublicKey(key).build();
-    }
-
-    @Bean
-    JwtEncoder jwtEncoder(){
-        var jwk = new RSAKey.Builder(key).privateKey(priv).build();
-        var jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
-        return new NimbusJwtEncoder(jwks);
     }
 
     @Bean

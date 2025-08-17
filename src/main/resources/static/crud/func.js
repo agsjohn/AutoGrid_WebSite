@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     let allStatesData = [];
 
+    const token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+    const headerName = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
     const stateSelect = document.getElementById('formState');
     const citySelect = document.getElementById('formCity');
     const vehicleModal = new bootstrap.Modal(document.getElementById('vehicleModal'));
@@ -204,7 +207,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const vehicleId = rowToDelete.getAttribute('data-id');
 
         try {
-            const response = await fetch(`/api/delete/${vehicleId}`, { method: 'DELETE' });
+            const response = await fetch(`/api/delete/${vehicleId}`, {
+                method: 'DELETE',
+                headers: {
+                    [headerName]: token
+                }
+            });
 
             if (response.ok) {
                 rowToDelete.remove();
@@ -257,7 +265,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const response = await fetch(url, {
                 method: method,
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    [headerName]: token
                 },
                 body: JSON.stringify(carroData)
             });
