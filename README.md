@@ -16,55 +16,48 @@ O AutoGrid WebSite é uma aplicação web moderna e responsiva para a exibição
 ## 🚀 Tecnologias Utilizadas
 O projeto foi construído utilizando um conjunto de tecnologias modernas e eficientes:
 
-* Backend
-  * Java 17, Spring Boot 3, Spring Security, Spring Data JPA, WebSocket, Apache Kafka
-* Banco de Dados
-  * H2 Database (para ambiente de desenvolvimento)
-* Frontend
+* **Backend**
+  * Java 21, Spring Boot 3.5.3, Spring Security, Spring Data JPA, WebSocket, Apache Kafka
+* **Banco de Dados**
+  * H2 Database
+* **Frontend**
   * Thymeleaf, HTML5, CSS3, JavaScript
-* DevOps
+* **DevOps**
   * Docker & Docker Compose
-* Build
+* **Build**
   * Apacha Gradle
 
 ## ⚙️ Como Executar o Projeto Localmente
 Siga os passos abaixo para configurar e executar a aplicação em seu ambiente de desenvolvimento.
 
 ### Pré-requisitos
-* Java JDK 17 ou superior
-* Apache Maven 3.8 ou superior
+* Java JDK 21 ou superior
+* Apache Gradle 8.14.2 ou superior
 * Docker
 * Docker Compose
 
 ### Passos
-1. Clone o repositório:
+#### 1. Clone o repositório:
 
   ```bash
   git clone https://github.com/agsjohn/AutoGrid_WebSite.git
   cd AutoGrid_WebSite
   ```
 
-2. Execute a aplicação com o Maven Wrapper:
+#### 2. Executar a Aplicação
 
-  ```bash
-  gradlew run
-  ```
-  A aplicação estará disponível em http://localhost:8080.
+> [!NOTE]
+> Certifique-se de que o Docker está em execução.
 
-3. 🐳 Executando com Docker: 
-  Navegue até a raiz do projeto. 
-  Construa as imagens e inicie os contêineres: 
+Na raiz do projeto, execute o seguinte comando: 
 
-  ```bash
-  docker-compose up --build
-  ```
+```bash
+docker-compose up --build
+```
+Este comando irá construir as imagens necessárias e iniciar todos os serviços definidos no seu docker-compose.yml, incluindo o servidor do Kafka.
 
-  Este comando irá baixar as dependências, construir a imagem da aplicação e iniciar todos os serviços necessários (incluindo Kafka e Zookeeper).
+A aplicação estará disponível em http://localhost:8080.
 
-* Acesse a aplicação: 
-
-Página Inicial: http://localhost:8080
-Painel de Login: http://localhost:8080/login
 
 # 👨‍💻 Autor
 João Vitor M. - agsjohn
