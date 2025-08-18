@@ -25,12 +25,12 @@
         <ul class="sidebar">
             <div>
                 <li class="sidebar-close" onclick=hideSidebar()>
-                    <img src="/images/X.png">
+                    <img alt="Botão de fechar barra lateral" src="../static/images/X.png" th:src="@{/images/X.png}">
                 </li>
                 <li class="sidebar-login" onclick=hideSidebar()>
-					<a href="#" onclick="document.getElementById('logoutForm').submit(); return false;">
-						<img src="/images/logout.png">
-					</a>
+                    <a th:href="@{/painel}">
+                        <img alt="Botão de login na barra lateral" src="../static/images/user_icon.png" th:src="@{/images/user_icon.png}">
+                    </a>
                 </li>
             </div>
             <li onclick=hideSidebar()><a th:href="@{/#initial-images}"><h2>Início</h2></a></li>
@@ -238,7 +238,7 @@
 					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<p>Você tem certeza que deseja excluir o veículo <strong id="vehicle-to-delete-name"></strong>?</p>
+					<p>Você tem certeza que deseja excluir o veículo<strong id="vehicle-to-delete-name"></strong>?</p>
 					<p class="text-danger">Esta ação não pode ser desfeita.</p>
 				</div>
 				<div class="modal-footer">
