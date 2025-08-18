@@ -7,8 +7,6 @@ function showNotification(message, carId) {
     notificationElement.classList.add('notification-popup');
     notificationElement.href = `/produtos/${carId}`;
     notificationElement.textContent = message;
-    notificationElement.style.color = 'white';
-    notificationElement.style.textDecoration = 'none';
 
     if (!notificationContainer) {
         notificationContainer = document.createElement('div');
