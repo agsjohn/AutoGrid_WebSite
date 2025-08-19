@@ -1,8 +1,9 @@
-// A lógica principal do seu CRUD e dos seletores
 document.addEventListener('DOMContentLoaded', function () {
-    let allStatesData = []; // <--- ADICIONE ESTA LINHA
+    let allStatesData = [];
 
-    // Seletores e Instâncias
+    const token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+    const headerName = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
     const stateSelect = document.getElementById('formState');
     const citySelect = document.getElementById('formCity');
     const vehicleModal = new bootstrap.Modal(document.getElementById('vehicleModal'));
@@ -29,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
         },
     });
 
-    // 1. INICIALIZAR CHOICES.JS PARA O SELETOR DE ESTADOS
     const stateChoices = new Choices(stateSelect, {
         searchPlaceholderValue: 'Pesquise um estado...',
         noResultsText: 'Nenhum resultado encontrado',
@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function () {
         },
     });
 
-    // 2. INICIALIZAR CHOICES.JS PARA O SELETOR DE CIDADES
     const cityChoices = new Choices(citySelect, {
         searchPlaceholderValue: 'Pesquise uma cidade...',
         noResultsText: 'Nenhum resultado encontrado',
@@ -70,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
     cityChoices.disable();
     stateChoices.disable();
 
-    // 3. BUSCAR E POPULAR OS ESTADOS USANDO A API DO CHOICES.JS
     fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')
         .then(res => res.json())
         .then(states => {
@@ -90,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function () {
             stateChoices.setChoices([{ value: '', label: 'Erro ao carregar', disabled: true }], 'value', 'label', true);
         });
     
-    // Função para buscar cidades
     async function fetchAndSetCities(stateAbbreviation) {
         cityChoices.clearStore();
         if (!stateAbbreviation) {
@@ -114,15 +111,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // 4. OUVIR A MUDANÇA NO SELETOR DE ESTADOS
     stateSelect.addEventListener('change', (event) => {
         const selectedStateAbbr = event.detail.value;
         fetchAndSetCities(selectedStateAbbr);
     });
 
 
-    // --- Lógica do CRUD ---
-    // Abrir modal de ADIÇÃO
+    // CRUD
     document.getElementById('btn-add-vehicle').addEventListener('click', function () {
         vehicleForm.reset();
         document.getElementById('vehicleId').value = '';
@@ -135,17 +130,14 @@ document.addEventListener('DOMContentLoaded', function () {
         vehicleModal.show();
     });
 
-    // Delegação de evento para botões de EDITAR e EXCLUIR
     vehicleTableBody.addEventListener('click', async function(event) {
         const target = event.target.closest('button');
         if (!target) return;
 
         const row = target.closest('tr');
         const vehicleId = row.getAttribute('data-id');
-        
+
         // Ação de EDITAR
-        // Ação de EDITAR (VERSÃO FINAL CORRIGIDA)
-        // Ação de EDITAR (VERSÃO FINAL CORRIGIDA E GARANTIDA)
         if (target.classList.contains('btn-edit')) {
             vehicleModalLabel.textContent = 'Editar Veículo';
             vehicleForm.reset();
@@ -159,7 +151,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 const carro = await response.json();
 
-                // Popula o formulário (campos gerais)
                 document.getElementById('vehicleId').value = carro.id;
                 document.getElementById('formVehicleTitle').value = carro.titulo;
                 const priceInput = document.getElementById('formVehiclePrice');
@@ -174,33 +165,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('formVehicleShortDescription').value = carro.descricaoCurta;
                 document.getElementById('formVehicleLongDescription').value = carro.descricaoLonga;
 
-                // Seleciona a condição (novo/usado)
                 conditionChoices.setChoiceByValue(carro.tipo || 'Usados');
 
-                // Lógica robusta para Estado e Cidade
                 if (carro.localizacao && carro.localizacao.includes(',')) {
                     const [cityName, stateNameOrAbbr] = carro.localizacao.split(',').map(item => item.trim());
                     
                     let stateAbbr = stateNameOrAbbr;
 
-                    // Se a string do estado tiver mais de 2 caracteres, é o nome completo.
+                    // Se a string do estado tiver mais de 2 caracteres é o nome completo
                     if (stateNameOrAbbr.length > 2) {
-                        // --- AQUI ESTÁ A CORREÇÃO FINAL ---
-                        // Usamos o nosso array 'allStatesData' que guardamos no início.
                         const stateData = allStatesData.find(state => state.label === stateNameOrAbbr);
                         
                         if (stateData) {
-                            stateAbbr = stateData.value; // Encontramos a sigla! Ex: "SP"
+                            stateAbbr = stateData.value;
                         }
                     }
                     
-                    // Agora 'stateAbbr' com certeza contém a sigla/UF
                     stateChoices.setChoiceByValue(stateAbbr);
-                    
-                    // Espera as cidades serem carregadas para o estado correto
                     await fetchAndSetCities(stateAbbr);
-                    
-                    // Seleciona a cidade correta
                     cityChoices.setChoiceByValue(cityName);
                 }
 
@@ -211,7 +193,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // Ação de EXCLUIR
         if (target.classList.contains('btn-delete')) {
             rowToDelete = row;
             const vehicleName = row.querySelector('.vehicle-title').textContent;
@@ -221,51 +202,42 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Confirmação de exclusão
-    // Confirmação de exclusão (VERSÃO FINAL COM CHAMADA À API)
     document.getElementById('btn-confirm-delete').addEventListener('click', async function() {
-        if (!rowToDelete) return; // Segurança: verifica se há uma linha para deletar
-
+        if (!rowToDelete) return;
         const vehicleId = rowToDelete.getAttribute('data-id');
 
         try {
-            // Faz a chamada à API usando o método DELETE
-            const response = await fetch(`/api/${vehicleId}`, {
-                method: 'DELETE'
+            const response = await fetch(`/api/delete/${vehicleId}`, {
+                method: 'DELETE',
+                headers: {
+                    [headerName]: token
+                }
             });
 
-            // Verifica se a resposta do servidor foi bem-sucedida (ex: 204 No Content)
             if (response.ok) {
-                // Se a exclusão no backend deu certo, removemos a linha da tabela na tela
                 rowToDelete.remove();
                 console.log(`Veículo com ID ${vehicleId} excluído com sucesso.`);
             } else {
-                // Se o servidor retornou um erro (ex: 404, 500), informamos o usuário
-                const errorData = await response.json().catch(() => ({})); // Tenta pegar detalhes do erro
+                const errorData = await response.json().catch(() => ({}));
                 throw new Error(errorData.message || `Falha ao excluir o veículo. Status: ${response.status}`);
             }
-
         } catch (error) {
             console.error('Erro ao excluir veículo:', error);
             alert('Não foi possível excluir o veículo. Tente novamente.');
-        
         } finally {
-            // Independentemente de sucesso ou falha, fechamos o modal e limpamos a variável
             rowToDelete = null;
             deleteConfirmModal.hide();
         }
     });
 
     // Lógica para SALVAR (Adicionar ou Editar)
-    // Lógica para SALVAR (Adicionar ou Editar) - VERSÃO COMPLETA COM API
     vehicleForm.addEventListener('submit', async function (event) {
         event.preventDefault();
 
-        // Reutiliza a sua lógica de validação
-        if (!validateForm()) { // Vamos criar essa função de validação
+        if (!validateForm()) {
             return;
         }
-        
-        // 1. Coleta os dados do formulário e cria um objeto
+
         const id = document.getElementById('vehicleId').value;
         const precoValue = document.getElementById('formVehiclePrice').value.replace(/\./g, '').replace(',', '.');
         const kmValue = document.getElementById('formVehicleKm').value.replace(/\./g, '');
@@ -286,39 +258,36 @@ document.addEventListener('DOMContentLoaded', function () {
             descricaoLonga: document.getElementById('formVehicleLongDescription').value,
         };
 
-        // Define o método e a URL da API com base na existência de um ID
         const method = id ? 'PUT' : 'POST';
-        const url = id ? `/api/${id}` : '/api';
+        const url = id ? `/api/update/${id}` : '/api/create';
 
         try {
-            // 2. Envia os dados para a API
             const response = await fetch(url, {
                 method: method,
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    [headerName]: token
                 },
-                body: JSON.stringify(carroData) // Converte o objeto para uma string JSON
+                body: JSON.stringify(carroData)
             });
 
             if (!response.ok) {
-                throw new Error('Falha ao salvar os dados do veículo.');
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.message || `Falha ao salvar. Status: ${response.status}`);
             }
 
-            const savedCarro = await response.json(); // Pega a resposta do servidor
+            const savedCarro = await response.json();
 
-            // 3. Atualiza a tabela na interface do usuário
             upsertTableRow(savedCarro);
 
-            vehicleModal.hide(); // Fecha o modal com sucesso
+            vehicleModal.hide();
 
         } catch (error) {
             console.error('Erro ao salvar:', error);
-            alert('Ocorreu um erro ao salvar. Verifique o console para mais detalhes.');
+            alert('Ocorreu um erro ao salvar: ' + error.message);
         }
     });
 
-    // FUNÇÃO HELPER PARA VALIDAR O FORMULÁRIO (Refatorando seu código original)
-    // FUNÇÃO HELPER PARA VALIDAR O FORMULÁRIO (VERSÃO CORRIGIDA E COMPLETA)
     function validateForm() {
         let isValid = true;
         const inputsToValidate = [
@@ -327,7 +296,6 @@ document.addEventListener('DOMContentLoaded', function () {
             'formVehicleLongDescription'
         ];
 
-        // Valida os campos de texto e número normais
         inputsToValidate.forEach(id => {
             const input = document.getElementById(id);
             if (!input.value.trim() || (input.id === 'formVehiclePrice' && input.value.trim() === '0,00')) {
@@ -338,20 +306,15 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Validação específica e correta para os seletores do Choices.js
-        // Incluímos stateChoices, cityChoices e conditionChoices no array
         [stateChoices, cityChoices, conditionChoices].forEach(choiceInstance => {
-            // 'choiceInstance.containerOuter.element' é a forma correta de pegar o contêiner principal do Choices.js
             const choicesElement = choiceInstance.containerOuter.element;
 
             if (!choiceInstance.getValue(true)) {
-                // Adiciona a classe de erro ao contêiner visível
                 if (choicesElement) {
                     choicesElement.classList.add('is-invalid');
                 }
                 isValid = false;
             } else {
-                // Remove a classe de erro
                 if (choicesElement) {
                     choicesElement.classList.remove('is-invalid');
                 }
@@ -362,16 +325,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    // FUNÇÃO HELPER PARA CRIAR OU ATUALIZAR UMA LINHA DA TABELA
     function upsertTableRow(carro) {
-        // Formata os dados para exibição
         const precoFormatado = (carro.preco || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         const kmFormatado = (carro.quilometragem || 0).toLocaleString('pt-BR');
 
-        // Verifica se a linha já existe na tabela
         let row = vehicleTableBody.querySelector(`tr[data-id="${carro.id}"]`);
 
-        if (row) { // Se a linha existe, atualiza as células (UPDATE)
+        if (row) {
             row.querySelector('.table-img-thumbnail').src = carro.imageUrl;
             row.querySelector('.table-img-thumbnail').alt = carro.titulo;
             row.querySelector('.vehicle-title').textContent = carro.titulo;
@@ -380,7 +340,7 @@ document.addEventListener('DOMContentLoaded', function () {
             row.querySelector('.vehicle-year').textContent = carro.ano;
             row.querySelector('.vehicle-brand').textContent = carro.marca;
             row.querySelector('.vehicle-location').textContent = carro.localizacao;
-        } else { // Se não existe, cria uma nova linha (CREATE)
+        } else {
             const newRowHTML = `
                 <tr data-id="${carro.id}">
                     <td><img src="${carro.imageUrl}" alt="${carro.titulo}" class="table-img-thumbnail"></td>

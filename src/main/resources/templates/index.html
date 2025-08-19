@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -12,12 +12,17 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link href="/header/header.css" rel="stylesheet">
-    <link href="/html/styles.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script th:src="@{/notification/notification.js}"></script>
+    <link href="../static/header/header.css" th:href="@{/header/header.css}" rel="stylesheet">
+    <link href="../static/html/styles.css" th:href="@{/html/styles.css}" rel="stylesheet">
+    <link href="../static/notification/styles.css" th:href="@{/notification/styles.css}" rel="stylesheet">
+    <script src="http://localhost:35729/livereload.js"></script>
 </head>
 
 <body>
-    <script src="/header/header.js"></script>
+    <script src="../static/header/header.js" th:src="@{/header/header.js}"></script>
     <header>
         <div class="header">
             <h1>AutoGrid</h1>
@@ -25,11 +30,11 @@
         <ul class="sidebar">
             <div>
                 <li class="sidebar-close" onclick=hideSidebar()>
-                    <img src="/images/X.png">
+                    <img alt="Botão de fechar barra lateral" src="../static/images/X.png" th:src="@{/images/X.png}">
                 </li>
                 <li class="sidebar-login" onclick=hideSidebar()>
-                    <a th:href="@{/login}">
-                        <img src="/images/user_icon.png">
+                    <a th:href="@{/painel}">
+                        <img alt="Botão de login na barra lateral" src="../static/images/user_icon.png" th:src="@{/images/user_icon.png}">
                     </a>
                 </li>
             </div>
@@ -49,7 +54,7 @@
             <a th:href="@{/#contact}" class="hideOnMobile"><h2>Contato</h2></a>
         </div>
         <div class="login">
-            <a th:href="@{/login}" class="loginIcon hideOnMobile"></a>
+            <a th:href="@{/painel}" class="loginIcon hideOnMobile"></a>
         </div>
         <li class="menu-button" onclick=showSidebar()>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
@@ -64,49 +69,22 @@
     </section>
 
     <section id="destaque">
-        <div class=" slideshow">
+        <div class="slideshow">
             <div class="offset-1 col-10">
                 <div class="slideshow-container">
-                    <a th:href="@{/produtos/2}" class="mySlides">
-                        <div class="numbertext">1 / 4</div>
-                        <img src="/images/31.jpg" id="img-slide">
+                    <a th:each="veiculo, iterStat : ${recentes}" th:href="@{/produtos/{id}(id=${veiculo.id})}" class="mySlides">
+                        <div class="numbertext" th:text="${iterStat.count} + ' / ' + ${iterStat.size}">1 / 4</div>
+                        <img th:alt="'Imagem do veículo ' + ${veiculo.getTitulo()}" th:src="@{${veiculo.getImageUrl()}}">
                         <div class="image-text">
-                            <h2>2019 Ford GT MK II</h2>
-                            <p>Uma máquina de corrida sem concessões, nascida para dominar as pistas com sua aerodinâmica extrema e performance brutal, levando a lenda do GT a um novo patamar de exclusividade e velocidade.</p>
-                        </div>
-                    </a>
-                    <a th:href="@{/produtos/1}" class="mySlides">
-                        <div class="numbertext">2 / 4</div>
-                        <img src="/images/32.jpg" id="img-slide">
-                        <div class="image-text">
-                            <h2>2019 Porsche Gt3 Rs</h2>
-                            <p>Um bólido focado nas pistas, que combina uma engenharia de precisão alemã com desempenho arrebatador, oferecendo uma experiência de condução visceral e emocionante para os puristas.</p>
-                        </div>
-                    </a>
-                    <a th:href="@{/produtos/4}" class="mySlides">
-                        <div class="numbertext">3 / 4</div>
-                        <img src="/images/33.jpg" id="img-slide">
-                        <div class="image-text">
-                            <h2>Nissan 370z</h2>
-                            <p>Um coupé esportivo que oferece uma experiência de condução divertida e envolvente, com um motor V6 potente e um design clássico de carro esportivo japonês.</p>
-                        </div>
-                    </a>
-                    <a th:href="@{/produtos/3}" class="mySlides">
-                        <div class="numbertext">4 / 4</div>
-                        <img src="/images/34.jpg" id="img-slide">
-                        <div class="image-text">
-                            <h2>2019 Chevrolet Corvette ZR1</h2>
-                            <p>Um supercarro americano brutal, com um motor supercharged de 755 cavalos de potência e aerodinâmica agressiva, feito para dominar tanto as ruas quanto as pistas.</p>
+                            <h2 th:text="${veiculo.ano} + ' ' + ${veiculo.getTitulo()}">2019 Ford GT MK II</h2>
+                            <p th:text="${veiculo.descricaoCurta}">Descrição do veículo...</p>
                         </div>
                     </a>
                     <a class="voltar" onclick="plusSlides(-1)">❮</a>
                     <a class="proximo" onclick="plusSlides(1)">❯</a>
                 </div>
                 <div style="text-align:center">
-                    <span class="dot" onclick="currentSlide(1)"></span>
-                    <span class="dot" onclick="currentSlide(2)"></span>
-                    <span class="dot" onclick="currentSlide(3)"></span>
-                    <span class="dot" onclick="currentSlide(4)"></span>
+                    <span th:each="veiculo, iterStat : ${recentes}" class="dot" th:attr="onclick='currentSlide(' + ${iterStat.count} + ')'"></span>
                 </div>
             </div>
         </div>
@@ -116,51 +94,38 @@
         <div class="title">
             <h2>Produtos em Destaque</h2>
         </div>
-        <div class="date">
-            <h1>2023</h1>
-        </div>
-        <div class="row">
-            <div class="offset-1 col-10 fill">
-                <img src="/images/7.jpg" class="sub-img2">
-                <img src="/images/23.jpg" class="sub-img2">
-                <img src="/images/9.jpg" class="sub-img2">
-                <img src="/images/10.jpg" class="sub-img2">
-                <img src="/images/11.jpg" class="sub-img1">
-            </div>
-        </div>
-        <div class="row">
-            <div class="offset-1 col-10 fill">
-                <img src="/images/12.jpg" class="sub-img2">
-                <img src="/images/13.png" class="sub-img2">
-                <img src="/images/14.jpg" class="sub-img2">
-                <img src="/images/15.jpg" class="sub-img2">
-                <img src="/images/16.jpg" class="sub-img1">
-            </div>
-        </div>
-        <span id="morePort">
-            <div class="date">
-                <h1>2024</h1>
-            </div>
-            <div class="row">
-                <div class="offset-1 col-10 fill">
-                    <img src="/images/17.jpg" class="sub-img2">
-                    <img src="/images/18.jpg" class="sub-img2">
-                    <img src="/images/19.jpg" class="sub-img2">
-                    <img src="/images/20.jpg" class="sub-img2">
-                    <img src="/images/21.jpg" class="sub-img1">
+
+        <th:block th:each="anoProdutos, iterStat : ${veiculosPorAno}">
+
+            <div th:if="${iterStat.index == 0}">
+                <div class="date">
+                    <h1 th:text="${anoProdutos.key}">2025</h1>
+                </div>
+                <div class="row">
+                    <div class="offset-1 col-10 fill">
+                        <a th:each="veiculo : ${anoProdutos.value}" th:href="@{/produtos/{id}(id=${veiculo.getId()})}">
+                            <img th:alt="'Imagem do veículo ' + ${veiculo.getTitulo()}" th:src="@{${veiculo.getImageUrl()}}" class="sub-img2">
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="offset-1 col-10 fill">
-                    <img src="/images/22.jpg" class="sub-img2">
-                    <img src="/images/8.jpg" class="sub-img2">
-                    <img src="/images/24.jpg" class="sub-img2">
-                    <img src="/images/25.jpg" class="sub-img2">
-                    <img src="/images/26.jpg" class="sub-img1">
+        </th:block>
+        <span id="morePort" style="display: none;">
+            <th:block th:each="anoProdutos, iterStat : ${veiculosPorAno}">
+                <div th:if="${iterStat.index > 0 and iterStat.index < 5 and anoProdutos.value.size() >= 4}">
+                    <div class="date">
+                        <h1 th:text="${anoProdutos.key}">ANO</h1>
+                    </div>
+                    <div class="row">
+                        <div class="offset-1 col-10 fill">
+                            <a th:each="veiculo : ${anoProdutos.value}" th:href="@{/produtos/{id}(id=${veiculo.getId()})}">
+                                 <img th:alt="'Imagem do veículo ' + ${veiculo.getTitulo()}" th:src="@{${veiculo.getImageUrl()}}" class="sub-img2">
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </span>
-        <div class="ver-mais invert" onclick="VerMais()">
+            </th:block>
+        </span> <div class="ver-mais invert" onclick="VerMais()">
             <i class="bi bi-arrow-down-circle" id="downPort"></i>
             <i class="bi bi-arrow-up-circle" id="upPort"></i>
             <h1 id="btnVerMais">VER MAIS</h1>
@@ -168,21 +133,20 @@
     </section>
 
     <section id="car-brands">
-            <h2>Marcas</h2>
-            <p>As marcas de carro são muito mais do que apenas um logotipo 
-                ou um nome bonito estampado na frente de um veículo. Elas 
-                representam a identidade de uma empresa, um conjunto de 
-                valores, uma história e, acima de tudo, uma promessa ao 
-                consumidor. Cada marca carrega consigo uma reputação 
-                construída ao longo de décadas, influenciando diretamente a 
-                percepção de qualidade, confiabilidade, desempenho e até 
-                mesmo o status social.
-            </p>
-        </div>
+        <h2>Marcas</h2>
+        <p>As marcas de carro são muito mais do que apenas um logotipo
+            ou um nome bonito estampado na frente de um veículo. Elas
+            representam a identidade de uma empresa, um conjunto de
+            valores, uma história e, acima de tudo, uma promessa ao
+            consumidor. Cada marca carrega consigo uma reputação
+            construída ao longo de décadas, influenciando diretamente a
+            percepção de qualidade, confiabilidade, desempenho e até
+            mesma posição social.
+        </p>
 
         <div class="brands">
             <a href="busca" class="brand-img">
-                <img src="/images/Toyota.png">
+                <img alt="Imagem de carro da Toyota" src="../static/images/Toyota.png" th:src="@{/images/Toyota.png}">
             </a>
             <div class="brand-align">
                 <div class="car-brand-text-left">
@@ -221,12 +185,12 @@
                 </div>
             </div>
             <a href="busca" class="brand-img">
-                <img src="/images/MercedesBenz.png">
+                <img alt="Imagem de carro da Mercedes Benz" src="../static/images/MercedesBenz.png" th:src="@{/images/MercedesBenz.png}">
             </a>
         </div>
         <div class="brands">
             <a href="busca" class="brand-img">
-                <img src="/images/BMW.jpg">
+                <img alt="Imagem de carro da BWM" src="../static/images/BMW.jpg" th:src="@{/images/BMW.jpg}">
             </a>
             <div class="brand-align">
                 <div class="car-brand-text-left">
@@ -237,7 +201,7 @@
                         uma experiência envolvente que combina desempenho 
                         esportivo com um design elegante e tecnologias avançadas. 
                         Desde seus sedãs executivos da Série 3 e 5 até seus SUVs 
-                        (SAVs, como a BMW os chama) e modelos de alta performance 
+                        (SAVs, como a BMW os chama) e modelos de alto desempenho
                         da divisão M, a BMW atrai motoristas que valorizam a 
                         conexão com a estrada e uma direção mais esportiva. 
                     </p>
@@ -263,12 +227,12 @@
                 </div>
             </div>
             <a href="busca" class="brand-img">
-                <img src="/images/Volkswagen.png">
+                <img alt="Imagem de carro da Volkswagen" src="../static/images/Volkswagen.png" th:src="@{/images/Volkswagen.png}">
             </a>
         </div>
         <div class="brands">
             <a href="busca" class="brand-img">
-                <img src="/images/Honda.jpg">
+                <img alt="Imagem de carro da Honda" src="../static/images/Honda.jpg" th:src="@{/images/Honda.jpg}">
             </a>
             <div class="brand-align">
                 <div class="car-brand-text-left">
@@ -278,7 +242,7 @@
                         especialmente reconhecida pela excelência de seus 
                         motores. A marca vai além dos automóveis, sendo líder 
                         também em motocicletas e equipamentos de força, o que 
-                        demonstra sua vasta expertise em engenharia mecânica. 
+                        demonstra sua vasta experiência em engenharia mecânica.
                         No universo automotivo, modelos como o Civic e o HR-V 
                         são exemplos de como a Honda combina desempenho 
                         equilibrado, durabilidade e uma condução agradável, 
@@ -296,13 +260,11 @@
         <h1 id="btnVerMaisTestemunho">VER MAIS</h1>
     </div>
 
-    
-
     <section id="contact">
         <h2>Contato</h2>
         <form id="form">
             <label for="Name" class="form-label">Nome*</label>
-            <input type="text" class="form-control" required>
+            <input type="text" id="Name" class="form-control" required>
             <label for="exampleInputEmail1" class="form-label">Endereço de email*</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                 required>
@@ -310,13 +272,14 @@
                 e-mail com mais
                 ninguém.
             </div>
-            <label for="Message" class="form-label">Mensagem</label>
+            <label for="exampleFormControlTextarea1" class="form-label">Mensagem</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
             <button type="submit" class="btn btn-outline-secondary" style="color: white;"
                 onclick="Confirmar()">Submit</button>
         </form>
         <p id="resposta"></p>
     </section>
-    <script src="/html/func.js"></script>
+
+    <script src="../static/html/func.js" th:src="@{/html/func.js}"></script>
 </body>
 </html>

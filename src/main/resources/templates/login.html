@@ -14,6 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="/login/styles.css" rel="stylesheet">
     <link href="/header/header.css" rel="stylesheet">
+    <script src="http://localhost:35729/livereload.js"></script>
 </head>
 
 <body>
@@ -25,11 +26,11 @@
         <ul class="sidebar">
             <div>
                 <li class="sidebar-close" onclick=hideSidebar()>
-                    <img src="/images/X.png">
+                    <img alt="Botão de fechar barra lateral" src="../static/images/X.png" th:src="@{/images/X.png}">
                 </li>
                 <li class="sidebar-login" onclick=hideSidebar()>
-                    <a th:href="@{/login}">
-                        <img src="/images/user_icon.png">
+                    <a th:href="@{/painel}">
+                        <img alt="Botão de login na barra lateral" src="../static/images/user_icon.png" th:src="@{/images/user_icon.png}">
                     </a>
                 </li>
             </div>
@@ -49,7 +50,7 @@
             <a th:href="@{/#contact}" class="hideOnMobile"><h2>Contato</h2></a>
         </div>
         <div class="login">
-            <a th:href="@{/login}" class="loginIcon hideOnMobile"></a>
+            <a th:href="@{/painel}" class="loginIcon hideOnMobile"></a>
         </div>
         <li class="menu-button" onclick=showSidebar()>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
@@ -61,7 +62,8 @@
     <main id="login-section">
         <div class="login-container">
             <h2>Acesse sua Conta</h2>
-            <form id="login-form" method="POST" action="/do-login">
+            <form id="login-form" action="/login" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 <div class="mb-4">
                     <label for="loginUser" class="form-label">Login de Usuário</label>
                     <input type="text" class="form-control" id="loginUser" name="username" required>
@@ -87,7 +89,6 @@
             </div> -->
         </div>
     </main>
-
     <script src="/login/func.js"></script>
 </body>
 

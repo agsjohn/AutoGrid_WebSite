@@ -120,7 +120,7 @@ header svg{
 }
 
 .loginIcon{
-    background-image: url("/images/user_icon.png");
+    background-image: url("../images/user_icon.png");
     background-repeat: no-repeat;
     background-size: contain;
     filter: invert();
@@ -137,7 +137,7 @@ header svg{
 }
 
 .logoutIcon{
-    background-image: url("/images/logout.png");
+    background-image: url("../images/logout.png");
     background-repeat: no-repeat;
     background-size: contain;
     filter: invert();

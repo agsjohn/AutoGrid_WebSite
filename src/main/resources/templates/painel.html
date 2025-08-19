@@ -5,6 +5,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Gerenciamento - AutoGrid</title>
+	<meta name="_csrf" th:content="${_csrf.token}"/>
+	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 	<link rel="icon" href="/images/AutoGrid_logo.png">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -12,6 +14,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
 	<link href="/header/header.css" rel="stylesheet">
 	<link href="/crud/crud.css" rel="stylesheet">
+    <script src="http://localhost:35729/livereload.js"></script>
 </head>
 
 <body>
@@ -23,11 +26,11 @@
         <ul class="sidebar">
             <div>
                 <li class="sidebar-close" onclick=hideSidebar()>
-                    <img src="/images/X.png">
+                    <img alt="Botão de fechar barra lateral" src="../static/images/X.png" th:src="@{/images/X.png}">
                 </li>
                 <li class="sidebar-login" onclick=hideSidebar()>
-                    <a th:href="@{/logout}">
-                        <img src="/images/logout.png">
+                    <a th:href="@{/painel}">
+                        <img alt="Botão de login na barra lateral" src="../static/images/user_icon.png" th:src="@{/images/user_icon.png}">
                     </a>
                 </li>
             </div>
@@ -47,7 +50,7 @@
             <a th:href="@{/#contact}" class="hideOnMobile"><h2>Contato</h2></a>
         </div>
         <div class="login">
-            <a th:href="@{/logout}" class="logoutIcon hideOnMobile"></a>
+			<a href="#" onclick="document.getElementById('logoutForm').submit(); return false;" class="logoutIcon hideOnMobile"></a>
         </div>
         <li class="menu-button" onclick=showSidebar()>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
@@ -236,7 +239,7 @@
 					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<p>Você tem certeza que deseja excluir o veículo <strong id="vehicle-to-delete-name"></strong>?</p>
+					<p>Você tem certeza que deseja excluir o veículo<strong id="vehicle-to-delete-name"></strong>?</p>
 					<p class="text-danger">Esta ação não pode ser desfeita.</p>
 				</div>
 				<div class="modal-footer">
@@ -247,12 +250,13 @@
 		</div>
 	</div>
 
+	<form id="logoutForm" th:action="@{/logout}" method="post" style="display: none;"></form>
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	<script src="crud/func.js"></script>
+	<script src="/crud/func.js"></script>
 </body>
 
 </html>
