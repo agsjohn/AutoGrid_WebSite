@@ -69,49 +69,22 @@
     </section>
 
     <section id="destaque">
-        <div class=" slideshow">
+        <div class="slideshow">
             <div class="offset-1 col-10">
                 <div class="slideshow-container">
-                    <a th:href="@{/produtos/2}" class="mySlides">
-                        <div class="numbertext">1 / 4</div>
-                        <img src="../static/images/31.jpg" th:src="@{/images/31.jpg}">
+                    <a th:each="veiculo, iterStat : ${recentes}" th:href="@{/produtos/{id}(id=${veiculo.id})}" class="mySlides">
+                        <div class="numbertext" th:text="${iterStat.count} + ' / ' + ${iterStat.size}">1 / 4</div>
+                        <img th:alt="'Imagem do veículo ' + ${veiculo.getTitulo()}" th:src="@{${veiculo.getImageUrl()}}">
                         <div class="image-text">
-                            <h2>2019 Ford GT MK II</h2>
-                            <p>Uma máquina de corrida sem concessões, nascida para dominar as pistas com sua aerodinâmica extrema e desempenho brutal, levando a lenda do GT a um novo patamar de exclusividade e velocidade.</p>
-                        </div>
-                    </a>
-                    <a th:href="@{/produtos/1}" class="mySlides">
-                        <div class="numbertext">2 / 4</div>
-                        <img src="../static/images/32.jpg" th:src="@{/images/32.jpg}">
-                        <div class="image-text">
-                            <h2>2019 Porsche Gt3 Rs</h2>
-                            <p>Um bólido focado nas pistas, que combina uma engenharia de precisão alemã com desempenho arrebatador, oferecendo uma experiência de condução visceral e emocionante para os puristas.</p>
-                        </div>
-                    </a>
-                    <a th:href="@{/produtos/4}" class="mySlides">
-                        <div class="numbertext">3 / 4</div>
-                        <img src="../static/images/33.jpg" th:src="@{/images/33.jpg}">
-                        <div class="image-text">
-                            <h2>Nissan 370z</h2>
-                            <p>Um coupé esportivo que oferece uma experiência de condução divertida e envolvente, com um motor V6 potente e um design clássico de carro esportivo japonês.</p>
-                        </div>
-                    </a>
-                    <a th:href="@{/produtos/3}" class="mySlides">
-                        <div class="numbertext">4 / 4</div>
-                        <img src="../static/images/34.jpg" th:src="@{/images/34.jpg}">
-                        <div class="image-text">
-                            <h2>2019 Chevrolet Corvette ZR1</h2>
-                            <p>Um supercarro americano brutal, com um motor supercharged de 755 cavalos de potência e aerodinâmica agressiva, feito para dominar tanto as ruas quanto as pistas.</p>
+                            <h2 th:text="${veiculo.ano} + ' ' + ${veiculo.getTitulo()}">2019 Ford GT MK II</h2>
+                            <p th:text="${veiculo.descricaoCurta}">Descrição do veículo...</p>
                         </div>
                     </a>
                     <a class="voltar" onclick="plusSlides(-1)">❮</a>
                     <a class="proximo" onclick="plusSlides(1)">❯</a>
                 </div>
                 <div style="text-align:center">
-                    <span class="dot" onclick="currentSlide(1)"></span>
-                    <span class="dot" onclick="currentSlide(2)"></span>
-                    <span class="dot" onclick="currentSlide(3)"></span>
-                    <span class="dot" onclick="currentSlide(4)"></span>
+                    <span th:each="veiculo, iterStat : ${recentes}" class="dot" th:attr="onclick='currentSlide(' + ${iterStat.count} + ')'"></span>
                 </div>
             </div>
         </div>
@@ -121,51 +94,38 @@
         <div class="title">
             <h2>Produtos em Destaque</h2>
         </div>
-        <div class="date">
-            <h1>2023</h1>
-        </div>
-        <div class="row">
-            <div class="offset-1 col-10 fill">
-                <img src="../static/images/7.jpg" th:src="@{/images/7.jpg}" class="sub-img2">
-                <img src="../static/images/23.jpg" th:src="@{/images/23.jpg}" class="sub-img2">
-                <img src="../static/images/9.jpg" th:src="@{/images/9.jpg}" class="sub-img2">
-                <img src="../static/images/10.jpg" th:src="@{/images/10.jpg}" class="sub-img2">
-                <img src="../static/images/11.jpg" th:src="@{/images/11.jpg}" class="sub-img1">
-            </div>
-        </div>
-        <div class="row">
-            <div class="offset-1 col-10 fill">
-                <img src="../static/images/12.jpg" th:src="@{/images/12.jpg}" class="sub-img2">
-                <img src="../static/images/13.png" th:src="@{/images/13.png}" class="sub-img2">
-                <img src="../static/images/14.jpg" th:src="@{/images/14.jpg}" class="sub-img2">
-                <img src="../static/images/15.jpg" th:src="@{/images/15.jpg}" class="sub-img2">
-                <img src="../static/images/16.jpg" th:src="@{/images/16.jpg}" class="sub-img1">
-            </div>
-        </div>
-        <span id="morePort">
-            <div class="date">
-                <h1>2024</h1>
-            </div>
-            <div class="row">
-                <div class="offset-1 col-10 fill">
-                    <img src="../static/images/17.jpg" th:src="@{/images/17.jpg}" class="sub-img2">
-                    <img src="../static/images/18.jpg" th:src="@{/images/18.jpg}" class="sub-img2">
-                    <img src="../static/images/19.jpg" th:src="@{/images/19.jpg}" class="sub-img2">
-                    <img src="../static/images/20.jpg" th:src="@{/images/20.jpg}" class="sub-img2">
-                    <img src="../static/images/21.jpg" th:src="@{/images/21.jpg}" class="sub-img1">
+
+        <th:block th:each="anoProdutos, iterStat : ${veiculosPorAno}">
+
+            <div th:if="${iterStat.index == 0}">
+                <div class="date">
+                    <h1 th:text="${anoProdutos.key}">2025</h1>
+                </div>
+                <div class="row">
+                    <div class="offset-1 col-10 fill">
+                        <a th:each="veiculo : ${anoProdutos.value}" th:href="@{/produtos/{id}(id=${veiculo.getId()})}">
+                            <img th:alt="'Imagem do veículo ' + ${veiculo.getTitulo()}" th:src="@{${veiculo.getImageUrl()}}" class="sub-img2">
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="offset-1 col-10 fill">
-                    <img src="../static/images/22.jpg" th:src="@{/images/22.jpg}" class="sub-img2">
-                    <img src="../static/images/8.jpg" th:src="@{/images/8.jpg}" class="sub-img2">
-                    <img src="../static/images/24.jpg" th:src="@{/images/24.jpg}" class="sub-img2">
-                    <img src="../static/images/25.jpg" th:src="@{/images/25.jpg}" class="sub-img2">
-                    <img src="../static/images/26.jpg" th:src="@{/images/26.jpg}" class="sub-img1">
+        </th:block>
+        <span id="morePort" style="display: none;">
+            <th:block th:each="anoProdutos, iterStat : ${veiculosPorAno}">
+                <div th:if="${iterStat.index > 0 and iterStat.index < 5 and anoProdutos.value.size() >= 4}">
+                    <div class="date">
+                        <h1 th:text="${anoProdutos.key}">ANO</h1>
+                    </div>
+                    <div class="row">
+                        <div class="offset-1 col-10 fill">
+                            <a th:each="veiculo : ${anoProdutos.value}" th:href="@{/produtos/{id}(id=${veiculo.getId()})}">
+                                 <img th:alt="'Imagem do veículo ' + ${veiculo.getTitulo()}" th:src="@{${veiculo.getImageUrl()}}" class="sub-img2">
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </span>
-        <div class="ver-mais invert" onclick="VerMais()">
+            </th:block>
+        </span> <div class="ver-mais invert" onclick="VerMais()">
             <i class="bi bi-arrow-down-circle" id="downPort"></i>
             <i class="bi bi-arrow-up-circle" id="upPort"></i>
             <h1 id="btnVerMais">VER MAIS</h1>
