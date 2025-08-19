@@ -33,6 +33,7 @@ O projeto foi construído utilizando um conjunto de tecnologias modernas e efici
 - [ ] Mudar ordem para "Mais novos"
 - [ ] Ver o que fazer com a parte de Contato
 - [ ] Adicionar docker compose
+- [ ] Atualizar readme
 
 ## ⚙️ Como Executar o Projeto Localmente
 Siga os passos abaixo para configurar e executar a aplicação em seu ambiente de desenvolvimento.
