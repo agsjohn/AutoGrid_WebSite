@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${carro.titulo} + ' - AutoGrid'"></title>
+    <link rel="icon" href="/images/AutoGrid_logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="/produto/styles.css" rel="stylesheet">
+    <link href="/header/header.css" rel="stylesheet">
+    <script src="http://localhost:35729/livereload.js"></script>
+</head>
+
+<body>
+    <script src="/header/header.js"></script>
+    <header>
+        <div class="header">
+            <h1>AutoGrid</h1>
+        </div>
+        <ul class="sidebar">
+            <div>
+                <li class="sidebar-close" onclick=hideSidebar()>
+                    <img alt="Botão de fechar barra lateral" src="../static/images/X.png" th:src="@{/images/X.png}">
+                </li>
+                <li class="sidebar-login" onclick=hideSidebar()>
+                    <a th:href="@{/painel}">
+                        <img alt="Botão de login na barra lateral" src="../static/images/user_icon.png" th:src="@{/images/user_icon.png}">
+                    </a>
+                </li>
+            </div>
+            <li onclick=hideSidebar()><a th:href="@{/#initial-images}"><h2>Início</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#destaque}"><h2>Destaque</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#products}"><h2>Produtos</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/busca}"><h2>Busca</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#car-brands}"><h2>Marcas</h2></a></li>
+            <li onclick=hideSidebar()><a th:href="@{/#contact}"><h2>Contato</h2></a></li>
+        </ul>
+        <div class="nav">
+            <a th:href="@{/#initial-images}" class="hideOnMobile"><h2>Início</h2></a>
+            <a th:href="@{/#destaque}" class="hideOnMobile"><h2>Destaque</h2></a>
+            <a th:href="@{/#products}" class="hideOnMobile"><h2>Produtos</h2></a>
+            <a th:href="@{/busca}" class="hideOnMobile"><h2>Busca</h2></a>
+            <a th:href="@{/#car-brands}" class="hideOnMobile"><h2>Marcas</h2></a>
+            <a th:href="@{/#contact}" class="hideOnMobile"><h2>Contato</h2></a>
+        </div>
+        <div class="login">
+            <a th:href="@{/painel}" class="loginIcon hideOnMobile"></a>
+        </div>
+        <li class="menu-button" onclick=showSidebar()>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
+                <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/>
+            </svg>
+        </li>
+    </header>
+
+    <main class="product-view-container">
+        <div class="container-fluid">
+            <div class="breadcrumb-nav mb-4">
+                <a th:href="@{/}">Início</a> > <a th:href="@{/busca}">Carros</a> > <a href="#" th:text="${carro.titulo}">Nome do Carro</a>
+            </div>
+
+            <div class="row">
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img th:src="${carro.imageUrl}" th:alt="${carro.titulo}" id="main-product-image">
+                    </div>
+                    <div class="thumbnail-images" th:if="${!#strings.isEmpty(carro.imageUrl1) or !#strings.isEmpty(carro.imageUrl2) or !#strings.isEmpty(carro.imageUrl3)}">
+                        <img th:src="${carro.imageUrl}" th:alt="${carro.titulo}" class="thumbnail active" th:data-large-src="${carro.imageUrl}">
+                        <img th:if="${!#strings.isEmpty(carro.imageUrl1)}" th:src="${carro.imageUrl1}" th:alt="${carro.titulo} + ' Thumbnail 1'" class="thumbnail" th:data-large-src="${carro.imageUrl1}">
+                        <img th:if="${!#strings.isEmpty(carro.imageUrl2)}" th:src="${carro.imageUrl2}" th:alt="${carro.titulo} + ' Thumbnail 2'" class="thumbnail" th:data-large-src="${carro.imageUrl2}">
+                        <img th:if="${!#strings.isEmpty(carro.imageUrl3)}" th:src="${carro.imageUrl3}" th:alt="${carro.titulo} + ' Thumbnail 3'" class="thumbnail" th:data-large-src="${carro.imageUrl3}">
+                    </div>
+                </div>
+
+                <div class="info-side">
+                    <div class="product-info">
+                        <h2 class="product-title-large" th:text="${carro.titulo}">Titulo</h2>
+                        <p class="product-subtitle" th:text="${carro.ano} + ' | ' + ${#numbers.formatDecimal(carro.quilometragem, 1, 'POINT', 0, 'POINT')} + ' km'">Ano | Quilometragem</p>
+                        <hr>
+                        <p class="product-price-large" th:text="'R$ ' + ${#numbers.formatDecimal(carro.preco, 1, 'POINT', 2, 'COMMA')}">Preço</p>
+                        <p class="product-description" th:text="${carro.descricaoCurta}">
+                            Descrição curta. 
+                        </p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary btn-lg w-100 mb-3">Comprar Agora</button>
+                            <button class="btn btn-outline-light btn-lg w-100">Falar com o vendedor</button>
+                        </div>
+                        <div class="seller-info mt-4">
+                            <!-- <h5>Vendido por: <strong>Concessionária Premium</strong></h5> -->
+                            <p class="location"><i class="bi bi-geo-alt-fill"></i> <span th:text="${carro.localizacao}">Localização</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="product-details-tabs">
+                        <ul class="nav nav-tabs" id="detailsTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab">Descrição Detalhada</button>
+                            </li>
+                            <!-- <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs" type="button" role="tab">Ficha Técnica</button>
+                            </li> -->
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">Avaliações</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="detailsTabContent">
+                            <div class="tab-pane fade show active" id="description" role="tabpanel">
+                                <p th:text="${carro.descricaoLonga}">
+                                    Descrição longa. 
+                                </p>
+                            </div>
+                            <div class="tab-pane fade" id="specs" role="tabpanel">
+                                <table class="table table-dark table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td>Motor</td>
+                                            <td>4.0L Boxer 6 cilindros</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Potência</td>
+                                            <td>520 cv</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Torque</td>
+                                            <td>470 Nm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>0-100 km/h</td>
+                                            <td>3.2 segundos</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Velocidade Máxima</td>
+                                            <td>312 km/h</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="reviews" role="tabpanel">
+                                <p>Nenhuma avaliação para este produto ainda.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/produto/func.js"></script>
+</body>
+
+</html>
