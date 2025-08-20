@@ -28,7 +28,7 @@ public class CarroService {
     public void carroListener(Carro carro){
         System.out.println("Received Message Consumer 01: " + carro.getTitulo());
 
-        CarNotification notification = new CarNotification("Novo carro adicionado: " + carro.getTitulo(), carro.getId());
+        CarNotification notification = new CarNotification(carro.getTitulo(), carro.getId());
 
         simpMessagingTemplate.convertAndSend("/topic/newcar", notification);
         System.out.println("Notificação WebSocket enviada para o frontend com ID do carro.");
