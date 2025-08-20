@@ -28,8 +28,8 @@ O projeto foi construído utilizando um conjunto de tecnologias modernas e efici
   * Apacha Gradle
 
 ## A fazer
+- [x] Ver o que fazer com o "comprar agora" / "Falar com o vendedor"
 - [ ] Tamanho máximo imagem de produto
-- [ ] Ver o que fazer com o "comprar agora" / "Falar com o vendedor"
 - [ ] Mudar ordem para "Mais novos"
 - [ ] Ver o que fazer com a parte de Contato
 - [ ] Adicionar docker compose
