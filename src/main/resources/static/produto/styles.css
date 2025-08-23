@@ -37,6 +37,7 @@
     object-fit: cover;
     border: 1px solid #444;
     margin-bottom: 1rem;
+    aspect-ratio: 16 / 9;
 }
 
 .thumbnail-images {
