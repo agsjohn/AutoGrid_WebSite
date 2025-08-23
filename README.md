@@ -32,7 +32,7 @@ O projeto foi construído utilizando um conjunto de tecnologias modernas e efici
 - [x] Tamanho máximo imagem de produto
 - [x] Mudar ordem para "Mais novos"
 - [x] Ver o que fazer com a parte de Contato
-- [ ] Adicionar docker compose
+- [x] Adicionar docker compose
 - [ ] Atualizar readme
 
 ## ⚙️ Como Executar o Projeto Localmente
