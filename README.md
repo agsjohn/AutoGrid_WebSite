@@ -20,7 +20,7 @@ O AutoGrid WebSite é uma aplicação web moderna e responsiva para a exibição
   * **Notificações em Tempo Real:** Ao cadastrar um novo veículo, uma mensagem é enviada via WebSocket (utilizando Apache Kafka como mensageria) para a página inicial, atualizando todos os usuários conectados em tempo real.
 
 ## 📸 Imagens do Projeto
-<img width="1879" height="923" alt="Opera Instantâneo_2025-08-23_154402_localhost" src="https://github.com/user-attachments/assets/4a0a6ddb-a1b5-4ed4-8e1d-ac5ae47c40fb" />
+<img width="1879" height="923" alt="Opera Instantâneo_2025-08-23_161912_localhost" src="https://github.com/user-attachments/assets/020ff8a9-819f-4b0e-a429-4c2279538848" />
 <img width="1879" height="923" alt="Opera Instantâneo_2025-08-23_154423_localhost" src="https://github.com/user-attachments/assets/031edbb5-dc76-4b5f-a9a2-01e0db96473b" />
 <img width="1879" height="923" alt="Opera Instantâneo_2025-08-23_154432_localhost" src="https://github.com/user-attachments/assets/10c608e6-eb98-4f03-81d9-f926c2e58081" />
 <img width="1879" height="923" alt="Opera Instantâneo_2025-08-23_154618_localhost" src="https://github.com/user-attachments/assets/6ca5b709-1326-49fc-ba3e-9e9ac622f997" />
