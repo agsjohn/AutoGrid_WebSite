@@ -41,13 +41,15 @@
 }
 
 .thumbnail-images {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 1rem; 
+    display: flex;
+    justify-content: center;
+    gap: .7rem;
 }
 
 .thumbnail-images .thumbnail {
     width: 100%;
+    max-width: 24%;
+    aspect-ratio: 16 / 9;
     height: 8rem;
     object-fit: cover;
     border-radius: 4px;
