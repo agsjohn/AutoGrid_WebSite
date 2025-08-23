@@ -2,11 +2,11 @@
 O AutoGrid WebSite é uma aplicação web moderna e responsiva para a exibição e gerenciamento de catálogos de veículos. Desenvolvido com Spring Boot, o projeto oferece uma interface de usuário dinâmica com atualizações em tempo real, um painel de administração seguro e completo, e uma arquitetura robusta para garantir performance e escalabilidade.
 
 ## 📖 Sumário
-* [✨ Funcionalidades Principais](https://github.com/agsjohn/AutoGrid_WebSite/edit/main/README.md#-funcionalidades-principais)
-* [📸 Imagens do Projeto](https://github.com/agsjohn/AutoGrid_WebSite/edit/main/README.md#-funcionalidades-principais)
-* [🔒 Acesso ao Painel de Administração](https://github.com/agsjohn/AutoGrid_WebSite/edit/main/README.md#-funcionalidades-principais)
-* [🚀 Tecnologias Utilizadas](https://github.com/agsjohn/AutoGrid_WebSite/edit/main/README.md#-funcionalidades-principais)
-* [⚙️ Como Executar o Projeto Localmente](https://github.com/agsjohn/AutoGrid_WebSite/edit/main/README.md#-funcionalidades-principais)
+* [✨ Funcionalidades Principais](https://github.com/agsjohn/AutoGrid_WebSite?tab=readme-ov-file#-imagens-do-projeto)
+* [📸 Imagens do Projeto](https://github.com/agsjohn/AutoGrid_WebSite?tab=readme-ov-file#-imagens-do-projeto)
+* [🔒 Acesso ao Painel de Administração](https://github.com/agsjohn/AutoGrid_WebSite?tab=readme-ov-file#-imagens-do-projeto)
+* [🚀 Tecnologias Utilizadas](https://github.com/agsjohn/AutoGrid_WebSite?tab=readme-ov-file#-imagens-do-projeto)
+* [⚙️ Como Executar o Projeto Localmente](https://github.com/agsjohn/AutoGrid_WebSite?tab=readme-ov-file#-imagens-do-projeto)
 
 ## ✨ Funcionalidades Principais
 * **Vitrine de Veículos:** Página inicial que exibe os veículos disponíveis e recebe notificações instantâneas sobre novos anúncios.
