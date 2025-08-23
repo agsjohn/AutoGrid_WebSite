@@ -25,15 +25,7 @@ O projeto foi construído utilizando um conjunto de tecnologias modernas e efici
 * **DevOps**
   * Docker & Docker Compose
 * **Build**
-  * Apacha Gradle
-
-## A fazer
-- [ ] Tamanho máximo imagem de produto
-- [ ] Ver o que fazer com o "comprar agora" / "Falar com o vendedor"
-- [ ] Mudar ordem para "Mais novos"
-- [ ] Ver o que fazer com a parte de Contato
-- [ ] Adicionar docker compose
-- [ ] Atualizar readme
+  * Apache Gradle
 
 ## ⚙️ Como Executar o Projeto Localmente
 Siga os passos abaixo para configurar e executar a aplicação em seu ambiente de desenvolvimento.
@@ -47,24 +39,31 @@ Siga os passos abaixo para configurar e executar a aplicação em seu ambiente d
 ### Passos
 #### 1. Clone o repositório:
 
-  ```bash
-  git clone https://github.com/agsjohn/AutoGrid_WebSite.git
-  cd AutoGrid_WebSite
-  ```
+   ```bash
+   git clone https://github.com/agsjohn/AutoGrid_WebSite.git
+   cd AutoGrid_WebSite
+   ```
 
-#### 2. Executar a Aplicação
+#### 2. Iniciar o serviço do Kafka no Docker
 
 > [!NOTE]
 > Certifique-se de que o Docker está em execução.
 
-Na raiz do projeto, execute o seguinte comando: 
+Na raiz do projeto, execute o seguinte comando para iniciar o serviço do Apache Kafka em segundo plano:
 
-```bash
-docker-compose up --build
-```
-Este comando irá construir as imagens necessárias e iniciar todos os serviços definidos no seu docker-compose.yml, incluindo o servidor do Kafka.
+   ```bash
+   docker-compose up -d
+   ```
+Este comando irá baixar e iniciar o container do Kafka, que é uma dependência essencial para a aplicação.
 
-A aplicação estará disponível em http://localhost:8080.
+#### 3. Executar a aplicação
+
+Na raiz do projeto, execute o comando de build e run do Gradle:
+
+   ```bash
+   ./gradlew bootRun
+   ```
+Esse comando irá compilar e iniciar a aplicação estará disponível em http://localhost:8080.
 
 
 # 👨‍💻 Autor

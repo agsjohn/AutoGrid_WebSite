@@ -1,6 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
     const mainImage = document.getElementById('main-product-image');
     const thumbnails = document.querySelectorAll('.thumbnail-images .thumbnail');
+    const detailsButton = document.querySelector('a[href="#detailsTab"]');
+
+    if (detailsButton) {
+        detailsButton.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const tabTargetElement = document.getElementById('detailsTab');
+
+            if (tabTargetElement) {
+                tabTargetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            const descriptionTabButton = document.getElementById('description-tab');
+            if (descriptionTabButton) {
+                const tab = new bootstrap.Tab(descriptionTabButton);
+                tab.show();
+            }
+        });
+    }
 
     if (mainImage && thumbnails.length > 0) {
         thumbnails.forEach(thumbnail => {

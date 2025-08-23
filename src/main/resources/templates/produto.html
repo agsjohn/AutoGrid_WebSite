@@ -39,7 +39,6 @@
             <li onclick=hideSidebar()><a th:href="@{/#products}"><h2>Produtos</h2></a></li>
             <li onclick=hideSidebar()><a th:href="@{/busca}"><h2>Busca</h2></a></li>
             <li onclick=hideSidebar()><a th:href="@{/#car-brands}"><h2>Marcas</h2></a></li>
-            <li onclick=hideSidebar()><a th:href="@{/#contact}"><h2>Contato</h2></a></li>
         </ul>
         <div class="nav">
             <a th:href="@{/#initial-images}" class="hideOnMobile"><h2>Início</h2></a>
@@ -47,7 +46,6 @@
             <a th:href="@{/#products}" class="hideOnMobile"><h2>Produtos</h2></a>
             <a th:href="@{/busca}" class="hideOnMobile"><h2>Busca</h2></a>
             <a th:href="@{/#car-brands}" class="hideOnMobile"><h2>Marcas</h2></a>
-            <a th:href="@{/#contact}" class="hideOnMobile"><h2>Contato</h2></a>
         </div>
         <div class="login">
             <a th:href="@{/painel}" class="loginIcon hideOnMobile"></a>
@@ -88,11 +86,12 @@
                             Descrição curta. 
                         </p>
                         <div class="product-actions">
-                            <button class="btn btn-primary btn-lg w-100 mb-3">Comprar Agora</button>
-                            <button class="btn btn-outline-light btn-lg w-100">Falar com o vendedor</button>
+                            <button class="btn btn-primary btn-lg w-100 mb-3" data-bs-toggle="modal" data-bs-target="#interestModal">
+                                Tenho Interesse
+                            </button>
+                            <a href="#detailsTab" class="btn btn-outline-light btn-lg w-100">Ver Descrição Detalhada</a>
                         </div>
                         <div class="seller-info mt-4">
-                            <!-- <h5>Vendido por: <strong>Concessionária Premium</strong></h5> -->
                             <p class="location"><i class="bi bi-geo-alt-fill"></i> <span th:text="${carro.localizacao}">Localização</span></p>
                         </div>
                     </div>
@@ -104,48 +103,19 @@
                     <div class="product-details-tabs">
                         <ul class="nav nav-tabs" id="detailsTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab">Descrição Detalhada</button>
+                                <button class="nav-link active" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">Avaliações</button>
                             </li>
-                            <!-- <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs" type="button" role="tab">Ficha Técnica</button>
-                            </li> -->
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">Avaliações</button>
+                                <button class="nav-link" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab">Descrição Detalhada</button>
                             </li>
                         </ul>
                         <div class="tab-content" id="detailsTabContent">
-                            <div class="tab-pane fade show active" id="description" role="tabpanel">
+                            <div class="tab-pane fade" id="description" role="tabpanel">
                                 <p th:text="${carro.descricaoLonga}">
                                     Descrição longa. 
                                 </p>
                             </div>
-                            <div class="tab-pane fade" id="specs" role="tabpanel">
-                                <table class="table table-dark table-striped">
-                                    <tbody>
-                                        <tr>
-                                            <td>Motor</td>
-                                            <td>4.0L Boxer 6 cilindros</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Potência</td>
-                                            <td>520 cv</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Torque</td>
-                                            <td>470 Nm</td>
-                                        </tr>
-                                        <tr>
-                                            <td>0-100 km/h</td>
-                                            <td>3.2 segundos</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Velocidade Máxima</td>
-                                            <td>312 km/h</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="tab-pane fade" id="reviews" role="tabpanel">
+                            <div class="tab-pane fade show active" id="reviews" role="tabpanel">
                                 <p>Nenhuma avaliação para este produto ainda.</p>
                             </div>
                         </div>
@@ -154,6 +124,24 @@
             </div>
         </div>
     </main>
+
+    <div class="modal fade" id="interestModal" tabindex="-1" aria-labelledby="interestModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="interestModalLabel">Entre em Contato</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p>Gostou do <strong th:text="${carro.titulo}">Nome do Carro</strong>?</p>
+                    <p>Fale com nossa equipe de vendas e agende um test-drive!</p>
+                    <hr>
+                    <p>📞 Telefone: <strong>(51) 99999-9999</strong></p>
+                    <p>✉️ E-mail: <strong>vendas@autogrid.com</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="/produto/func.js"></script>
 </body>

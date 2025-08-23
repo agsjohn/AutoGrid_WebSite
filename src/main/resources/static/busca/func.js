@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 switch (sortValue) {
                     case 'Menor preço': return a.preco - b.preco;
                     case 'Maior preço': return b.preco - a.preco;
-                    case 'Mais recentes': return b.ano - a.ano;
+                    case 'Mais novos': return b.ano - a.ano;
                     default: return 0;
                 }
             });
